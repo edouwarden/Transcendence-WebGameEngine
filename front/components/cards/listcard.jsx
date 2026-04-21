@@ -16,6 +16,7 @@ export default function ListCard() {
   // ];
   const [players, setPlayers] = useState([]);
   const [img, setImg] = useState([]);
+  const [UserName, setUserName] = useState("");
 
   async function fetchData() {
     const url = "http://localhost:8080/api/users";
@@ -46,8 +47,32 @@ async function fetchImg() {
     console.error(error);
   }
 }
+async function fetchUserById(id) {
+  const url = 'http://localhost:8080/api/users/' + id;
+  const options = {method: 'GET', headers: {Accept: 'application/json, application/problem+json'}};
+  try {
+    const response = await fetch(url, options);
+    const data = await response.json();
+    setUserName(data[0].username);
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+function getCookie(name) {
+  return document.cookie
+    .split('; ')
+    .find(row => row.startsWith(name + '='))
+    ?.split('=')[1];
+}
 
 useEffect(() => {
+  const token = getCookie('auth_token');
+  if (!token) return;
+
+  const payload = token.split('.')[1];
+  const decoded = JSON.parse(atob(payload));
+  fetchUserById(decoded.sub);
   fetchData();
   fetchImg();
 }, []);
@@ -58,7 +83,9 @@ players.sort((a, b) => b.win - a.win);
       <nav
         className="flex flex-col gap-4 w-full h-full overflow-y-auto scrollbar-hide p-2 box-border pb-12 max-h-[calc(100%-8px)]"
       >
-        {players.map((player, idx) => (
+        {players
+        .filter((player) => player.username !== UserName)
+        .map((player, idx) => (
           <div
             key={idx}
             className="flex w-full items-center rounded-lg p-4 bg-[#0b1328] text-white shadow-md border border-slate-700 transition-all hover:bg-[#162447] focus:bg-[#162447] active:bg-[#162447]"
