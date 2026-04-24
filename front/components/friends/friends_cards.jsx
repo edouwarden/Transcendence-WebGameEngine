@@ -8,11 +8,12 @@ import {
 } from "@/components/chat/chat-header";
 import FriendList from "@/components/friends/friends_list.jsx";
 import { Button } from "../../app/animations/Button.jsx";
+import FriendsRequests from "@/components/friends/friends_requests.jsx";
 
 export default function YourFriends(props) {
   
 const[FriendsDisplay, setFriendsDisplay] = useState(true);
-
+const[FriendsRequestsOpen, setFriendsRequestsOpen] = useState(false);
   return (
     <div
       data-dialog-backdrop="web-3-dialog"
@@ -45,13 +46,19 @@ const[FriendsDisplay, setFriendsDisplay] = useState(true);
             </div>
             <div className="flex gap-3 justify-center py-3 bg-indigo">
               {FriendsDisplay && (
+                <Fragment>
                 <Button statement="Add Friends" onClick={() => { setFriendsDisplay(false); }} />
+                <Button statement="Friends Requests" onClick={() => { setFriendsRequestsOpen(true); }} />
+                </Fragment>
               )}
               <Button statement="Go back" onClick={() => { FriendsDisplay ? props.setYourFriendsOpen(false) : setFriendsDisplay(true); }} />
             </div>
           </ChatContainer>
         </div>
       </div>
+     {FriendsRequestsOpen && (
+      <FriendsRequests setFriendsRequestsOpen={setFriendsRequestsOpen}/>
+      )}
     </div>
   );
 }
