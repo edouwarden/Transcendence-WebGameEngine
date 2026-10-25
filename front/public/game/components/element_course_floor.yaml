@@ -2,7 +2,7 @@
 # ---
 id: course_floor
 meshes:
-  - gltf: /game/modeles/course_floor/scene.gltf
+  - gltf: /game/models/course_floor/scene.gltf
     scale:
       x: 0.003
       'y': 0.003

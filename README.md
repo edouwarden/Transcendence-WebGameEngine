@@ -348,4 +348,4 @@ All AI-generated code was reviewed, tested, and understood by team members befor
 
 ## Third-party assets
 
-Some 3D models are used for educational and demonstration purposes under their respective CC-BY-4.0 licences. Attribution is included in `front/public/game/modeles/*/license.txt`. This project is non-commercial.
+Some 3D models are used for educational and demonstration purposes under their respective CC-BY-4.0 licences. Attribution is included in `front/public/game/models/*/license.txt`. This project is non-commercial.

@@ -2,7 +2,7 @@
 # ---
 id: map_parkour
 meshes:
-  - gltf: /game/modeles/obby_parkour_v1/scene.gltf
+  - gltf: /game/models/obby_parkour_v1/scene.gltf
     scale:
       x: 20
       'y': 20
