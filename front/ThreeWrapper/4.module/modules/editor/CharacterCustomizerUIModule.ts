@@ -82,7 +82,7 @@ export class CharacterCustomizerUIModule implements Module {
     this.api.setBones(bones)
     this.api.setAnimations(animations)
     this.api.setLoaded(true)
-    this.preview.playAnimation("FG_Idle_A")
+    this.preview.playAnimation("AN_Idle_A")
   }
   private _handlePaintEvent(e: MouseEvent, isDown: boolean): void {
     if (!this.paintState.active || !this.ctx || !this.preview) return

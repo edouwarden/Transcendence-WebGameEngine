@@ -1,4 +1,4 @@
-# ThreeWrapper — TREEFRAG (LOD 1+4)
+# ThreeWrapper — Architecture (LOD 1+4)
 
 > Node names + tag lines. ASCII format. ~12:1 compression over raw source.
 > **Update rule:**

@@ -4,7 +4,7 @@ export default function SimpleFooter({ setPrivacyOpen }) {
   return (
     <footer className="flex w-full flex-row flex-wrap items-center justify-center gap-y-6 gap-x-12  py-6 text-center md:justify-between">
       <Typography color="white" className="font-normal text-xs">
-        &copy; 2026 Fun Guys
+        &copy; 2026 Parkour Arena
       </Typography>
       <ul className="flex flex-wrap items-center gap-y-2 gap-x-8">
         <li>

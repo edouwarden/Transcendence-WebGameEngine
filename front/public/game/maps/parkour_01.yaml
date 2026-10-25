@@ -50,7 +50,7 @@ objects:
                   y: 0
                   z: 0
         - id: spawn_main
-          component: /game/components/spawn_point.yaml
+          component: /game/components/utils_spawn_point.yaml
           type: map
           position:
                   x: 0

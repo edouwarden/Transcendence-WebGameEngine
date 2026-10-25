@@ -47,7 +47,7 @@ export class CharacterCustomizerModule implements Module {
     this._clearCharacter()
     const loader = new GLTFLoader()
     const gltf = await new Promise<any>((resolve, reject) => {
-      loader.load('/game/modeles/charactere/scene.gltf', resolve, undefined, reject)
+      loader.load('/game/modeles/character/scene.gltf', resolve, undefined, reject)
     })
     this.characterScene = gltf.scene as THREE.Group
     this.clips = gltf.animations as THREE.AnimationClip[]

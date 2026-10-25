@@ -200,7 +200,7 @@ useEffect(() => {
               className="party-title mb-6 text-5xl md:text-7xl lg:text-6xl xl:text-8xl text-white"
             >
               <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
-                Fun Guys
+                Parkour Arena
               </span>{" "}
               <span className="text-white">(For Sure)</span>
 

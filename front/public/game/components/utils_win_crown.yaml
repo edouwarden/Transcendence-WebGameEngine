@@ -2,7 +2,7 @@
 # ---
 id: utils_win_crown
 meshes:
-  - gltf: /game/modeles/fall_guys_crown/scene.gltf
+  - gltf: /game/modeles/course_crown/scene.gltf
     offset:
       x: 0
       'y': 1.7

@@ -1,4 +1,4 @@
-id: gta
+id: city_course
 sky:
         preset: day
 #        cubemap:
@@ -43,18 +43,18 @@ lights:
           intensity: 0.35
 objects:
         - id: floor_start
-          component: /game/components/fallguys_map.yaml
+          component: /game/components/map_city2.yaml
           type: map
           position:
                   x: 0
                   y: 0
                   z: 0
         - id: spawn_main
-          component: /game/components/spawn_point.yaml
+          component: /game/components/utils_spawn_point.yaml
           type: map
           position:
                   x: 0
-                  y: 1.5
+                  y: 0.5
                   z: 0
           extraData:
                   spawnpoint: { x: 0, y: 2, z: 0 }

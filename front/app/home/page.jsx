@@ -21,37 +21,37 @@ import { EngineCanvas } from "../../ThreeWrapper/1.engine/EngineCanvas";
 import "./character_controls.css";
 import { api } from "@/lib/api";
 const ANIMATIONS = [
-	"FG_Loading_Falling_A",
-	"FG_Idle_A",
-	"FG_Walk_Right_A",
-	"FG_Walk_Left_A",
-	"FG_Walk_A",
-	"FG_CostumeChangeLooking_A",
-	"FG_Idle_Joggingonspot",
-	"FG_Idle_TouchingToes",
-	"FG_Emote_Chicken_A",
-	"FG_Emote_Wave_A",
-	"FG_Emote_Neener_A",
-	"FG_Emote_ThumbsUp_A",
-	"FG_Emote_WaveOverHead_A",
-	"FG_Emote_PirateDance_A",
-	"FG_Emote_slowclap_A",
-	"FG_Emote_RobotDance_A",
-	"CH_Fallguy_FG_Emote_Mexwave",
-	"CH_Fallguy_FG_emote_HappyClap",
-	"FG_Beefcake_A",
-	"FG_Emote_Zsnap_A",
-	"FG_Emote_Pattycake_A",
-	"FG_Emote_Armthrow_A",
-	"FG_emote_boxing_01_A",
-	"FG_emote_ChestBump_01_A",
-	"FG_emote_Salute_01_A",
-	"FG_emote_horsey_A",
-	"FG_emote_Jester_A",
-	"FG_emote_Curtsy_A",
-	"FG_emote_Bow_A",
-	"FG_emote_comeon_01_A",
-	"FG_emote_HONK_01_A",
+	"AN_Loading_Falling_A",
+	"AN_Idle_A",
+	"AN_Walk_Right_A",
+	"AN_Walk_Left_A",
+	"AN_Walk_A",
+	"AN_CostumeChangeLooking_A",
+	"AN_Idle_Joggingonspot",
+	"AN_Idle_TouchingToes",
+	"AN_Emote_Chicken_A",
+	"AN_Emote_Wave_A",
+	"AN_Emote_Neener_A",
+	"AN_Emote_ThumbsUp_A",
+	"AN_Emote_WaveOverHead_A",
+	"AN_Emote_PirateDance_A",
+	"AN_Emote_slowclap_A",
+	"AN_Emote_RobotDance_A",
+	"CH_Character_AN_Emote_Mexwave",
+	"CH_Character_AN_emote_HappyClap",
+	"AN_Beefcake_A",
+	"AN_Emote_Zsnap_A",
+	"AN_Emote_Pattycake_A",
+	"AN_Emote_Armthrow_A",
+	"AN_emote_boxing_01_A",
+	"AN_emote_ChestBump_01_A",
+	"AN_emote_Salute_01_A",
+	"AN_emote_horsey_A",
+	"AN_emote_Jester_A",
+	"AN_emote_Curtsy_A",
+	"AN_emote_Bow_A",
+	"AN_emote_comeon_01_A",
+	"AN_emote_HONK_01_A",
 	"ArmWave_Start",
 	"ArmWave_Loop",
 	"ArmWave_End"
@@ -68,7 +68,7 @@ export default function Home() {
 	const [YourFriendsOpen, setYourFriendsOpen] = useState(false);
 	const [colorPanelOpen, setColorPanelOpen] = useState(false);
 	const [worldApi, setWorldApi] = useState(null);
-	const [currentAnim, setCurrentAnim] = useState("FG_Idle_A");
+	const [currentAnim, setCurrentAnim] = useState("AN_Idle_A");
 	const [currentBodyColor, setCurrentBodyColor] = useState("#c000c0");
 	const [currentFaceColor, setCurrentFaceColor] = useState("#ffffff");
 	const [currentEyeColor, setCurrentEyeColor] = useState("#00ff00");
@@ -82,7 +82,7 @@ export default function Home() {
 		eyeColor: "#00ff00",
 		cameraPos: { x: 0, y: 1.1, z: 1.5 },
 		cameraTarget: { x: 0, y: 0.95, z: 0 },
-		animation: "FG_Idle_A",
+		animation: "AN_Idle_A",
 		background: false
 	});
 

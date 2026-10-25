@@ -23,7 +23,7 @@ export function Terms({ setTermsOpen }) {
           <h2 className="text-2xl font-bold mb-4">Terms of Service</h2>
           <section className="mb-4">
             <h3 className="font-semibold">1. Service Overview</h3>
-            <p>This online video game is published by Fun Guys. It allows users to play, interact, and participate in virtual competitions.</p>
+            <p>This online video game is published by Parkour Arena. It allows users to play, interact, and participate in virtual competitions.</p>
           </section>
           <section className="mb-4">
             <h3 className="font-semibold">2. Access to the Service</h3>

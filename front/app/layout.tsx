@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   appleWebApp: {
     capable: true,
     statusBarStyle: "black-translucent",
-    title: "Fun Guys",
+    title: "Parkour Arena",
   },
   formatDetection: {
     telephone: false,
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
     icon: "/champion.png",
     apple: "/champion.png",
   },
-  applicationName: "Fun Guys",
+  applicationName: "Parkour Arena",
   keywords: ["game", "multiplayer", "interactive"],
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
   openGraph: {

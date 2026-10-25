@@ -51,8 +51,8 @@ export class PlayerBodyModule implements Module {
 	private physics: PlayerBodyModuleOptions["physics"];
 	private spawnPosition: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
 	constructor(options: PlayerBodyModuleOptions = {}) {
-		this.modelUrl = options.modelUrl ?? "/game/modeles/charactere/scene.gltf";
-		this.textureUrl = options.textureUrl ?? "/game/modeles/charactere/character_texture.png";
+		this.modelUrl = options.modelUrl ?? "/game/modeles/character/scene.gltf";
+		this.textureUrl = options.textureUrl ?? "/game/modeles/character/character_texture.png";
 		this.size = options.size ?? 1;
 		this.physics = {
 			bodyType: options.physics?.bodyType ?? "dynamic",

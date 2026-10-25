@@ -37,18 +37,18 @@ export class PlayerAnimationModule implements Module {
 	private fadeOutDuration = 0.3;
 
 	// Animation clip names
-	private animIdle = "FG_Idle_A";
-	private animWalk = "FG_Walk_A";
-	private animJump = "FG_emote_HONK_01_A";
-	private animFall = "FG_Loading_Falling_A";
+	private animIdle = "AN_Idle_A";
+	private animWalk = "AN_Walk_A";
+	private animJump = "AN_emote_HONK_01_A";
+	private animFall = "AN_Loading_Falling_A";
 
 	private emoteKeyToClip: Record<string, string> = {
-		[KeyAction.EMOTE_1]: "FG_Emote_Wave_A",
-		[KeyAction.EMOTE_2]: "FG_Emote_PirateDance_A",
-		[KeyAction.EMOTE_3]: "FG_Emote_ThumbsUp_A",
-		[KeyAction.EMOTE_4]: "FG_Emote_slowclap_A",
-		[KeyAction.EMOTE_5]: "FG_Emote_Chicken_A",
-		[KeyAction.EMOTE_6]: "FG_Emote_RobotDance_A"
+		[KeyAction.EMOTE_1]: "AN_Emote_Wave_A",
+		[KeyAction.EMOTE_2]: "AN_Emote_PirateDance_A",
+		[KeyAction.EMOTE_3]: "AN_Emote_ThumbsUp_A",
+		[KeyAction.EMOTE_4]: "AN_Emote_slowclap_A",
+		[KeyAction.EMOTE_5]: "AN_Emote_Chicken_A",
+		[KeyAction.EMOTE_6]: "AN_Emote_RobotDance_A"
 	};
 
 	constructor(options: PlayerAnimationModuleOptions = {}) {

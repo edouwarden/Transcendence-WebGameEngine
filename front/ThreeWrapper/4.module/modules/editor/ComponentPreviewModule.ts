@@ -787,7 +787,7 @@ export class ComponentPreviewModule implements Module {
 			const { GLTFLoader } = await import("three/examples/jsm/loaders/GLTFLoader.js");
 			const loader = new GLTFLoader();
 			const gltf = await new Promise<any>((resolve, reject) => {
-				loader.load("/game/modeles/charactere/scene.gltf", resolve, undefined, reject);
+				loader.load("/game/modeles/character/scene.gltf", resolve, undefined, reject);
 			});
 
 			const model = gltf.scene;

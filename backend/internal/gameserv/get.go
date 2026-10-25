@@ -75,11 +75,11 @@ func (gs *GameService) GetUserGames(
 
 func (gs *GameService) GetPlayersFromGameId(ctx context.Context, gameid int) ([]PlayerResult, error) {
 	ret := []PlayerResult{}
-	idk, err := gs.Client.Result.Query().Where(result.GameIDEQ(gameid)).Order(result.ByID(sql.OrderAsc())).All(ctx)
+	results, err := gs.Client.Result.Query().Where(result.GameIDEQ(gameid)).Order(result.ByID(sql.OrderAsc())).All(ctx)
 	if err != nil {
 		return ret, myhuma.EntErrToHumaErr(err)
 	}
-	for _, v := range idk {
+	for _, v := range results {
 		ret = append(ret, PlayerResult{
 			UserId:   v.UserID,
 			Username: v.Username,

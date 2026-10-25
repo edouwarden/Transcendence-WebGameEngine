@@ -14,8 +14,8 @@ export type CharacterVisualizerWorldArgs = {
 const DEFAULT_BODY_COLOR = "#c000c0";
 const DEFAULT_FACE_COLOR = "#ffffff";
 const DEFAULT_EYE_COLOR = "#00ff00";
-const MODEL_URL = "/game/modeles/charactere/scene.gltf";
-const TEXTURE_URL = "/game/modeles/charactere/character_texture.png";
+const MODEL_URL = "/game/modeles/character/scene.gltf";
+const TEXTURE_URL = "/game/modeles/character/character_texture.png";
 export class CharacterVisualizerWorld extends World {
 	private cameraPos: { x: number; y: number; z: number };
 	private cameraTarget: { x: number; y: number; z: number };
@@ -33,7 +33,7 @@ export class CharacterVisualizerWorld extends World {
 		this.bodyColor = args.bodyColor ?? DEFAULT_BODY_COLOR;
 		this.faceColor = args.faceColor ?? DEFAULT_FACE_COLOR;
 		this.eyeColor = args.eyeColor ?? DEFAULT_EYE_COLOR;
-		this.initialAnimation = args.animation ?? "FG_Idle_A";
+		this.initialAnimation = args.animation ?? "AN_Idle_A";
 		this.background = args.background ?? false;
 	}
 	protected setupEnvironment(): void {

@@ -52,7 +52,7 @@ objects:
 
   # ── Team spawn zones ──────────────────────────────────────────────────────────
   - id: spawn_team_blue
-    component: /game/components/spawn_point.yaml
+    component: /game/components/utils_spawn_point.yaml
     type: map
     position: { x: -8, y: 0.5, z: 0 }
     extraData:
@@ -60,7 +60,7 @@ objects:
       teamId: 0
 
   - id: spawn_team_red
-    component: /game/components/spawn_point.yaml
+    component: /game/components/utils_spawn_point.yaml
     type: map
     position: { x:  8, y: 0.5, z: 0 }
     extraData:

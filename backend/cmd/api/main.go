@@ -33,9 +33,7 @@ func addServices(i do.Injector) {
 }
 
 func main() {
-	log.Printf("-------------------\n")
-	log.Printf("\tSTARTINGG\n")
-	log.Printf("-------------------\n")
+	log.Printf("Starting Parkour Arena API server")
 
 	err := os.MkdirAll("./img/", 0755)
 	if err != nil {
@@ -67,7 +65,7 @@ func ProvideRouter(i do.Injector) (*chi.Mux, error) {
 }
 
 func ProvideApi(i do.Injector) (huma.API, error) {
-	config := huma.DefaultConfig("transcendence", "0.6.9")
+	config := huma.DefaultConfig("Parkour Arena API", "0.6.9")
 	config.DocsPath = "/api/docs"
 	config.OpenAPIPath = "/api/openapi"
 	config.SchemasPath = "/api/schemas"

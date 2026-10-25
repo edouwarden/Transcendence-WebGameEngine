@@ -1,4 +1,4 @@
-# server — TREEFRAG (LOD 1+4)
+# server — Architecture (LOD 1+4)
 > Node names + tag lines. ASCII format. Bun WebSocket game server.
 
 ```
@@ -58,5 +58,5 @@ server                                          # Bun WebSocket game server
 ├── Dockerfile                                  # oven/bun:slim, copies server + shared
 ├── .dockerignore
 ├── bun.lock
-└── FRAGTREE.md
+└── ARCHITECTURE.md
 ```

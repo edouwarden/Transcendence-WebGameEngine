@@ -52,14 +52,14 @@ objects:
 
   # ── Spawn points ─────────────────────────────────────────────────────────────
   - id: spawn_1
-    component: /game/components/spawn_point.yaml
+    component: /game/components/utils_spawn_point.yaml
     type: map
     position: { x: -6, y: 0.5, z: 0 }
     extraData:
       teamId: 0
 
   - id: spawn_2
-    component: /game/components/spawn_point.yaml
+    component: /game/components/utils_spawn_point.yaml
     type: map
     position: { x:  6, y: 0.5, z: 0 }
     extraData:
