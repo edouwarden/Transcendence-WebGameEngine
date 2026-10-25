@@ -1,4 +1,4 @@
-import { VisualizerEnvironment } from "@/ThreeWrapper/3.environment/envs/VisualizerEnvironment";
+import { VisualizerEnvironment } from "@/ThreeWrapper/environment/envs/VisualizerEnvironment";
 import * as THREE from "three";
 import { World } from "../WorldClass";
 export type VisualizerWorldArgs = {

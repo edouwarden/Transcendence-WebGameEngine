@@ -50,7 +50,7 @@ export function NetworkingSection() {
     setSelectedTypes(newTypes)
     networkLogger.setSelectedTypes(newTypes)
   }
-  const handleFakeMessageChange = (idx: number) => {
+  const handleMockMessageChange = (idx: number) => {
     setFakeMessageIdx(idx)
     if (idx !== 0) {
       const msg = FAKE_MESSAGES[idx]
@@ -99,7 +99,7 @@ export function NetworkingSection() {
     a.click()
     URL.revokeObjectURL(url)
   }
-  const handleFakeSend = () => {
+  const handleMockSend = () => {
     const msg = FAKE_MESSAGES[fakeMessageIdx]
     const type = msg?.type || customType.trim()
     if (!type) return
@@ -110,18 +110,18 @@ export function NetworkingSection() {
       payload = customPayload
     }
     if (msg?.direction === 'outgoing' || (!msg && fakeMessageIdx === 0)) {
-      networkLogger.sendRealOutgoing(type, payload)
+      networkLogger.sendLiveOutgoing(type, payload)
     } else {
-      networkLogger.fakeIncoming(type, payload)
+      networkLogger.mockIncoming(type, payload)
     }
   }
   const handleQuickSend = (msg: typeof FAKE_MESSAGES[number]) => {
     if (!msg.type) return
     const payload = JSON.parse(msg.defaultPayload)
     if (msg.direction === 'outgoing') {
-      networkLogger.sendRealOutgoing(msg.type, payload)
+      networkLogger.sendLiveOutgoing(msg.type, payload)
     } else {
-      networkLogger.fakeIncoming(msg.type, payload)
+      networkLogger.mockIncoming(msg.type, payload)
     }
   }
   const quickMessages: typeof FAKE_MESSAGES = [
@@ -345,7 +345,7 @@ export function NetworkingSection() {
         <select
           className="dbg-select"
           value={fakeMessageIdx}
-          onChange={e => handleFakeMessageChange(parseInt(e.target.value))}
+          onChange={e => handleMockMessageChange(parseInt(e.target.value))}
         >
           {FAKE_MESSAGES.map((msg, i) => (
             <option key={i} value={i}>{msg.label}</option>
@@ -370,7 +370,7 @@ export function NetworkingSection() {
         />
       </div>
       <div className="dbg-control">
-        <button className="dbg-btn" onClick={handleFakeSend}>Send {currentMsg?.direction === 'incoming' ? '← IN (fake)' : '→ OUT (real)'}</button>
+        <button className="dbg-btn" onClick={handleMockSend}>Send {currentMsg?.direction === 'incoming' ? '← IN (mock)' : '→ OUT (live)'}</button>
       </div>
     </>
   )

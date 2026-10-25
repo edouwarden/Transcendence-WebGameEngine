@@ -1,9 +1,9 @@
 "use client";
-import "./Background.css";
+import "./background.css";
 import { motion } from "motion/react";
 import { useState } from "react";
-import { CharacterCard } from "./CharacterCard";
-import {Button } from "../animations/Button.jsx"
+import { CharacterCard } from "./character-card";
+import {Button } from "../animations/button.jsx"
 const CHARACTER_IDS = Array.from({ length: 9 }, (_, i) => String(i + 1));
 
 export function Background({ signInOpen }) {

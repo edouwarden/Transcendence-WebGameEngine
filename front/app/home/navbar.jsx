@@ -1,12 +1,12 @@
 "use client"
 import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
-import './Navbar.css';
-import './Background.css';
+import './navbar.css';
+import './background.css';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import KpiCard1, { KpiCard } from "@/components/cards/multicards";
+import KpiCardContainer, { KpiCard } from "@/components/cards/kpi-cards";
 import { useRouter } from 'next/navigation';
-import Options from "@/components/cards/Options";
+import Options from "@/components/cards/options";
 import { Avatar, Typography } from "@material-tailwind/react";
 import Sloth from "@/public/sloth-meditate.json";
 import lottie from "lottie-web";
@@ -22,7 +22,7 @@ const router = useRouter();
 const slothRef = useRef(null);
 
 
-async function fetchImg() {
+async function fetchImage() {
   try {
     const blob = await api.getBlob('/api/users/me/profile-picture');
     if (!blob) { setImg(null); return; }
@@ -56,7 +56,7 @@ useEffect(() => {
   const payload = token.split('.')[1];
   const decoded = JSON.parse(atob(payload));
   fetchData(decoded.sub);
-  fetchImg()
+  fetchImage()
 }, [OptionsOpen]);
 
 useEffect(function(){
@@ -70,7 +70,7 @@ useEffect(function(){
     <>
     <div className="navbar">
       <div>
-        <KpiCard1 />
+        <KpiCardContainer />
       </div>
       <div className="navbar-actions">
         <div className="dropdown-trigger" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>

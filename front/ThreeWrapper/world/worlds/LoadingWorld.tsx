@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { World } from "../WorldClass";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
-import { LoadingUI } from "@/ThreeWrapper/4.module/modules/ui/LoadingUI";
-import type { UIModule } from "@/ThreeWrapper/4.module/modules/ui/UIModule";
+import { ModuleKey } from "@/ThreeWrapper/module";
+import { LoadingUI } from "@/ThreeWrapper/module/modules/ui/LoadingUI";
+import type { UIModule } from "@/ThreeWrapper/module/modules/ui/UIModule";
 
 const STORAGE_KEY = "loading_progress";
 

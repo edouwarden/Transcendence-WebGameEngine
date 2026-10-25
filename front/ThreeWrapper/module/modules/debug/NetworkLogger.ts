@@ -1,7 +1,7 @@
 "use client";
 import type { WSMessage } from "shared/protocol";
 import { CLIENT_MSG, SERVER_MSG } from "shared/protocol";
-import { ServerHandler } from "@/ThreeWrapper/1.engine/tools/ServerHandler";
+import { ServerHandler } from "@/ThreeWrapper/engine/tools/ServerHandler";
 export const ALL_PACKET_TYPES = {
 	incoming: Object.values(SERVER_MSG),
 	outgoing: Object.values(CLIENT_MSG)
@@ -189,7 +189,7 @@ class NetworkLogger {
 		const stored = localStorage.getItem("debugNetworkEnabled");
 		this.enabled = stored === "true";
 	}
-	fakeIncoming(type: string, payload: unknown): void {
+	mockIncoming(type: string, payload: unknown): void {
 		if (!this.enabled) return;
 		const msg = { type, payload, ts: Date.now() };
 		if (this.packetStates.get(type) === "block") {
@@ -199,10 +199,10 @@ class NetworkLogger {
 		if (!this.serverHandlerRef) return;
 		this.serverHandlerRef.dispatch(msg);
 	}
-	fakeOutgoing(type: string, payload: unknown): void {
+	mockOutgoing(type: string, payload: unknown): void {
 		this.push({ direction: "outgoing", type, payload });
 	}
-	sendRealOutgoing(type: string, payload: unknown): boolean {
+	sendLiveOutgoing(type: string, payload: unknown): boolean {
 		if (!this.serverHandlerRef) {
 			console.warn("[NetworkLogger] No server handler attached, cannot send real packet");
 			return false;

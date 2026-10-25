@@ -1,10 +1,10 @@
 "use client"
 import { useState } from 'react';
-import { Navbar } from './Navbar';
-import { Background } from './Background';
-import OrientationGuard  from '../home/Orientation_Guard.jsx';
+import { Navbar } from './navbar';
+import { Background } from './background';
+import OrientationGuard  from '../home/orientation-guard.jsx';
 
-export default function Home() {
+export default function LoginPage() {
   const [signInOpen, setSignInOpen] = useState(false);
   return (
     <>

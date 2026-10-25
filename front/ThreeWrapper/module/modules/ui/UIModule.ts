@@ -1,6 +1,6 @@
 import { createRoot, type Root } from 'react-dom/client'
 import type { ReactNode } from 'react'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
 type UIPanel = {
   node: ReactNode
   root: Root

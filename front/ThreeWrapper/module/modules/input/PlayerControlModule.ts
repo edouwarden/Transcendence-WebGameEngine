@@ -3,7 +3,7 @@ import type { Module, WorldContext } from "../../ModuleClass";
 import { ModuleKey } from "../../ModuleClass";
 import type { InputModule } from "./InputModule";
 import { KeyAction } from "shared/config";
-import { ManagedObject, OBJECT_TYPE } from "@/ThreeWrapper/2.world/tools";
+import { ManagedObject, OBJECT_TYPE } from "@/ThreeWrapper/world/tools";
 export type PlayerControlOptions = {
 	moveSpeed?: number;
 	jumpImpulse?: number;

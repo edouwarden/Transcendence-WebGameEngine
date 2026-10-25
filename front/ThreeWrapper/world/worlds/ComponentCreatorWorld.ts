@@ -1,6 +1,6 @@
 import * as THREE from "three";
 import { World } from "../WorldClass";
-import { ComponentCreatorEnvironment } from "@/ThreeWrapper/3.environment/envs/ComponentCreatorEnvironment";
+import { ComponentCreatorEnvironment } from "@/ThreeWrapper/environment/envs/ComponentCreatorEnvironment";
 import { LightFactory, OBJECT_TYPE } from "../tools";
 export class ComponentCreatorWorld extends World {
 	constructor() {

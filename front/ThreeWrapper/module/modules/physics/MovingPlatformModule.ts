@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import type { WaypointAnimDef } from '@/ThreeWrapper/2.world/tools'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import type { WaypointAnimDef } from '@/ThreeWrapper/world/tools'
 export type Waypoint = { x: number; y: number; z: number; rx?: number; ry?: number; rz?: number }
 export type PlatformDef = {
   objectName: string

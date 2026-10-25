@@ -1,6 +1,6 @@
 'use client'
 
-import { Button } from "../../../../../app/animations/Button.jsx"
+import { Button } from "../../../../../app/animations/button.jsx"
 
 type EscapeMenuProps = {
   onResume: () => void

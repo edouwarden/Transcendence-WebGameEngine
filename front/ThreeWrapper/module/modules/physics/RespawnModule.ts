@@ -1,5 +1,5 @@
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import type { ZoneShape } from "@/ThreeWrapper/2.world/tools/PhysicsWorld";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import type { ZoneShape } from "@/ThreeWrapper/world/tools/PhysicsWorld";
 import { PhaseChangedPayload } from "shared/protocol";
 export type SpawnPoint = { x: number; y: number; z: number };
 export type RespawnModuleOptions = {

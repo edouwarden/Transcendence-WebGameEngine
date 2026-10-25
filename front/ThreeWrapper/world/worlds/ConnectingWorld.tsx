@@ -1,8 +1,8 @@
 import * as THREE from "three";
 import { World } from "../WorldClass";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
-import { ConnectingUI } from "@/ThreeWrapper/4.module/modules/ui/ConnectingUI";
-import type { UIModule } from "@/ThreeWrapper/4.module/modules/ui/UIModule";
+import { ModuleKey } from "@/ThreeWrapper/module";
+import { ConnectingUI } from "@/ThreeWrapper/module/modules/ui/ConnectingUI";
+import type { UIModule } from "@/ThreeWrapper/module/modules/ui/UIModule";
 
 export class ConnectingWorld extends World {
 	constructor() {

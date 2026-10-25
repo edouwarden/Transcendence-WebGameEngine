@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
 import type { InputModule } from "../input/InputModule";
-import { ManagedObject } from "@/ThreeWrapper/2.world/tools";
+import { ManagedObject } from "@/ThreeWrapper/world/tools";
 export type TPVModuleOptions = {
 	distance?: number;
 	height?: number;

@@ -6,9 +6,9 @@ import {
   ChatHeader,
   ChatHeaderMain,
 } from "@/components/chat/chat-header";
-import FriendsRequestsList from "@/components/friends/friendsrequestslist.jsx";
-import { Button } from "../../app/animations/Button.jsx";
-// import FriendsRequests from "@/components/friends/friends_requests.jsx";
+import FriendsRequestsList from "@/components/friends/friends-requests-list.jsx";
+import { Button } from "../../app/animations/button.jsx";
+// import FriendsRequests from "@/components/friends/friends-requests.jsx";
 
 export default function FriendsRequests(props) {
   

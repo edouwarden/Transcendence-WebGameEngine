@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { World } from '../WorldClass'
-import { MinimalEnvironment } from '@/ThreeWrapper/3.environment/envs/MinimalEnvironment'
+import { MinimalEnvironment } from '@/ThreeWrapper/environment/envs/MinimalEnvironment'
 export class MinimalWorld extends World {
   constructor() {
     super({ id: 'minimal' })

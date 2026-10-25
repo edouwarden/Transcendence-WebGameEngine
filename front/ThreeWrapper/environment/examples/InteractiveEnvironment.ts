@@ -1,6 +1,6 @@
 import { Environment } from '../EnvironmentClass'
-import { ResizeModule } from '@/ThreeWrapper/4.module/modules/rendering/ResizeModule'
-import { ObjectInteractionModule } from '@/ThreeWrapper/4.module/examples/ObjectInteractionModule'
+import { ResizeModule } from '@/ThreeWrapper/module/modules/rendering/ResizeModule'
+import { ObjectInteractionModule } from '@/ThreeWrapper/module/examples/ObjectInteractionModule'
 export class InteractiveEnvironment extends Environment {
   constructor() {
     super({ id: 'interactive' })

@@ -1,11 +1,11 @@
 "use client";
 
-import { Button } from "../../app/animations/Button.jsx";
+import { Button } from "../../app/animations/button.jsx";
 import { useState } from 'react';
 import { Profile } from "@/components/dialogs/profile";
 import { Keyboard } from "@/components/dialogs/keyboard";
-import  LeaderBoard  from "@/components/cards/Leaderboard.jsx";
-import  YourFriends  from "@/components/friends/friends_cards.jsx";
+import  LeaderBoard  from "@/components/cards/leaderboard.jsx";
+import  FriendsPanel  from "@/components/friends/friends-panel.jsx";
 import { useRouter } from 'next/navigation';
 
 export default function MenuOptions({setOptionsOpen}) {

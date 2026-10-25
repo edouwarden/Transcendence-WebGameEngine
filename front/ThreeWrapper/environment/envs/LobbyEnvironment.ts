@@ -18,7 +18,7 @@ import {
 	PlayerSyncModule,
 	LagCompensationModule,
 	LobbyReadyModule
-} from "@/ThreeWrapper/4.module";
+} from "@/ThreeWrapper/module";
 import { Environment } from "../EnvironmentClass";
 export class LobbyEnvironment extends Environment {
 	constructor() {

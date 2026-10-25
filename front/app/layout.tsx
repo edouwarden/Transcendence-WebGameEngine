@@ -1,7 +1,7 @@
 import type { Metadata, Viewport } from "next";
 import { Baloo_2, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import "./home/Background.css";
+import "./home/background.css";
 import "./online/online-background.css";
 import "./rules/comicspeechbubbles.css";
 

@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { World } from '../WorldClass'
-import { EditorEnvironment } from '@/ThreeWrapper/3.environment/envs/EditorEnvironment'
+import { EditorEnvironment } from '@/ThreeWrapper/environment/envs/EditorEnvironment'
 import { LightFactory } from '../tools'
 export class EditorWorld extends World {
   constructor() {

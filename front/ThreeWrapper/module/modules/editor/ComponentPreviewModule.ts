@@ -1,10 +1,10 @@
 import * as THREE from "three";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
 import type { ComponentState, HitboxState, AnimationState, MeshPartState } from "./components/ComponentCreatorUI";
-import type { HitboxShape, PieceHitbox } from "@/ThreeWrapper/2.world/tools/ObjectManager";
-import { generateAutoMeshHitboxes } from "@/ThreeWrapper/2.world/util/autoMeshHitbox";
-import type { AutoMeshOptions, AutoHitboxResult } from "@/ThreeWrapper/2.world/util/autoMeshHitbox";
+import type { HitboxShape, PieceHitbox } from "@/ThreeWrapper/world/tools/ObjectManager";
+import { generateAutoMeshHitboxes } from "@/ThreeWrapper/world/util/autoMeshHitbox";
+import type { AutoMeshOptions, AutoHitboxResult } from "@/ThreeWrapper/world/util/autoMeshHitbox";
 
 function buildPrimitiveGeometry(mesh: MeshPartState): THREE.BufferGeometry {
 	const { primitive, sizeX, sizeY, sizeZ } = mesh;
@@ -787,7 +787,7 @@ export class ComponentPreviewModule implements Module {
 			const { GLTFLoader } = await import("three/examples/jsm/loaders/GLTFLoader.js");
 			const loader = new GLTFLoader();
 			const gltf = await new Promise<any>((resolve, reject) => {
-				loader.load("/game/modeles/character/scene.gltf", resolve, undefined, reject);
+				loader.load("/game/models/character/scene.gltf", resolve, undefined, reject);
 			});
 
 			const model = gltf.scene;

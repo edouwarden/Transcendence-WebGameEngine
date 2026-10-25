@@ -1,6 +1,6 @@
 "use client";
 
-import { Button } from "@/app/animations/Button.jsx";
+import { Button } from "@/app/animations/button.jsx";
 import { useState } from "react";
 
 export function Terms({ setTermsOpen }) {
@@ -55,7 +55,7 @@ export function Terms({ setTermsOpen }) {
           </section>
           <section className="mb-4">
             <h3 className="font-semibold">9. Contact</h3>
-            <p>For any questions or complaints, please contact us at: funguys@gmail.com.</p>
+            <p>For any questions or complaints, please contact us at: contact@parkour-arena.example.</p>
           </section>
         </div>
         <div className="mt-6 flex gap-3 justify-end pr-1">

@@ -1,7 +1,7 @@
 import { createElement } from "react";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
-import type { UIModule } from "@/ThreeWrapper/4.module/modules/ui/UIModule";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
+import type { UIModule } from "@/ThreeWrapper/module/modules/ui/UIModule";
 import type { ComponentPreviewModule } from "./ComponentPreviewModule";
 import type { ComponentState } from "./components/ComponentCreatorUI";
 import { ComponentCreatorUI } from "./components/ComponentCreatorUI";

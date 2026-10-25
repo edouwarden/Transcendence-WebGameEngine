@@ -33,7 +33,7 @@ useEffect(() => {
   async function loadImages() {
     const imgs = {};
     for (const player of players) {
-      const url = await fetchImg(player.id);
+      const url = await fetchImage(player.id);
       imgs[player.id] = url;
     }
     setPlayerImgs(imgs);
@@ -43,7 +43,7 @@ useEffect(() => {
   }
 }, [players]);
 
-async function fetchImg(id) {
+async function fetchImage(id) {
   try {
     const blob = await api.getBlob(`/api/users/${id}/picture`);
     if (!blob) return;
@@ -54,7 +54,7 @@ async function fetchImg(id) {
   }
 }
 
-async function fetchUserById(id) {
+async function fetchUserByID(id) {
   try {
     const data = await api.get('/api/users/' + id);
     setUserName(data[0].username);
@@ -79,7 +79,7 @@ useEffect(() => {
 
     const payload = token.split('.')[1];
     const decoded = JSON.parse(atob(payload));
-    fetchUserById(decoded.sub);
+    fetchUserByID(decoded.sub);
     fetchData();
   };
 

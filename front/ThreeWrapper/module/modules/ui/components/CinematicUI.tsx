@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { DotLottieReact } from '@lottiefiles/dotlottie-react'
-import TextType from '@/components/effects/Texttype'
+import TextType from '@/components/effects/text-type'
 
 type Props = {
   description: string

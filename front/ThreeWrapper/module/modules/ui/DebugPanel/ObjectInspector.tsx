@@ -1,6 +1,6 @@
 'use client'
 import { useState, useEffect, useCallback } from 'react'
-import type { HitboxShape } from '@/ThreeWrapper/2.world/tools/ObjectManager'
+import type { HitboxShape } from '@/ThreeWrapper/world/tools/ObjectManager'
 
 
 interface Vec3 {

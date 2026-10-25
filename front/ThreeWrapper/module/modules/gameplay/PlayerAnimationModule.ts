@@ -1,10 +1,10 @@
 import * as THREE from "three";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
-import type { ManagedObject } from "@/ThreeWrapper/2.world/tools/ObjectManager";
-import { OBJECT_TYPE } from "@/ThreeWrapper/2.world/tools/ObjectManager";
-import type { LagCompensationModule } from "@/ThreeWrapper/4.module/modules/online/LagCompensationModule";
-import type { InputModule } from "@/ThreeWrapper/4.module/modules/input/InputModule";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
+import type { ManagedObject } from "@/ThreeWrapper/world/tools/ObjectManager";
+import { OBJECT_TYPE } from "@/ThreeWrapper/world/tools/ObjectManager";
+import type { LagCompensationModule } from "@/ThreeWrapper/module/modules/online/LagCompensationModule";
+import type { InputModule } from "@/ThreeWrapper/module/modules/input/InputModule";
 import { KeyAction } from "shared/config";
 import { SERVER_MSG } from "shared/protocol";
 

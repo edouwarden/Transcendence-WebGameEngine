@@ -9,7 +9,7 @@
 
 ```
 ThreeWrapper                                    # Three.js engine wrapper for game client
-├── 1.engine
+├── engine
 │   ├── Engine                                  # Core render loop, owns renderer + active world + persistent DebugControlModule + UIModule
 │   │   ├── (public fields)                     # mode, renderer, keymap, logger, selfServerClient, server?, debug, uiModule
 │   │   ├── (public state)                      # paused, timeScale, gravity, stepRequested
@@ -71,13 +71,7 @@ ThreeWrapper                                    # Three.js engine wrapper for ga
 │   │           ├── getSimulationState
 │   │           ├── sendJoin / sendWorldLoaded
 │   │           └── (base) connect/disconnect/send/onMessage/onOpen/onClose/onError
-│   ├── Logger.ts (legacy)                      # Superseded by tools/Logger.ts
-│   ├── KeymapHandler.ts (legacy)               # Superseded by tools/KeymapHandler.ts
-│   ├── network (legacy)
-│   │   ├── NetworkManager.ts                   # Superseded by tools/communication/NetworkManager.ts
-│   │   └── protocol.ts                         # Re-export from @/shared/protocol
-│   └── ServerMessageHandler.ts (legacy)        # Superseded by tools/ServerHandler.ts
-├── 2.world
+├── world
 │   ├── World (abstract)                        # Scene container; manages modules, lifecycle, NO-LOGIC
 │   │   ├── constructor(config: WorldConfig)    # Init scene, camera, loader tools → calls setupEnvironment()
 │   │   ├── (fields)                            # config, ctx, scene, camera, gltf, objects, map, modules, _appliedEnvironments[]
@@ -143,7 +137,7 @@ ThreeWrapper                                    # Three.js engine wrapper for ga
 │   │   └── GameConfigLoader                    # Loads YAML/JSON game configs, registers event→action bindings via EventHandler
 │   └── util
 │       └── autoMeshHitbox                      # Auto-generates hitboxes from mesh geometry (OBB, merging, shape detection)
-├── 3.environment
+├── environment
 │   ├── Environment (base)                      # Holds module list for a preset; consumed by World.applyEnvironment()
 │   │   ├── constructor(config)                 # Accept config (typically {}), init empty module array
 │   │   ├── addModule (protected)               # Push module to internal list
@@ -151,7 +145,7 @@ ThreeWrapper                                    # Three.js engine wrapper for ga
 │   ├── envs                                    # Preset environments (10 total)
 │   │   ├── DefaultEnvironment                  # Standard gameplay environment
 │   │   ├── MinimalEnvironment                  # Minimal (loading screen) environment
-│   │   ├── OnlineEnvironement                  # Online multiplayer environment
+│   │   ├── OnlineEnvironment                  # Online multiplayer environment
 │   │   ├── EditorEnvironment                   # Map editor environment
 │   │   ├── LobbyEnvironment                    # Lobby environment
 │   │   ├── UIEnvironment                       # UI-only environment
@@ -160,7 +154,7 @@ ThreeWrapper                                    # Three.js engine wrapper for ga
 │   │   ├── ComponentCreatorEnvironment         # Component creator environment
 │   │   └── CharacterCustomizerEnvironment      # Character customizer environment
 │   └── examples/...                            # DebugEnvironment, FPSEnvironment, InputEnvironment, InteractiveEnvironment, MinimalEnvironment, NetworkEnvironment
-└── 4.module
+└── module
     ├── ModuleClass                              # Module interface + ModuleKey enum + WorldContext type
     │   ├── ModuleKey (enum, 44 entries)         # Canonical string keys for all built-in modules
     │   ├── WorldContext                         # Full ctx object passed to every module.init()
@@ -184,7 +178,7 @@ ThreeWrapper                                    # Three.js engine wrapper for ga
     │   ├── PhysicsDebugModule                  # Render Rapier physics collider wireframes
     │   ├── InspectorModule                     # Scene inspector / object picker overlay
     │   ├── DebugControlModule                  # Bridge (window.__debugCtrl): hover picking, 11 visual debug groups, object manipulation. Engine-owned (persists across world changes)
-    │   ├── NetworkLogger                       # Packet capture via ServerHandler interceptors; attach/detach, fakeIncoming/fakeOutgoing, sendRealOutgoing, packetStates, onNetworkEntry
+    │   ├── NetworkLogger                       # Packet capture via ServerHandler interceptors; attach/detach, mockIncoming/mockOutgoing, sendLiveOutgoing, packetStates, onNetworkEntry
     │   └── TraceRecorder                       # Perfect Trace recording engine
     ├── editor
     │   ├── EditorOrbitCameraModule             # Orbit camera (mouse drag + scroll, editor only)
@@ -241,7 +235,7 @@ ThreeWrapper                                    # Three.js engine wrapper for ga
         └── DebugPanel                          # 5-tab dev panel (F1 toggle)
             ├── DebugPanel.tsx                  # Persistent parent shell: drag/drop, 5 tabs, window.__debugCtrl bridge, DebugControl interface (46 methods)
             ├── LoggingSection.tsx              # Log Level + Verbosity dropdown, LOG_CATEGORIES groups, tag filters, Perfect Trace recorder embedded
-            ├── PerfectTraceSection.tsx         # Record modes (now/until event/N frames/manual), timeline, filters, HTML+JSON export
+            ├── TraceSection.tsx         # Record modes (now/until event/N frames/manual), timeline, filters, HTML+JSON export
             ├── WorldInspectorSection.tsx       # Object list sidebar, ObjectInspector, Save/Load Snapshot, Hover overlay toggle
             ├── VisualDebugSection.tsx          # Hitbox/bounds/names/grid/shadows/fog/wireframe/noTextures/exposure/ambient/GI toggles
             ├── NetworkingSection.tsx           # Packet capture/filters, simulation (lag/loss/dup), blocked types, quick send, fake message

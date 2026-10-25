@@ -14,7 +14,7 @@ export class LobbyManager {
   removePlayer(id: string): void {
     this.players.delete(id)
     this.sockets.delete(id)
-    if (this.countdownTimer && !this.allReady()) {
+    if (this.countdownTimer && !this.allPlayersReady()) {
       clearTimeout(this.countdownTimer)
       this.countdownTimer = null
     }
@@ -23,11 +23,11 @@ export class LobbyManager {
     const player = this.players.get(id)
     if (!player) return
     player.ready = true
-    if (this.allReady() && this.players.size > 0) {
+    if (this.allPlayersReady() && this.players.size > 0) {
       this.startCountdown()
     }
   }
-  private allReady(): boolean {
+  private allPlayersReady(): boolean {
     return [...this.players.values()].every((p) => p.ready)
   }
   private startCountdown(): void {

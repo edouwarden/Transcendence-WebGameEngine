@@ -26,9 +26,9 @@ import {
   ChatToolbarButton,
 } from "@/components/chat/chat-toolbar";
 import { ChatMessages } from "@/components/chat/chat-messages";
-import { PrimaryMessage } from "@/components/examples/primary-message";
-import { AdditionalMessage } from "@/components/examples/additional-message";
-import { DateItem } from "@/components/examples/date-item";
+import { PrimaryMessage } from "@/components/messages/primary-message";
+import { AdditionalMessage } from "@/components/messages/additional-message";
+import { DateItem } from "@/components/messages/date-item";
 import { api } from "@/lib/api";
 
 // type Message = {
@@ -52,26 +52,21 @@ const ASSISTANT_SENDER = {
   avatarUrl: "https://cdn.jsdelivr.net/gh/alohe/avatars/png/upstream_20.png",
 };
 
-export default function Chat(OptionsOpen) {
-  
-  const [isOpen, setIsOpen] = useState(false);
+export default function ChatPage() {
   const [input, setInput] = useState("");
   const [messages, setMessages] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
-  const [ConversationId, setConversationId] = useState("");
-  const [Img, setImg] = useState("");
   const socketRef = useRef(null);
   const [playerImgs, setPlayerImgs] = useState({});
 
 
-async function fetchImg(id) {
+async function fetchImage(id) {
   try {
     const blob = await api.getBlob(`/api/users/${id}/picture`);
     if (!blob) return;
     return URL.createObjectURL(blob);
   } catch (error) {
     console.error(error);
-    setImg(null);
   }
 }
 
@@ -83,7 +78,7 @@ useEffect(() => {
       if (!senderId) {
         continue;
       }
-      const url = await fetchImg(senderId);
+      const url = await fetchImage(senderId);
       imgs[senderId] = url;
     }
     setPlayerImgs(imgs);
@@ -106,7 +101,7 @@ useEffect(() => {
     }
   }
 
-  async function definePlayerId(){
+  async function fetchCurrentUserID(){
     try 
 	  {
       const data = await api.get('/api/users/me');
@@ -122,7 +117,7 @@ useEffect(() => {
   
    async function initChat() {
     const convId = 1;
-    const pId = await definePlayerId();
+    const pId = await fetchCurrentUserID();
     fetchConversationHistory(1);
 
     const socket = new WebSocket(api.getChatWebSocketUrl("/api/chat/ws"));

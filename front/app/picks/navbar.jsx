@@ -1,8 +1,8 @@
 "use client"
 import { useState } from 'react';
 import Image from 'next/image';
-import './Navbar.css';
-import './Background.css';
+import './navbar.css';
+import './background.css';
 
 export const Navbar = ({ signInOpen, setSignInOpen }) => {
   const [dropdownOpen, setDropdownOpen] = useState(false);

@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import { ModuleKey } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import { ModuleKey } from '@/ThreeWrapper/module'
 export type AccessoryConfig = {
   id: string
   name: string
@@ -47,7 +47,7 @@ export class CharacterCustomizerModule implements Module {
     this._clearCharacter()
     const loader = new GLTFLoader()
     const gltf = await new Promise<any>((resolve, reject) => {
-      loader.load('/game/modeles/character/scene.gltf', resolve, undefined, reject)
+      loader.load('/game/models/character/scene.gltf', resolve, undefined, reject)
     })
     this.characterScene = gltf.scene as THREE.Group
     this.clips = gltf.animations as THREE.AnimationClip[]

@@ -1,7 +1,7 @@
 "use client";
-import "./Background.css";
-import { Loader } from './animations/Loader';
-import { Spinner } from './animations/Spinner';
+import "./background.css";
+import { Loader } from './animations/loader';
+import { Spinner } from './animations/spinner';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "motion/react"
 import { useRouter } from "next/navigation";

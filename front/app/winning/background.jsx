@@ -1,10 +1,10 @@
 "use client";
-import "./Background.css";
+import "./background.css";
 import { useEffect, useState } from "react";
 import { motion } from "motion/react"
 import { BackgroundGradientAnimation } from "@/components/ui/background-gradient-animation";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import {Button } from "../animations/Button.jsx"
+import {Button } from "../animations/button.jsx"
 import { useRouter } from 'next/navigation';
 
 export function Background() {

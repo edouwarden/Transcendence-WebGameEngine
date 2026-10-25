@@ -1,4 +1,4 @@
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
 import type { Player } from 'shared/state'
 export type TeamColor = 'red' | 'blue' | 'green' | 'yellow' | string
 export type Team = {

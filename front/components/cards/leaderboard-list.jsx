@@ -24,7 +24,7 @@ useEffect(() => {
   async function loadImages() {
     const imgs = {};
     for (const player of players) {
-      const url = await fetchImg(player.id);
+      const url = await fetchImage(player.id);
       imgs[player.id] = url;
     }
     setPlayerImgs(imgs);
@@ -34,7 +34,7 @@ useEffect(() => {
   }
 }, [players]);
 
-async function fetchImg(id) {
+async function fetchImage(id) {
   try {
     const blob = await api.getBlob(`/api/users/${id}/picture`);
     if (!blob) return;

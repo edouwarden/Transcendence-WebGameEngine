@@ -1,7 +1,7 @@
 'use client'
 
 import { useState, useEffect, useCallback } from 'react'
-import { Button } from '../../../../../app/animations/Button.jsx'
+import { Button } from '../../../../../app/animations/button.jsx'
 import Key from '../../../../../components/keyboard/key.jsx'
 import Space from '../../../../../components/keyboard/space.jsx'
 import type { KeyBinding } from 'shared/config'

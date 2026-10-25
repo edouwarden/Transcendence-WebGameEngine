@@ -1,8 +1,8 @@
 "use client";
 
-import { Button } from "../../app/animations/Button.jsx";
+import { Button } from "../../app/animations/button.jsx";
 import { useState } from 'react';
-import { PrivacyPolicy } from "@/components/privacy/privacy_policy.jsx";
+import { PrivacyPolicy } from "@/components/privacy/privacy-policy.jsx";
 import { Terms } from "@/components/privacy/terms.jsx";
 
 export default function MenuPrivacy({setPrivacyOpen}) {

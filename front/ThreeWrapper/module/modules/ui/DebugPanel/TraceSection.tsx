@@ -10,7 +10,7 @@ const USEFUL_FILTER_PRESET = {
   contains: undefined,
 }
 const ALL_EVENTS = FAKE_MESSAGES.filter((m: { type: string }) => m.type !== '').map((m: { label: string; type: string }) => ({ label: m.label, type: m.type }))
-export function PerfectTraceSection() {
+export function TraceSection() {
   const [recording, setRecording] = useState(false)
   const [recordType, setRecordType] = useState<RecordType>('startNow')
   const [selectedEvent, setSelectedEvent] = useState('')

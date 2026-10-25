@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { World } from '../WorldClass'
-import { CharacterCustomizerEnvironment } from '@/ThreeWrapper/3.environment/envs/CharacterCustomizerEnvironment'
+import { CharacterCustomizerEnvironment } from '@/ThreeWrapper/environment/envs/CharacterCustomizerEnvironment'
 import { LightFactory, OBJECT_TYPE } from '../tools'
 export class CharacterCustomizerWorld extends World {
   constructor() {

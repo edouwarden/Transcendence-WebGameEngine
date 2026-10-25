@@ -1,5 +1,5 @@
 'use client'
-import { traceRecorder } from '@/ThreeWrapper/4.module/modules/debug/TraceRecorder'
+import { traceRecorder } from '@/ThreeWrapper/module/modules/debug/TraceRecorder'
 export type LogLevel = 'DEBUG' | 'INFO' | 'WARN' | 'ERROR'
 export type VerbosityLevel = 'NONE' | 'LOW' | 'MEDIUM' | 'HIGH' | 'INSANE'
 export type LogEntry = {

@@ -1,6 +1,6 @@
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import type { Zone, ZoneShape } from "@/ThreeWrapper/2.world/tools/PhysicsWorld";
-import type { ManagedObject, ObjectManager } from "@/ThreeWrapper/2.world/tools";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import type { Zone, ZoneShape } from "@/ThreeWrapper/world/tools/PhysicsWorld";
+import type { ManagedObject, ObjectManager } from "@/ThreeWrapper/world/tools";
 export type TriggerDef = {
 	id: string;
 	center: { x: number; y: number; z: number };

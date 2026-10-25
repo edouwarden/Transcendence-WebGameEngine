@@ -1,5 +1,5 @@
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import type { Zone, ZoneShape } from '@/ThreeWrapper/2.world/tools/PhysicsWorld'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import type { Zone, ZoneShape } from '@/ThreeWrapper/world/tools/PhysicsWorld'
 export type Checkpoint = {
   id: string
   order: number

@@ -1,9 +1,9 @@
 import * as THREE from 'three'
 import { dump as yamlDump, load as yamlLoad } from 'js-yaml'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import { ModuleKey } from '@/ThreeWrapper/4.module'
-import { ComponentLoader, OBJECT_TYPE } from '@/ThreeWrapper/2.world/tools'
-import type { ComponentDef, MapObjectInstance, MapDef } from '@/ThreeWrapper/2.world/tools'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import { ModuleKey } from '@/ThreeWrapper/module'
+import { ComponentLoader, OBJECT_TYPE } from '@/ThreeWrapper/world/tools'
+import type { ComponentDef, MapObjectInstance, MapDef } from '@/ThreeWrapper/world/tools'
 type PlacedObject = {
   id: string
   component: string
@@ -824,8 +824,8 @@ export class EditorPlacementModule implements Module {
     }
   }
   get componentLoader(): ComponentLoader { return this.loader }
-  get placedCopy(): PlacedObject[] { return JSON.parse(JSON.stringify(this.placed)) }
-  get historyCopy(): HistoryEntry[] { return JSON.parse(JSON.stringify(this.history)) }
+  get placedSnapshot(): PlacedObject[] { return JSON.parse(JSON.stringify(this.placed)) }
+  get historySnapshot(): HistoryEntry[] { return JSON.parse(JSON.stringify(this.history)) }
   get historyIndexValue(): number { return this.historyIndex }
   setHistoryState(history: HistoryEntry[], index: number): void { this.history = history; this.historyIndex = index }
   buildMapDef(): MapDef {

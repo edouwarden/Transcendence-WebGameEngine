@@ -60,7 +60,7 @@ function AccessoryForm({
     const n = parseFloat(raw)
     if (!isNaN(n)) onChange({ ...value, [key]: { ...value[key], [axis]: n } })
   }
-  const numInput = (
+  const numberInput = (
     axis: string,
     val: number,
     onChange: (raw: string) => void,
@@ -130,23 +130,23 @@ function AccessoryForm({
       {value.meshKind !== "gltf" && (
         <>
           <span style={{ ...fieldLabel, marginTop: 4, display: "block" }}>Size</span>
-          {numInput("X", value.size.x, (v) => setVec("size", "x", v))}
-          {numInput("Y", value.size.y, (v) => setVec("size", "y", v))}
-          {numInput("Z", value.size.z, (v) => setVec("size", "z", v))}
+          {numberInput("X", value.size.x, (v) => setVec("size", "x", v))}
+          {numberInput("Y", value.size.y, (v) => setVec("size", "y", v))}
+          {numberInput("Z", value.size.z, (v) => setVec("size", "z", v))}
         </>
       )}
       <span style={{ ...fieldLabel, marginTop: 4, display: "block" }}>Offset</span>
-      {numInput("X", value.offset.x, (v) => setVec("offset", "x", v))}
-      {numInput("Y", value.offset.y, (v) => setVec("offset", "y", v))}
-      {numInput("Z", value.offset.z, (v) => setVec("offset", "z", v))}
+      {numberInput("X", value.offset.x, (v) => setVec("offset", "x", v))}
+      {numberInput("Y", value.offset.y, (v) => setVec("offset", "y", v))}
+      {numberInput("Z", value.offset.z, (v) => setVec("offset", "z", v))}
       <span style={{ ...fieldLabel, marginTop: 4, display: "block" }}>Rotation °</span>
-      {numInput("X", value.rotation.x, (v) => setVec("rotation", "x", v), 1)}
-      {numInput("Y", value.rotation.y, (v) => setVec("rotation", "y", v), 1)}
-      {numInput("Z", value.rotation.z, (v) => setVec("rotation", "z", v), 1)}
+      {numberInput("X", value.rotation.x, (v) => setVec("rotation", "x", v), 1)}
+      {numberInput("Y", value.rotation.y, (v) => setVec("rotation", "y", v), 1)}
+      {numberInput("Z", value.rotation.z, (v) => setVec("rotation", "z", v), 1)}
       <span style={{ ...fieldLabel, marginTop: 4, display: "block" }}>Scale</span>
-      {numInput("X", value.scale.x, (v) => setVec("scale", "x", v))}
-      {numInput("Y", value.scale.y, (v) => setVec("scale", "y", v))}
-      {numInput("Z", value.scale.z, (v) => setVec("scale", "z", v))}
+      {numberInput("X", value.scale.x, (v) => setVec("scale", "x", v))}
+      {numberInput("Y", value.scale.y, (v) => setVec("scale", "y", v))}
+      {numberInput("Z", value.scale.z, (v) => setVec("scale", "z", v))}
       <div style={{ display: "flex", gap: 6, marginTop: 8 }}>
         <button onClick={onSave} style={btnPrimary}>Done</button>
         <button onClick={onCancel} style={btnSecondary}>Cancel</button>

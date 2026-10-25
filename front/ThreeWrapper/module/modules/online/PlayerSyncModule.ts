@@ -4,8 +4,8 @@ import type { PlayerJoinPayload, PlayerDisconnectPayload } from "shared/protocol
 import type { Quat } from "shared/math";
 import type { Module, WorldContext } from "../../ModuleClass";
 import { ModuleKey } from "../../ModuleClass";
-import { OBJECT_TYPE } from "@/ThreeWrapper/2.world/tools";
-import { PlayerBodyModule } from "@/ThreeWrapper/4.module/modules/players/PlayerBodyModule";
+import { OBJECT_TYPE } from "@/ThreeWrapper/world/tools";
+import { PlayerBodyModule } from "@/ThreeWrapper/module/modules/players/PlayerBodyModule";
 export class PlayerSyncModule implements Module {
 	readonly type = "player_sync";
 	readonly requires: readonly ModuleKey[] = [];

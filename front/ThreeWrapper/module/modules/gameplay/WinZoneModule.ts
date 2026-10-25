@@ -1,4 +1,4 @@
-import { ManagedObject, OBJECT_TYPE } from "@/ThreeWrapper/2.world/tools";
+import { ManagedObject, OBJECT_TYPE } from "@/ThreeWrapper/world/tools";
 import { ModuleKey, type Module, type WorldContext } from "../../ModuleClass";
 import { TriggerZoneModule } from "../physics/TriggerZoneModule";
 

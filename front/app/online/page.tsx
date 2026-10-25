@@ -1,11 +1,11 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { DemoWorld } from "@/ThreeWrapper/2.world/worlds/DemoWorld";
-import { EngineCanvas } from "../../ThreeWrapper/1.engine/EngineCanvas";
-import { ConnectingWorld } from "@/ThreeWrapper/2.world/worlds/ConnectingWorld";
+import { DemoWorld } from "@/ThreeWrapper/world/worlds/DemoWorld";
+import { EngineCanvas } from "../../ThreeWrapper/engine/EngineCanvas";
+import { ConnectingWorld } from "@/ThreeWrapper/world/worlds/ConnectingWorld";
 
-export default function OnlineDemo() {
+export default function OnlinePage() {
 	const [engineReady, setEngineReady] = useState(false);
 
 	return (

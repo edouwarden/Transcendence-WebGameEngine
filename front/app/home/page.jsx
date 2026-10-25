@@ -3,21 +3,21 @@ import { useEffect, useState, useRef } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
 import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Background } from "./Background";
-import { Navbar } from "./Navbar.jsx";
-import OrientationGuard from "./Orientation_Guard.jsx";
-import { Button } from "../animations/Button.jsx";
+import { Background } from "./background";
+import { Navbar } from "./navbar.jsx";
+import OrientationGuard from "./orientation-guard.jsx";
+import { Button } from "../animations/button.jsx";
 import Chat from "../chat/chat";
-import Online from "@/components/cards/Onlineplayers";
+import Online from "@/components/cards/online-players";
 import SimpleFooter from "@/components/footers/footer";
 import "./page.css";
-import Privacy from "./Privacy.jsx";
-import LeaderBoard from "@/components/cards/Leaderboard.jsx";
-import YourFriends from "@/components/friends/friends_cards.jsx";
+import Privacy from "./privacy.jsx";
+import LeaderBoard from "@/components/cards/leaderboard.jsx";
+import FriendsPanel from "@/components/friends/friends-panel.jsx";
 import lottie from "lottie-web";
 import Bear from "@/public/cute-bear.json";
-import { CharacterVisualizerWorld } from "@/ThreeWrapper/2.world/worlds/CharacterVisualizerWorld";
-import { EngineCanvas } from "../../ThreeWrapper/1.engine/EngineCanvas";
+import { CharacterVisualizerWorld } from "@/ThreeWrapper/world/worlds/CharacterVisualizerWorld";
+import { EngineCanvas } from "../../ThreeWrapper/engine/EngineCanvas";
 import "./character_controls.css";
 import { api } from "@/lib/api";
 const ANIMATIONS = [
@@ -59,7 +59,7 @@ const ANIMATIONS = [
 const BODY_COLORS = ["#c000c0", "#ff4444", "#44ff44", "#4444ff", "#ffff00", "#ff8800", "#00ffff", "#ff00ff"];
 const FACE_COLORS = ["#ffffff", "#ffcccc", "#ccffcc", "#ccccff", "#ffffcc", "#ffccff", "#ccffff", "#ffddaa"];
 const EYE_COLORS = ["#00ff00", "#ff0000", "#0000ff", "#ffff00", "#ff8800", "#00ffff", "#ff00ff", "#8800ff"];
-export default function Home() {
+export default function HomePage() {
 	const router = useRouter();
 	const [OptionsOpen, setOptionsOpen] = useState(false);
 	const [isTransitioning, setIsTransitioning] = useState(false);
@@ -98,7 +98,7 @@ export default function Home() {
 		};
 	}, []);
 	useEffect(() => {
-		const userId = getUserIdFromCookie();
+		const userId = getUserIDFromCookie();
 		if (!userId) {
 			setColorsReady(true);
 			return;
@@ -131,7 +131,7 @@ export default function Home() {
 		window.addEventListener("resize", updateCanvasHeight);
 		return () => window.removeEventListener("resize", updateCanvasHeight);
 	}, []);
-	function getUserIdFromCookie() {
+	function getUserIDFromCookie() {
 		const auth_token = document.cookie
 			.split("; ")
 			.find((row) => row.startsWith("auth_token="))
@@ -154,7 +154,7 @@ export default function Home() {
 		setIsChangingColor(true);
 		try {
 			await worldApi.setBodyColor(color);
-			const userId = getUserIdFromCookie();
+			const userId = getUserIDFromCookie();
 			if (userId) {
 				console.log("PATCH /api/users/" + userId, { skin_color: color });
 				await api.patch("/api/users/" + userId, { skin_color: color });
@@ -170,7 +170,7 @@ export default function Home() {
 		setIsChangingColor(true);
 		try {
 			await worldApi.setFaceColor(color);
-			const userId = getUserIdFromCookie();
+			const userId = getUserIDFromCookie();
 			if (userId) {
 				console.log("PATCH /api/users/" + userId, { face_color: color });
 				await api.patch("/api/users/" + userId, { face_color: color });
@@ -269,7 +269,7 @@ export default function Home() {
 						</div>
 					)}
 					{LeaderBoardOpen && <LeaderBoard setLeaderBoardOpen={setLeaderBoardOpen} />}
-					{YourFriendsOpen && <YourFriends setYourFriendsOpen={setYourFriendsOpen} />}
+					{YourFriendsOpen && <FriendsPanel setYourFriendsOpen={setYourFriendsOpen} />}
 				</motion.div>
 			</main>
 		</OrientationGuard>

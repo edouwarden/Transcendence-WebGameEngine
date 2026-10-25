@@ -1,8 +1,8 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { extractGltfZip } from "../gltfVirtualFs";
-import type { AutoMeshOptions } from "@/ThreeWrapper/2.world/util/autoMeshHitbox";
-import { mergeAABBHitboxes, removeContainedHitboxes } from "@/ThreeWrapper/2.world/util/autoMeshHitbox";
+import type { AutoMeshOptions } from "@/ThreeWrapper/world/util/autoMeshHitbox";
+import { mergeAABBHitboxes, removeContainedHitboxes } from "@/ThreeWrapper/world/util/autoMeshHitbox";
 import * as THREE from "three";
 export type TextureSlot = {
 	file: File | null;

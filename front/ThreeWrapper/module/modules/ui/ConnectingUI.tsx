@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import Lightning from "@/app/animations/Lightning";
+import Lightning from "@/app/animations/lightning";
 
 const Overlay = styled.div`
 	position: fixed;

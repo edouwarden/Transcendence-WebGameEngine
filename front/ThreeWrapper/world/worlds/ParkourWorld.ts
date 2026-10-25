@@ -1,9 +1,9 @@
 import * as THREE from "three";
 import { World } from "../WorldClass";
-import { ParkourEnvironement } from "@/ThreeWrapper/3.environment/envs/ParkourEnvironment";
+import { ParkourEnvironement } from "@/ThreeWrapper/environment/envs/ParkourEnvironment";
 import { ComponentLoader, OBJECT_TYPE } from "../tools";
-import { RespawnModule, ModuleKey } from "@/ThreeWrapper/4.module";
-import type { SpawnPoint } from "@/ThreeWrapper/4.module/modules/physics/RespawnModule";
+import { RespawnModule, ModuleKey } from "@/ThreeWrapper/module";
+import type { SpawnPoint } from "@/ThreeWrapper/module/modules/physics/RespawnModule";
 export class ParkourWorld extends World {
 	private _disposeMap?: () => void;
 	constructor() {

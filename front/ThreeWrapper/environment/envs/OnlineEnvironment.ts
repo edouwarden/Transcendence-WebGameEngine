@@ -1,6 +1,6 @@
-import { ResizeModule, PlayerControlModule, EscapeUIModule, InputModule, ModuleKey, SkyboxModule, PlayerAnimationModule, RagdollModule } from "@/ThreeWrapper/4.module";
+import { ResizeModule, PlayerControlModule, EscapeUIModule, InputModule, ModuleKey, SkyboxModule, PlayerAnimationModule, RagdollModule } from "@/ThreeWrapper/module";
 import { Environment } from "../EnvironmentClass";
-export class OnlineEnvironement extends Environment {
+export class OnlineEnvironment extends Environment {
 	constructor() {
 		super({ id: "online" });
 		this.addModule(new SkyboxModule({ preset: "day" }));

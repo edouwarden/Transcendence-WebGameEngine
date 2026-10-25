@@ -7,7 +7,7 @@ import type {
   HitboxDef,
   PhysicsDef,
   AnimationDef,
-} from '@/ThreeWrapper/2.world/tools'
+} from '@/ThreeWrapper/world/tools'
 import type { ComponentState, HitboxState, AnimationState, MeshPartState } from './components/ComponentCreatorUI'
 
 function buildComponentDef(state: ComponentState): ComponentDef {

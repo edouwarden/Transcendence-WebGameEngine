@@ -19,7 +19,7 @@ import {
 	LagCompensationModule,
 	WinZoneModule,
 	SpectatorFlyModule
-} from "@/ThreeWrapper/4.module";
+} from "@/ThreeWrapper/module";
 import { Environment } from "../EnvironmentClass";
 export class ParkourEnvironement extends Environment {
 	constructor() {

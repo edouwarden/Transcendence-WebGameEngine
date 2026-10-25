@@ -1,5 +1,5 @@
 "use client";
-import "./Background.css";
+import "./background.css";
 
 export function Background() {
   return (

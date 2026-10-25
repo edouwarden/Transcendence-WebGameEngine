@@ -26,10 +26,10 @@ import {
   ChatToolbarButton,
 } from "@/components/chat/chat-toolbar";
 import { ChatMessages } from "@/components/chat/chat-messages";
-import { PrimaryMessage } from "@/components/examples/primary-message";
-import { AdditionalMessage } from "@/components/examples/additional-message";
-import { DateItem } from "@/components/examples/date-item";
-import LeaderBoardList from "@/components/cards/leaderboardlist.jsx";
+import { PrimaryMessage } from "@/components/messages/primary-message";
+import { AdditionalMessage } from "@/components/messages/additional-message";
+import { DateItem } from "@/components/messages/date-item";
+import LeaderBoardList from "@/components/cards/leaderboard-list.jsx";
 type Message = {
   id: string;
   role: "user" | "assistant";

@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import { VisualizerEnvironment } from "@/ThreeWrapper/3.environment/envs/VisualizerEnvironment";
+import { VisualizerEnvironment } from "@/ThreeWrapper/environment/envs/VisualizerEnvironment";
 import { World } from "../WorldClass";
 import { LightFactory, OBJECT_TYPE } from "../tools";
 export type CharacterVisualizerWorldArgs = {
@@ -14,8 +14,8 @@ export type CharacterVisualizerWorldArgs = {
 const DEFAULT_BODY_COLOR = "#c000c0";
 const DEFAULT_FACE_COLOR = "#ffffff";
 const DEFAULT_EYE_COLOR = "#00ff00";
-const MODEL_URL = "/game/modeles/character/scene.gltf";
-const TEXTURE_URL = "/game/modeles/character/character_texture.png";
+const MODEL_URL = "/game/models/character/scene.gltf";
+const TEXTURE_URL = "/game/models/character/character_texture.png";
 export class CharacterVisualizerWorld extends World {
 	private cameraPos: { x: number; y: number; z: number };
 	private cameraTarget: { x: number; y: number; z: number };

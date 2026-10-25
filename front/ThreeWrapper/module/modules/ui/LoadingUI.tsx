@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
-import { Loader } from "@/app/animations/Loader";
-import { ProgressSpinner } from "@/app/animations/ProgressSpinner";
+import { Loader } from "@/app/animations/loader";
+import { ProgressSpinner } from "@/app/animations/progress-spinner";
 
 const Overlay = styled.div`
 	position: fixed;

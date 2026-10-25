@@ -1,6 +1,6 @@
 import { SERVER_MSG } from 'shared/protocol'
 import type { WorldStatePayload } from 'shared/protocol'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
 export type PingDisplayModuleOptions = {
   onPingUpdate?: (ping: number) => void
 }

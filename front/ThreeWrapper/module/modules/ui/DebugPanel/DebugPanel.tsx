@@ -8,8 +8,8 @@ import { VisualDebugSection } from "./VisualDebugSection";
 import { NetworkingSection } from "./NetworkingSection";
 import { EngineControlsSection } from "./EngineControlsSection";
 import { StatsOverlay } from "./StatsOverlay";
-import { Logger } from "../../../../1.engine/tools/Logger";
-import type { PieceHitbox } from "../../../../2.world/tools/ObjectManager";
+import { Logger } from "../../../../engine/tools/Logger";
+import type { PieceHitbox } from "../../../../world/tools/ObjectManager";
 export interface DebugControl {
 	open: () => void;
 	close: () => void;

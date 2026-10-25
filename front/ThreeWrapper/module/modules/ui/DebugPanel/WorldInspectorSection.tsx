@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback, useMemo } from "react";
 import { ObjectInspector } from "./ObjectInspector";
-import { Logger } from "../../../../1.engine/tools/Logger";
+import { Logger } from "../../../../engine/tools/Logger";
 import type { ObjectSummary } from "./DebugPanel";
 const OBJECT_TYPES = ["player", "npc", "map"] as const;
 type OBJECT_TYPE = (typeof OBJECT_TYPES)[number];

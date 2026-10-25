@@ -1,9 +1,9 @@
 "use client"
 import { useState } from 'react';
-import { Background } from './Background';
-import OrientationGuard  from '../home/Orientation_Guard.jsx';
+import { Background } from './background';
+import OrientationGuard  from '../home/orientation-guard.jsx';
 
-export default function Home() {
+export default function WinningPage() {
   const [signInOpen, setSignInOpen] = useState(false);
   return (
     <>

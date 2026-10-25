@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "../../app/animations/Button.jsx";
+import { Button } from "../../app/animations/button.jsx";
 import { useState, useEffect} from "react";
 import { api } from "@/lib/api";
 export default function FriendsRequestsList(props) {
@@ -42,7 +42,7 @@ useEffect(() => {
   async function loadImages() {
     const imgs = {};
     for (const Request of Requests) {
-      const url = await fetchImg(Request.id);
+      const url = await fetchImage(Request.id);
       imgs[Request.id] = url;
     }
     setPlayerImgs(imgs);
@@ -52,7 +52,7 @@ useEffect(() => {
   }
 }, [Requests]);
 
-async function fetchImg(id) {
+async function fetchImage(id) {
   try {
     const blob = await api.getBlob(`/api/users/${id}/picture`);
     if (!blob) return;

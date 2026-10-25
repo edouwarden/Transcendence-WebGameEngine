@@ -141,7 +141,7 @@ const StyledCard = styled(Card)`
 `;
 
 
-function KpiCard1() {
+function KpiCardContainer() {
   const [DataUser, setDataUser] = useState<{ games_played: number; wins: number; total_deaths: number } | null>(null)
   const data = [
   {
@@ -198,4 +198,4 @@ function KpiCard1() {
   );
 }
 
-export default KpiCard1;
+export default KpiCardContainer;

@@ -2,9 +2,9 @@
 import { useEffect, useRef } from "react";
 import { useRouter } from "next/navigation";
 import type { EngineConfig, KeyBinding } from "shared/config";
-import type { World } from "@/ThreeWrapper/2.world/WorldClass";
+import type { World } from "@/ThreeWrapper/world/WorldClass";
 import { Engine } from "./Engine";
-import { resolveWorld } from "@/ThreeWrapper/2.world/WorldRegistry";
+import { resolveWorld } from "@/ThreeWrapper/world/WorldRegistry";
 type EngineCanvasProps = {
 	config: Omit<EngineConfig, "canvas">;
 	world: World | (() => World);
@@ -29,7 +29,7 @@ export function EngineCanvas({ config, world, keymap, style, className, onReady 
 		const augmentedConfig: EngineConfig = {
 			...configRef.current,
 			onEndGame: (won: boolean) => {
-				router.push(won ? "/wining" : "/lose");
+				router.push(won ? "/winning" : "/lose");
 			}
 		};
 		const engine = new Engine(augmentedConfig, keymapRef.current);

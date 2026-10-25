@@ -1,5 +1,5 @@
-import { ResizeModule, UIModule, EscapeUIModule, ModuleKey, InputModule } from "@/ThreeWrapper/4.module/index";
-import { Environment } from "@/ThreeWrapper/3.environment/EnvironmentClass";
+import { ResizeModule, UIModule, EscapeUIModule, ModuleKey, InputModule } from "@/ThreeWrapper/module/index";
+import { Environment } from "@/ThreeWrapper/environment/EnvironmentClass";
 export class DefaultEnvironment extends Environment {
 	constructor() {
 		super({ id: "default" });

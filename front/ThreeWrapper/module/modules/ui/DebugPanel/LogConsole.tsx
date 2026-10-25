@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useRef, useCallback } from "react";
 import { networkLogger } from "../../debug/NetworkLogger";
-import { Logger } from "../../../../1.engine/tools/Logger";
+import { Logger } from "../../../../engine/tools/Logger";
 type LogLevel = "log" | "warn" | "error" | "debug" | "info" | "network-in" | "network-out";
 interface ConsoleEntry {
 	id: number;

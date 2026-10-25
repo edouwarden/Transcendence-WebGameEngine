@@ -1,4 +1,4 @@
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
 export type ScoreEntry = {
   playerId: string
   score: number

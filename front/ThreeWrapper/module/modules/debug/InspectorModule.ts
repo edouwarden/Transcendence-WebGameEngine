@@ -1,5 +1,5 @@
 import * as THREE from 'three'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
 export type InspectorModuleOptions = {
   enabled?: boolean
   toggleKey?: string
@@ -73,9 +73,9 @@ export class InspectorModule implements Module {
     const info = [
       `Name: ${obj.name || '(unnamed)'}`,
       `Type: ${obj.type}`,
-      `Pos: ${fmt(obj.position)}`,
-      `Rot: ${fmt(obj.rotation)}`,
-      `Scale: ${fmt(obj.scale)}`,
+      `Pos: ${formatVector(obj.position)}`,
+      `Rot: ${formatVector(obj.rotation)}`,
+      `Scale: ${formatVector(obj.scale)}`,
     ]
     if (managed) {
       info.push(`Managed ID: ${managed.id}`)
@@ -122,6 +122,6 @@ export class InspectorModule implements Module {
     this.ctx = null
   }
 }
-function fmt(v: { x: number; y: number; z: number }): string {
+function formatVector(v: { x: number; y: number; z: number }): string {
   return `(${v.x.toFixed(2)}, ${v.y.toFixed(2)}, ${v.z.toFixed(2)})`
 }

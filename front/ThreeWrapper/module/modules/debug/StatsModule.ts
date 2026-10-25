@@ -1,4 +1,4 @@
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
 export type StatsModuleOptions = {
   position?: 'top-left' | 'top-right' | 'bottom-left' | 'bottom-right'
 }

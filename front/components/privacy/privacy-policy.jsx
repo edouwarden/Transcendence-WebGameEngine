@@ -1,5 +1,5 @@
 "use client";
-import { Button } from "@/app/animations/Button.jsx";
+import { Button } from "@/app/animations/button.jsx";
 import {useState } from "react";
 
 export function PrivacyPolicy({ setPrivacyPolicyOpen }) {
@@ -23,7 +23,7 @@ export function PrivacyPolicy({ setPrivacyPolicyOpen }) {
           <h2 className="text-2xl font-bold mb-4">Privacy Policy</h2>
           <section className="mb-4">
             <h3 className="font-semibold">1. Introduction</h3>
-            <p>We, FunGuysCorp, are committed to protecting your personal data. This Privacy Policy explains what data we collect when you use FunGuys, how we use it, and what rights you have regarding your information.</p>
+            <p>We, Parkour Arena, are committed to protecting your personal data. This Privacy Policy explains what data we collect when you use Parkour Arena, how we use it, and what rights you have regarding your information.</p>
           </section>
           <section className="mb-4">
             <h3 className="font-semibold">2. Data we collect</h3>
@@ -64,7 +64,7 @@ export function PrivacyPolicy({ setPrivacyPolicyOpen }) {
               <li className="ml-10">Right to object to processing and to data portability</li>
               <li className="ml-10">Right to withdraw consent at any time</li>
               <li className="ml-10">Right to lodge a complaint with your local data protection authority (e.g. CNIL in France, ICO in the UK)</li>
-              <p>To exercise any of these rights, contact us at: funguys@gmail.com</p>
+              <p>To exercise any of these rights, contact us at: contact@parkour-arena.example</p>
             </ul>
           </section>
           <section className="mb-4">
@@ -77,7 +77,7 @@ export function PrivacyPolicy({ setPrivacyPolicyOpen }) {
           </section>
           <section className="mb-4">
             <h3 className="font-semibold">10.  Contact</h3>
-            <p>You may contact us at funguys@gmail.com</p>
+            <p>You may contact us at contact@parkour-arena.example</p>
           </section>
         </div>
         <div className="mt-6 flex gap-3 justify-end pr-1">

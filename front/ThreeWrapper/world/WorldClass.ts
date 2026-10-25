@@ -1,8 +1,8 @@
 import * as THREE from "three";
-import type { KeymapHandler, Logger, Self, ServerHandlerScope } from "@/ThreeWrapper/1.engine/tools";
-import type { Environment } from "@/ThreeWrapper/3.environment/EnvironmentClass";
-import type { WorldContext, Module } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
+import type { KeymapHandler, Logger, Self, ServerHandlerScope } from "@/ThreeWrapper/engine/tools";
+import type { Environment } from "@/ThreeWrapper/environment/EnvironmentClass";
+import type { WorldContext, Module } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
 import type { WorldConfig } from "shared/config";
 import type { LoadWorldPlayer } from "shared/state";
 import { GLTFLoader, MapLoader, ObjectManager, OBJECT_TYPE } from "./tools";
@@ -14,7 +14,7 @@ export type EngineContext = {
 	selfServerClient: Self;
 	server?: ServerHandlerScope;
 	debug?: any;
-	uiModule?: import("@/ThreeWrapper/4.module/modules/ui/UIModule").UIModule;
+	uiModule?: import("@/ThreeWrapper/module/modules/ui/UIModule").UIModule;
 };
 export abstract class World {
 	readonly config: WorldConfig;
@@ -129,7 +129,7 @@ export abstract class World {
 		}
 
 		try {
-			const { PhysicsWorld } = await import("@/ThreeWrapper/2.world/tools/PhysicsWorld");
+			const { PhysicsWorld } = await import("@/ThreeWrapper/world/tools/PhysicsWorld");
 			const physics = new PhysicsWorld(this._scene, { debug: false });
 			await physics.init();
 			this._objects.attachPhysics(physics);

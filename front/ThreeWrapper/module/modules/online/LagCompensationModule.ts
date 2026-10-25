@@ -1,9 +1,9 @@
 import * as THREE from 'three'
 import { SERVER_MSG } from 'shared/protocol'
 import type { WorldStatePayload } from 'shared/protocol'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import { ModuleKey } from '@/ThreeWrapper/4.module'
-import { OBJECT_TYPE } from '@/ThreeWrapper/2.world/tools'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import { ModuleKey } from '@/ThreeWrapper/module'
+import { OBJECT_TYPE } from '@/ThreeWrapper/world/tools'
 
 type PositionSnapshot = {
   pos: THREE.Vector3

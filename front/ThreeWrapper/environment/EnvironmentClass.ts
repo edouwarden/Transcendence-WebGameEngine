@@ -1,4 +1,4 @@
-import { type Module } from '@/ThreeWrapper/4.module'
+import { type Module } from '@/ThreeWrapper/module'
 export class Environment {
 	readonly config: {} = {}
 	protected modules: Module[] = []

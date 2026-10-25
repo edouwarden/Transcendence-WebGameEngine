@@ -1,6 +1,6 @@
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import { ModuleKey } from '@/ThreeWrapper/4.module'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import { ModuleKey } from '@/ThreeWrapper/module'
 export class EditorOrbitCameraModule implements Module {
   readonly type = ModuleKey.editorOrbitCamera
   private controls: OrbitControls | null = null

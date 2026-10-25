@@ -1,6 +1,6 @@
 "use client";
-import { Logger } from "@/ThreeWrapper/1.engine/tools/Logger";
-import type { LogEntry, VerbosityLevel } from "@/ThreeWrapper/1.engine/tools/Logger";
+import { Logger } from "@/ThreeWrapper/engine/tools/Logger";
+import type { LogEntry, VerbosityLevel } from "@/ThreeWrapper/engine/tools/Logger";
 export type TraceFilter = {
 	levels?: Array<"DEBUG" | "INFO" | "WARN" | "ERROR">;
 	namespaces?: string[];

@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
-import { OBJECT_TYPE, GeometryFactory, PhysicsDescriptor } from "@/ThreeWrapper/2.world/tools";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
+import { OBJECT_TYPE, GeometryFactory, PhysicsDescriptor } from "@/ThreeWrapper/world/tools";
 function makeNameSprite(name: string): THREE.Sprite {
 	const canvas = document.createElement("canvas");
 	canvas.width = 256;
@@ -51,8 +51,8 @@ export class PlayerBodyModule implements Module {
 	private physics: PlayerBodyModuleOptions["physics"];
 	private spawnPosition: THREE.Vector3 = new THREE.Vector3(0, 0, 0);
 	constructor(options: PlayerBodyModuleOptions = {}) {
-		this.modelUrl = options.modelUrl ?? "/game/modeles/character/scene.gltf";
-		this.textureUrl = options.textureUrl ?? "/game/modeles/character/character_texture.png";
+		this.modelUrl = options.modelUrl ?? "/game/models/character/scene.gltf";
+		this.textureUrl = options.textureUrl ?? "/game/models/character/character_texture.png";
 		this.size = options.size ?? 1;
 		this.physics = {
 			bodyType: options.physics?.bodyType ?? "dynamic",

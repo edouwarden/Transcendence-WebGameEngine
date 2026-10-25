@@ -1,4 +1,4 @@
-import type { Engine } from "@/ThreeWrapper/1.engine/Engine";
+import type { Engine } from "@/ThreeWrapper/engine/Engine";
 import type { JoinPayload, WSMessage } from "shared/protocol";
 import { SERVER_MSG, CLIENT_MSG, PHASE_EVENTS, createMessage, parseMessage } from "shared/protocol";
 import type { ConnectedPayload, PlayerInputPayload, PlayerInteractPayload, PlayerChoosePayload } from "shared/protocol";

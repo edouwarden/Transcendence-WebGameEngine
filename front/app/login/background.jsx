@@ -1,8 +1,8 @@
 "use client";
-import "./Background.css";
+import "./background.css";
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { motion } from "motion/react"
-import {Button } from "../animations/Button.jsx"
+import {Button } from "../animations/button.jsx"
 import { useEffect, useRef, useState } from 'react';
 import lottie from "lottie-web";
 import Mascot from "@/public/mascot.json";

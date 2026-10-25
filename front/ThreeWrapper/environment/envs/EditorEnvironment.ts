@@ -1,9 +1,9 @@
 import { Environment } from '../EnvironmentClass'
-import { ResizeModule, ModuleKey } from '@/ThreeWrapper/4.module'
-import { EditorOrbitCameraModule } from '@/ThreeWrapper/4.module/modules/editor/EditorOrbitCameraModule'
-import { EditorPlacementModule } from '@/ThreeWrapper/4.module/modules/editor/EditorPlacementModule'
-import { EditorHotbarModule } from '@/ThreeWrapper/4.module/modules/editor/EditorHotbarModule'
-import { EditorTestModeModule } from '@/ThreeWrapper/4.module/modules/editor/EditorTestModeModule'
+import { ResizeModule, ModuleKey } from '@/ThreeWrapper/module'
+import { EditorOrbitCameraModule } from '@/ThreeWrapper/module/modules/editor/EditorOrbitCameraModule'
+import { EditorPlacementModule } from '@/ThreeWrapper/module/modules/editor/EditorPlacementModule'
+import { EditorHotbarModule } from '@/ThreeWrapper/module/modules/editor/EditorHotbarModule'
+import { EditorTestModeModule } from '@/ThreeWrapper/module/modules/editor/EditorTestModeModule'
 export class EditorEnvironment extends Environment {
   constructor() {
     super({})

@@ -1,8 +1,8 @@
 import * as THREE from 'three'
 import { World } from '../WorldClass'
-import { DefaultEnvironment } from '@/ThreeWrapper/3.environment/envs/DefaultEnvironment'
+import { DefaultEnvironment } from '@/ThreeWrapper/environment/envs/DefaultEnvironment'
 import { GeometryFactory } from '../tools'
-import { Logger } from '@/ThreeWrapper/1.engine/tools'
+import { Logger } from '@/ThreeWrapper/engine/tools'
 export type DemoWorldArgs = {
 	id?: string
 }

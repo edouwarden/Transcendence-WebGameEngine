@@ -1,10 +1,10 @@
 "use client"
 import { useState, useEffect, useRef } from 'react';
-import './Navbar.css';
-import './Background.css';
+import './navbar.css';
+import './background.css';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
 import { useRouter } from 'next/navigation';
-import { Button } from "../animations/Button.jsx"
+import { Button } from "../animations/button.jsx"
 import lottie from "lottie-web";
 import Sloth from "@/public/sloth-meditate.json";
 import { api } from "@/lib/api";

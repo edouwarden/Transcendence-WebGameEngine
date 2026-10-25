@@ -1,6 +1,6 @@
 import * as THREE from 'three'
-import type { Module, WorldContext } from '@/ThreeWrapper/4.module'
-import { OBJECT_TYPE } from '@/ThreeWrapper/2.world/tools'
+import type { Module, WorldContext } from '@/ThreeWrapper/module'
+import { OBJECT_TYPE } from '@/ThreeWrapper/world/tools'
 export type SpectatorModuleOptions = {
   followDistance?: number
   followHeight?: number

@@ -1,13 +1,13 @@
 import * as THREE from "three"
 import { createElement } from "react"
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module"
-import { ModuleKey } from "@/ThreeWrapper/4.module"
-import { EditorTestEnvironment } from "@/ThreeWrapper/3.environment/envs/EditorTestEnvironment"
+import type { Module, WorldContext } from "@/ThreeWrapper/module"
+import { ModuleKey } from "@/ThreeWrapper/module"
+import { EditorTestEnvironment } from "@/ThreeWrapper/environment/envs/EditorTestEnvironment"
 import type { EditorPlacementModule } from "./EditorPlacementModule"
 import type { EditorOrbitCameraModule } from "./EditorOrbitCameraModule"
 import type { EditorHotbarModule } from "./EditorHotbarModule"
-import { OBJECT_TYPE, ComponentLoader } from "@/ThreeWrapper/2.world/tools"
-import type { UIModule } from "@/ThreeWrapper/4.module/modules/ui/UIModule"
+import { OBJECT_TYPE, ComponentLoader } from "@/ThreeWrapper/world/tools"
+import type { UIModule } from "@/ThreeWrapper/module/modules/ui/UIModule"
 const TEST_PLAYER_ID = "test_mode_player"
 export class EditorTestModeModule implements Module {
   readonly type = ModuleKey.editorTestMode
@@ -35,7 +35,7 @@ export class EditorTestModeModule implements Module {
     if (!placement || !orbitCam || !hotbar) return
     const mapDef = placement.buildMapDef()
     this.savedYaml = placement.exportYaml()
-    this.savedHistory = placement.historyCopy
+    this.savedHistory = placement.historySnapshot
     this.savedHistoryIndex = placement.historyIndexValue
     this.savedCamPos.copy(this.ctx.camera.position)
     const controls = orbitCam.getControls()
@@ -45,7 +45,7 @@ export class EditorTestModeModule implements Module {
     orbitCam.dispose()
     this.ctx.selfWorldPlayer = null
     const objects = this.ctx.objects
-    for (const id of placement.placedCopy.map(p => p.id)) {
+    for (const id of placement.placedSnapshot.map(p => p.id)) {
       if (objects.getById(id)) objects.remove(id)
     }
     const scene = this.ctx.scene as any as THREE.Scene

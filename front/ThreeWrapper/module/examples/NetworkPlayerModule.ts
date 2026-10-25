@@ -1,7 +1,7 @@
 import * as THREE from 'three'
 import { SERVER_MSG } from 'shared/protocol'
 import type { Module, WorldContext } from '../ModuleClass'
-import { OBJECT_TYPE } from '@/ThreeWrapper/2.world/tools'
+import { OBJECT_TYPE } from '@/ThreeWrapper/world/tools'
 export class NetworkPlayerModule implements Module {
   readonly type = 'network-player'
   private ctx: WorldContext | null = null

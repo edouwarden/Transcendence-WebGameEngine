@@ -1,9 +1,9 @@
 import * as THREE from "three";
 import { World } from "../WorldClass";
-import { OnlineEnvironement } from "@/ThreeWrapper/3.environment/envs/OnlineEnvironement";
+import { OnlineEnvironment } from "@/ThreeWrapper/environment/envs/OnlineEnvironment";
 import { ComponentLoader, GeometryFactory, LightFactory, OBJECT_TYPE } from "../tools";
-import { ParkourEnvironement } from "@/ThreeWrapper/3.environment/envs/ParkourEnvironment";
-import { LobbyEnvironment } from "@/ThreeWrapper/3.environment/envs/LobbyEnvironment";
+import { ParkourEnvironement } from "@/ThreeWrapper/environment/envs/ParkourEnvironment";
+import { LobbyEnvironment } from "@/ThreeWrapper/environment/envs/LobbyEnvironment";
 interface FloatingPlatform {
 	mesh: THREE.Mesh;
 	initialY: number;

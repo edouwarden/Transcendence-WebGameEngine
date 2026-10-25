@@ -1,7 +1,7 @@
 import type * as THREE from "three";
-import type { ServerHandlerScope, KeymapHandler, Logger, Self } from "@/ThreeWrapper/1.engine/tools";
-import type { GLTFLoader, MapLoader, ObjectManager, ManagedObject, OBJECT_TYPE } from "@/ThreeWrapper/2.world/tools";
-import type { UIModule } from "@/ThreeWrapper/4.module/modules/ui/UIModule";
+import type { ServerHandlerScope, KeymapHandler, Logger, Self } from "@/ThreeWrapper/engine/tools";
+import type { GLTFLoader, MapLoader, ObjectManager, ManagedObject, OBJECT_TYPE } from "@/ThreeWrapper/world/tools";
+import type { UIModule } from "@/ThreeWrapper/module/modules/ui/UIModule";
 export enum ModuleKey {
 	input = "input",
 	playerControl = "player_control",

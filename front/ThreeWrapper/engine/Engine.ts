@@ -1,14 +1,14 @@
 "use client";
 import * as THREE from "three";
 import type { EngineConfig, KeyBinding } from "shared/config";
-import type { World, EngineContext } from "@/ThreeWrapper/2.world/WorldClass";
+import type { World, EngineContext } from "@/ThreeWrapper/world/WorldClass";
 import { KeymapHandler, Logger, ServerHandler, Self } from "./tools";
 import { DEFAULT_KEYBINDS } from "./tools/KeymapHandler";
 import type { LoadWorldPlayer } from "shared/state";
 import { SERVER_MSG, type PhaseChangedPayload } from "shared/protocol";
-import { networkLogger } from "@/ThreeWrapper/4.module/modules/debug/NetworkLogger";
-import { DebugControlModule } from "@/ThreeWrapper/4.module";
-import { UIModule } from "@/ThreeWrapper/4.module/modules/ui/UIModule";
+import { networkLogger } from "@/ThreeWrapper/module/modules/debug/NetworkLogger";
+import { DebugControlModule } from "@/ThreeWrapper/module";
+import { UIModule } from "@/ThreeWrapper/module/modules/ui/UIModule";
 export class Engine {
 	readonly mode: "standalone" | "online";
 	readonly renderer: THREE.WebGLRenderer;
@@ -91,7 +91,7 @@ export class Engine {
 				if (this._onEndGame) {
 					this._onEndGame(won);
 				} else {
-					window.location.href = won ? "/wining" : "/lose";
+					window.location.href = won ? "/winning" : "/lose";
 				}
 			}
 			});
@@ -102,7 +102,7 @@ export class Engine {
 				const { description } = (e as CustomEvent).detail;
 				if (description) {
 					import("react").then(({ createElement }) =>
-						import("@/ThreeWrapper/4.module/modules/ui/components/CinematicUI").then(({ CinematicUI }) => {
+						import("@/ThreeWrapper/module/modules/ui/components/CinematicUI").then(({ CinematicUI }) => {
 							this.uiModule.show("cinematic", createElement(CinematicUI, { description }));
 							this.uiModule.enablePointer("cinematic");
 						})

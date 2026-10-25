@@ -1,7 +1,7 @@
 import * as THREE from "three";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
-import { OBJECT_TYPE } from "@/ThreeWrapper/2.world/tools";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
+import { OBJECT_TYPE } from "@/ThreeWrapper/world/tools";
 import type { InputModule } from "../input/InputModule";
 
 export class SpectatorFlyModule implements Module {

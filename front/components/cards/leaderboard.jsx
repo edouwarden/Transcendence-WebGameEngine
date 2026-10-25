@@ -1,8 +1,8 @@
 import React from 'react';
 import styled from 'styled-components';
-import Online from "@/components/cards/LeaderboardCard";
-import LeaderBoardCard from '@/components/cards/LeaderboardCard';
-import { Button } from "../../app/animations/Button.jsx";
+import Online from "@/components/cards/leaderboard-card";
+import LeaderBoardCard from '@/components/cards/leaderboard-card';
+import { Button } from "../../app/animations/button.jsx";
 
 const LeaderBoard = ({setLeaderBoardOpen}) => {
 return (

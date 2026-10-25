@@ -6,11 +6,11 @@ import {
   ChatHeader,
   ChatHeaderMain,
 } from "@/components/chat/chat-header";
-import FriendList from "@/components/friends/friends_list.jsx";
-import { Button } from "../../app/animations/Button.jsx";
-import FriendsRequests from "@/components/friends/friends_requests.jsx";
+import FriendList from "@/components/friends/friends-list.jsx";
+import { Button } from "../../app/animations/button.jsx";
+import FriendsRequests from "@/components/friends/friends-requests.jsx";
 
-export default function YourFriends(props) {
+export default function FriendsPanel(props) {
   
 const[FriendsDisplay, setFriendsDisplay] = useState(true);
 const[FriendsRequestsOpen, setFriendsRequestsOpen] = useState(false);

@@ -1,5 +1,5 @@
-import { Logger } from "@/ThreeWrapper/1.engine/tools";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
+import { Logger } from "@/ThreeWrapper/engine/tools";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
 export interface KeyBinding {
 	action: string;
 	fn?: (delta: number) => void;

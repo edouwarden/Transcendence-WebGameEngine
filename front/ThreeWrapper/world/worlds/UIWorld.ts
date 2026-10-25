@@ -1,7 +1,7 @@
 import { World } from '../WorldClass'
-import { UIEnvironment } from '@/ThreeWrapper/3.environment/envs/UIEnvironment'
-import { ModuleKey } from '@/ThreeWrapper/4.module'
-import type { UIModule } from '@/ThreeWrapper/4.module/modules/ui/UIModule'
+import { UIEnvironment } from '@/ThreeWrapper/environment/envs/UIEnvironment'
+import { ModuleKey } from '@/ThreeWrapper/module'
+import type { UIModule } from '@/ThreeWrapper/module/modules/ui/UIModule'
 export type UIWorldArgs = {
 	id?: string
 }

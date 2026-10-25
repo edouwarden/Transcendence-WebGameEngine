@@ -1,6 +1,6 @@
 import * as THREE from 'three'
 import { World } from '../WorldClass'
-import { DefaultEnvironment } from '@/ThreeWrapper/3.environment/envs/DefaultEnvironment'
+import { DefaultEnvironment } from '@/ThreeWrapper/environment/envs/DefaultEnvironment'
 import { GeometryFactory, LightFactory } from '../tools'
 export class InteractiveWorld extends World {
   constructor() {

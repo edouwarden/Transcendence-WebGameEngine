@@ -1,8 +1,8 @@
 import { Environment } from '../EnvironmentClass'
-import { ResizeModule, ModuleKey } from '@/ThreeWrapper/4.module'
-import { ComponentOrbitCameraModule } from '@/ThreeWrapper/4.module/modules/editor/ComponentOrbitCameraModule'
-import { ComponentPreviewModule } from '@/ThreeWrapper/4.module/modules/editor/ComponentPreviewModule'
-import { ComponentCreatorUIModule } from '@/ThreeWrapper/4.module/modules/editor/ComponentCreatorUIModule'
+import { ResizeModule, ModuleKey } from '@/ThreeWrapper/module'
+import { ComponentOrbitCameraModule } from '@/ThreeWrapper/module/modules/editor/ComponentOrbitCameraModule'
+import { ComponentPreviewModule } from '@/ThreeWrapper/module/modules/editor/ComponentPreviewModule'
+import { ComponentCreatorUIModule } from '@/ThreeWrapper/module/modules/editor/ComponentCreatorUIModule'
 export class ComponentCreatorEnvironment extends Environment {
   constructor() {
     super({})

@@ -3,7 +3,7 @@ import type { GameEventMap } from "shared/events";
 import type { WSMessage, PlayerInputPayload, PlayerInteractPayload, PlayerChoosePayload, PlayerEmotePayload, ConnectedPayload, JoinPayload, PlayerJoinPayload, SessionStolenPayload, IncomingInterceptor, OutgoingInterceptor, InterceptorHandle } from "shared/protocol";
 import { SERVER_MSG, CLIENT_MSG, PHASE_EVENTS, createMessage, parseMessage } from "shared/protocol";
 import type { LoadWorldPlayer } from "shared/state";
-import type { World } from "@/ThreeWrapper/2.world/WorldClass";
+import type { World } from "@/ThreeWrapper/world/WorldClass";
 import { Logger } from "./Logger";
 import { NetworkManager } from "./communication/NetworkManager";
 import { api } from "@/lib/api";

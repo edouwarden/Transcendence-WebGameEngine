@@ -1,5 +1,5 @@
 import * as THREE from "three";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
 export interface SkyboxModuleOptions {
 	files?: {
 		top: string;

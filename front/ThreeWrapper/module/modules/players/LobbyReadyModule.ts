@@ -1,6 +1,6 @@
 import { createElement } from "react";
-import type { Module, WorldContext } from "@/ThreeWrapper/4.module";
-import { ModuleKey } from "@/ThreeWrapper/4.module";
+import type { Module, WorldContext } from "@/ThreeWrapper/module";
+import { ModuleKey } from "@/ThreeWrapper/module";
 import type { InputModule } from "../input/InputModule";
 
 export class LobbyReadyModule implements Module {

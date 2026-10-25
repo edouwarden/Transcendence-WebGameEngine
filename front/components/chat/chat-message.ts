@@ -1,3 +1,3 @@
-export { PrimaryMessage } from "@/components/examples/primary-message";
-export { AdditionalMessage } from "@/components/examples/additional-message";
-export { DateItem } from "@/components/examples/date-item";
+export { PrimaryMessage } from "@/components/messages/primary-message";
+export { AdditionalMessage } from "@/components/messages/additional-message";
+export { DateItem } from "@/components/messages/date-item";

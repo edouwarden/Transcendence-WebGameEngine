@@ -1,7 +1,7 @@
 import { Environment } from '../EnvironmentClass'
-import { ResizeModule } from '@/ThreeWrapper/4.module/modules/rendering/ResizeModule'
-import { InputModule } from '@/ThreeWrapper/4.module/modules/input/InputModule'
-import { FreecamModule } from '@/ThreeWrapper/4.module/modules/camera/FreecamModule'
+import { ResizeModule } from '@/ThreeWrapper/module/modules/rendering/ResizeModule'
+import { InputModule } from '@/ThreeWrapper/module/modules/input/InputModule'
+import { FreecamModule } from '@/ThreeWrapper/module/modules/camera/FreecamModule'
 export class DebugEnvironment extends Environment {
   constructor() {
     super({ id: 'debug' })

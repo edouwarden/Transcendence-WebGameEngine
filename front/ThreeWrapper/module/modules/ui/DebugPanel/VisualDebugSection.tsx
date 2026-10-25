@@ -1,6 +1,6 @@
 "use client";
 import { useCallback } from "react";
-import { Logger } from "../../../../1.engine/tools/Logger";
+import { Logger } from "../../../../engine/tools/Logger";
 import type { EngineState } from "./DebugPanel";
 const VISUAL_HITBOX_KEYS = ["showHitboxes", "showBounds"] as const;
 const VISUAL_OBJECT_KEYS = ["showNames", "showObjectCenters", "showSkeleton", "showLOD"] as const;

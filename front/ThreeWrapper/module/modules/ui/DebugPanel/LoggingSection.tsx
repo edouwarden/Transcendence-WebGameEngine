@@ -1,7 +1,7 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
-import { Logger, VerbosityLevel, type DebugConfig } from "../../../../1.engine/tools/Logger";
-import { PerfectTraceSection } from "./PerfectTraceSection";
+import { Logger, VerbosityLevel, type DebugConfig } from "../../../../engine/tools/Logger";
+import { TraceSection } from "./TraceSection";
 interface LoggingSectionProps {
 	filterTags: string[];
 	setFilterTags: (tags: string[]) => void;
@@ -152,7 +152,7 @@ export function LoggingSection(_props: LoggingSectionProps) {
 				<div className="dbg-group-header">
 					<span className="dbg-group-title">🎯 Perfect Trace Recorder</span>
 				</div>
-				<PerfectTraceSection />
+				<TraceSection />
 			</div>
 			<div className="dbg-control-group" style={{ marginTop: "8px" }}>
 				<div className="dbg-group-header">

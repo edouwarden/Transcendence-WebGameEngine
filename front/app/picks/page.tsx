@@ -1,9 +1,9 @@
 "use client"
 import { useState } from 'react';
-import { Navbar } from './Navbar';
-import { Background } from './Background';
+import { Navbar } from './navbar';
+import { Background } from './background';
 
-export default function Home() {
+export default function PicksPage() {
   const [signInOpen, setSignInOpen] = useState(false);
   return (
     <div className="relative h-screen overflow-hidden">

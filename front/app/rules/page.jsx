@@ -1,12 +1,12 @@
 "use client"
 import { motion } from 'framer-motion';
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import {Background}  from "@/app/home/Background.jsx";
-import { Button } from "../animations/Button.jsx"
+import {Background}  from "@/app/home/background.jsx";
+import { Button } from "../animations/button.jsx"
 import "./comicspeechbubbles.css";
-import TextType from "@/components/effects/Texttype";
+import TextType from "@/components/effects/text-type";
 
-export default function Home() {
+export default function RulesPage() {
    return (
       <main className="relative min-h-screen overflow-hidden flex items-center justify-center">
         <Background />
