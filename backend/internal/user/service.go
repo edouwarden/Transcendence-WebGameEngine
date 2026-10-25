@@ -2,7 +2,7 @@ package user
 
 import (
 	"backend/internal/config"
-	"backend/internal/mid"
+	"backend/internal/middleware"
 	"backend/internal/pkg/routes"
 
 	"backend/ent"
@@ -21,7 +21,7 @@ type UserService struct {
 
 func ProvideAndRegister(i do.Injector) *UserService {
 	us, _ := ProvideUserService(i)
-	us.Register(do.MustInvoke[huma.API](i), do.MustInvoke[*mid.Middleware](i))
+	us.Register(do.MustInvoke[huma.API](i), do.MustInvoke[*middleware.Middleware](i))
 	return us
 }
 
@@ -32,7 +32,7 @@ func ProvideUserService(i do.Injector) (*UserService, error) {
 	return us, nil
 }
 
-func (us *UserService) Register(api huma.API, m *mid.Middleware) {
+func (us *UserService) Register(api huma.API, m *middleware.Middleware) {
 	huma.Register(api, huma.Operation{
 		Method:        http.MethodPost,
 		Path:          routes.AddUser,
@@ -48,7 +48,7 @@ func (us *UserService) Register(api huma.API, m *mid.Middleware) {
 		Security: []map[string][]string{
 			{"adminKey": {}},
 		},
-	}, us.DelUser)
+	}, us.DeleteUser)
 	huma.Register(api, huma.Operation{
 		Method:  http.MethodGet,
 		Path:    routes.FindUser,
@@ -58,12 +58,12 @@ func (us *UserService) Register(api huma.API, m *mid.Middleware) {
 	}, us.QueryUser)
 	huma.Register(api, huma.Operation{
 		Method:  http.MethodGet,
-		Path:    routes.UserById,
+		Path:    routes.UserByID,
 		Summary: "USER BY ID",
-	}, us.GetUserById)
+	}, us.GetUserByID)
 	huma.Register(api, huma.Operation{
 		Method:      http.MethodPut,
-		Path:        routes.UserById,
+		Path:        routes.UserByID,
 		Summary:     "USER REPLACE",
 		Middlewares: huma.Middlewares{m.Auth},
 		Security: []map[string][]string{
@@ -72,7 +72,7 @@ func (us *UserService) Register(api huma.API, m *mid.Middleware) {
 	}, us.PutUser)
 	huma.Register(api, huma.Operation{
 		Method:      http.MethodPatch,
-		Path:        routes.UserById,
+		Path:        routes.UserByID,
 		Summary:     "USER UPDATE",
 		Middlewares: huma.Middlewares{m.Auth},
 		Security: []map[string][]string{
@@ -111,7 +111,7 @@ func (us *UserService) Register(api huma.API, m *mid.Middleware) {
 		Security: []map[string][]string{
 			{"cookieAuth": {}},
 		},
-	}, us.UploadPP)
+	}, us.UploadProfilePicture)
 	huma.Register(api, huma.Operation{
 		Method:      http.MethodGet,
 		Path:        routes.GetMyPicture,

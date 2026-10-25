@@ -41,7 +41,7 @@ func (h *Handler) handleWebSocket(w http.ResponseWriter, r *http.Request) {
 }
 
 func (h *Handler) CreateConversation(ctx context.Context, input *CreateConversationInput) (*CreateConversationOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -56,7 +56,7 @@ func (h *Handler) CreateConversation(ctx context.Context, input *CreateConversat
 	if !isFriend {
 		return nil, huma.Error403Forbidden("must be friends to create a conversation")
 	}
-	conv, err := GetOrCreate1on1Conversation(ctx, h.Client, userID, input.Body.TargetUserID)
+	conv, err := GetOrCreateDirectConversation(ctx, h.Client, userID, input.Body.TargetUserID)
 	if err != nil {
 		log.Printf("failed to get/create conv: %v", err)
 		return nil, huma.Error500InternalServerError("failed to get/create conversation")
@@ -73,7 +73,7 @@ func (h *Handler) CreateConversation(ctx context.Context, input *CreateConversat
 }
 
 func (h *Handler) CreateGroupConversation(ctx context.Context, input *CreateGroupConversationInput) (*CreateGroupConversationOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -110,7 +110,7 @@ func (h *Handler) CreateGroupConversation(ctx context.Context, input *CreateGrou
 }
 
 func (h *Handler) GetConversationHistory(ctx context.Context, input *ConversationHistoryInput) (*ConversationHistoryOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -133,7 +133,7 @@ func (h *Handler) GetConversationHistory(ctx context.Context, input *Conversatio
 }
 
 func (h *Handler) GetConversations(ctx context.Context, input *GetConversationsInput) (*GetConversationsOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -148,7 +148,7 @@ func (h *Handler) GetConversations(ctx context.Context, input *GetConversationsI
 }
 
 func (h *Handler) GetOnlineUsers(ctx context.Context, input *OnlineUsersInput) (*OnlineUsersOutput, error) {
-	_, err := pkg.ContextUserId(ctx)
+	_, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -183,7 +183,7 @@ func (h *Handler) GetOnlineUsers(ctx context.Context, input *OnlineUsersInput) (
 }
 
 func (h *Handler) JoinGroupConversation(ctx context.Context, input *AddParticipantsInput) (*AddParticipantsOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -220,7 +220,7 @@ func (h *Handler) JoinGroupConversation(ctx context.Context, input *AddParticipa
 }
 
 func (h *Handler) AddGroupParticipants(ctx context.Context, input *AddParticipantsInput) (*AddParticipantsOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}
@@ -255,7 +255,7 @@ func (h *Handler) AddGroupParticipants(ctx context.Context, input *AddParticipan
 }
 
 func (h *Handler) LeaveGroupConversation(ctx context.Context, input *LeaveGroupInput) (*LeaveGroupOutput, error) {
-	userID, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized(err.Error())
 	}

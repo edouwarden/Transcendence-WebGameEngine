@@ -4,7 +4,7 @@ import (
 	"backend/ent/game"
 	"backend/ent/result"
 	"backend/ent/user"
-	"backend/internal/pkg/myhuma"
+	"backend/internal/pkg/humaext"
 	"context"
 	"time"
 
@@ -18,7 +18,7 @@ type Games struct {
 }
 
 type PlayerResult struct {
-	UserId   int    `json:"user_id"`
+	UserID   int    `json:"user_id"`
 	Username string `json:"username"`
 	Kill     int    `json:"kill"`
 	Death    int    `json:"death"`
@@ -34,7 +34,7 @@ type GameInfo struct {
 }
 
 type UserIdPath struct {
-	UserId int `path:"id"`
+	UserID int `path:"id"`
 }
 
 func (gs *GameService) GetUserGames(
@@ -45,22 +45,22 @@ func (gs *GameService) GetUserGames(
 	error,
 ) {
 	games := &Games{}
-	u, err := gs.Client.User.Query().Where(user.IDEQ(input.UserId)).Only(ctx)
+	u, err := gs.Client.User.Query().Where(user.IDEQ(input.UserID)).Only(ctx)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	results, err := u.QueryResults().All(ctx)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	for _, r := range results {
 		gr, err := r.QueryGame().Only(ctx)
 		if err != nil {
-			return nil, myhuma.EntErrToHumaErr(err)
+			return nil, humaext.EntErrorToHumaError(err)
 		}
-		players, err := gs.GetPlayersFromGameId(ctx, gr.ID)
+		players, err := gs.GetPlayersFromGameID(ctx, gr.ID)
 		if err != nil {
-			return nil, myhuma.EntErrToHumaErr(err)
+			return nil, humaext.EntErrorToHumaError(err)
 		}
 		games.Body.Game = append(games.Body.Game, GameInfo{
 			GameId:      gr.ID,
@@ -73,15 +73,15 @@ func (gs *GameService) GetUserGames(
 	return games, nil
 }
 
-func (gs *GameService) GetPlayersFromGameId(ctx context.Context, gameid int) ([]PlayerResult, error) {
+func (gs *GameService) GetPlayersFromGameID(ctx context.Context, gameid int) ([]PlayerResult, error) {
 	ret := []PlayerResult{}
 	results, err := gs.Client.Result.Query().Where(result.GameIDEQ(gameid)).Order(result.ByID(sql.OrderAsc())).All(ctx)
 	if err != nil {
-		return ret, myhuma.EntErrToHumaErr(err)
+		return ret, humaext.EntErrorToHumaError(err)
 	}
 	for _, v := range results {
 		ret = append(ret, PlayerResult{
-			UserId:   v.UserID,
+			UserID:   v.UserID,
 			Username: v.Username,
 			Kill:     v.Kills,
 			Death:    v.Death,
@@ -101,12 +101,12 @@ func (gs *GameService) GetGamesResults(
 	games := &Games{}
 	ent_games, err := gs.Client.Game.Query().Order(game.ByTimeStamp(sql.OrderDesc())).Limit(50).All(ctx)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	for _, gr := range ent_games {
-		players, err := gs.GetPlayersFromGameId(ctx, gr.ID)
+		players, err := gs.GetPlayersFromGameID(ctx, gr.ID)
 		if err != nil {
-			return nil, myhuma.EntErrToHumaErr(err)
+			return nil, humaext.EntErrorToHumaError(err)
 		}
 		games.Body.Game = append(games.Body.Game, GameInfo{
 			GameId:      gr.ID,

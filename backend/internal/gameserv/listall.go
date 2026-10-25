@@ -3,7 +3,7 @@ package gameserv
 import (
 	"backend/ent/game"
 	"backend/ent/result"
-	"backend/internal/pkg/myhuma"
+	"backend/internal/pkg/humaext"
 	"context"
 	"time"
 
@@ -25,7 +25,7 @@ func (gs *GameService) ListLastGames(ctx context.Context, input *struct{}) (*Gam
 	out := &GameListOut{}
 	game_q, err := gs.Client.Game.Query().Order(game.ByTimeStamp(sql.OrderDesc())).Limit(50).All(ctx)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	for _, v := range game_q {
 		out.Body = append(out.Body, GameEntry{
@@ -56,7 +56,7 @@ func (gs *GameService) ListLastResults(ctx context.Context, input *struct{}) (*R
 	out := &ResultListOut{}
 	results_q, err := gs.Client.Result.Query().Order(result.ByID(sql.OrderAsc())).Limit(50).All(ctx)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	for _, v := range results_q {
 		out.Body = append(out.Body, ResultEntry{

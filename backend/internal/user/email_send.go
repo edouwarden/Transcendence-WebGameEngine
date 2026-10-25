@@ -16,10 +16,10 @@ import (
 )
 
 type ResendEmailIn struct {
-	User_id int `path:"id"`
+	UserID int `path:"id"`
 }
 
-func (us *UserService) verifEmail(
+func (us *UserService) sendEmailVerification(
 	ctx context.Context,
 	user *ent.User,
 ) error {
@@ -34,7 +34,7 @@ func (us *UserService) verifEmail(
 		token,
 		fmt.Sprintf("%d", user.ID),
 	)
-	err := sendVerificationEmail(user.Email, link, us.Conf.Gmail.Address, us.Conf.Gmail.Password)
+	err := sendVerificationMail(user.Email, link, us.Conf.Gmail.Address, us.Conf.Gmail.Password)
 	if err != nil {
 		return err
 	}
@@ -47,7 +47,7 @@ func (us *UserService) verifEmail(
 	return err
 }
 
-func sendVerificationEmail(to string, link string, from string, password string) error {
+func sendVerificationMail(to string, link string, from string, password string) error {
 	host := "smtp.gmail.com"
 	port := "587"
 
@@ -99,9 +99,9 @@ func sendVerificationEmail(to string, link string, from string, password string)
 
 func (us *UserService) ResendEmail(ctx context.Context, input *ResendEmailIn) (*struct{}, error) {
 	// log.Printf("resend\n")
-	user, err := us.Client.User.Get(ctx, input.User_id)
+	user, err := us.Client.User.Get(ctx, input.UserID)
 	if err != nil {
-		str := fmt.Sprintf("user_id: %d not found\n", input.User_id)
+		str := fmt.Sprintf("user_id: %d not found\n", input.UserID)
 		if ent.IsNotFound(err) {
 			return nil, huma.Error400BadRequest(str)
 		}
@@ -112,7 +112,7 @@ func (us *UserService) ResendEmail(ctx context.Context, input *ResendEmailIn) (*
 		log.Print(err)
 		return nil, huma.Error500InternalServerError("operation failed")
 	}
-	if err := us.verifEmail(ctx, user); err != nil {
+	if err := us.sendEmailVerification(ctx, user); err != nil {
 		log.Print(err)
 		return nil, huma.Error500InternalServerError("operation failed")
 	}

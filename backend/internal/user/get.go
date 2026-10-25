@@ -12,12 +12,12 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 )
 
-type UserByIdIn struct {
-	UserId int `path:"id"`
+type UserByIDIn struct {
+	UserID int `path:"id"`
 }
 
 type InfoIn struct {
-	UserId   int    `query:"id"`
+	UserID   int    `query:"id"`
 	Email    string `query:"email"`
 	Username string `query:"username"`
 }
@@ -68,9 +68,9 @@ func (us *UserService) QueryUser(ctx context.Context, input *InfoIn) (*InfoOut, 
 		query predicate.User
 	)
 	out := &InfoOut{}
-	// log.Printf("id: %d | email: %s | username: %s\n", input.UserId, input.Email, input.Username)
-	if input.UserId != 0 {
-		query = user.IDEQ(input.UserId)
+	// log.Printf("id: %d | email: %s | username: %s\n", input.UserID, input.Email, input.Username)
+	if input.UserID != 0 {
+		query = user.IDEQ(input.UserID)
 	} else if input.Email != "" {
 		query = user.EmailEQ(input.Email)
 	} else if input.Username != "" {
@@ -102,9 +102,9 @@ func (us *UserService) QueryUser(ctx context.Context, input *InfoIn) (*InfoOut, 
 	return out, nil
 }
 
-func (us *UserService) GetUserById(ctx context.Context, input *UserByIdIn) (*InfoOut, error) {
+func (us *UserService) GetUserByID(ctx context.Context, input *UserByIDIn) (*InfoOut, error) {
 	info_in := &InfoIn{
-		UserId: input.UserId,
+		UserID: input.UserID,
 	}
 	info_out, err := us.QueryUser(ctx, info_in)
 	if err != nil {
@@ -114,10 +114,10 @@ func (us *UserService) GetUserById(ctx context.Context, input *UserByIdIn) (*Inf
 }
 
 func (us *UserService) Me(ctx context.Context, input *struct{}) (*InfoOut, error) {
-	id, err := pkg.ContextUserId(ctx)
+	id, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		log.Print(err)
 		return nil, huma.Error401Unauthorized("Error, try logging in again")
 	}
-	return us.GetUserById(ctx, &UserByIdIn{UserId: id})
+	return us.GetUserByID(ctx, &UserByIDIn{UserID: id})
 }

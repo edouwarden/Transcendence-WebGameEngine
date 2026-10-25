@@ -95,7 +95,7 @@ func RemoveParticipantFromGroup(ctx context.Context, db *ent.Client, conversatio
 		Exec(ctx)
 }
 
-func GetOrCreate1on1Conversation(ctx context.Context, db *ent.Client, userID1, userID2 int) (*ent.Conversation, error) {
+func GetOrCreateDirectConversation(ctx context.Context, db *ent.Client, userID1, userID2 int) (*ent.Conversation, error) {
 	// Try to find an existing 1-on-1 conversation between these two exact users
 	conv, err := db.Conversation.Query().
 		Where(

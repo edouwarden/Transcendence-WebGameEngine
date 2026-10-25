@@ -12,49 +12,49 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 )
 
-type UploadPPIn struct {
+type UploadProfilePictureIn struct {
 	RawBody huma.MultipartFormFiles[struct {
 		File huma.FormFile `form:"file" required:"true"`
 	}]
 }
 
-func (us *UserService) UploadPP(
+func (us *UserService) UploadProfilePicture(
 	ctx context.Context,
-	input *UploadPPIn,
+	input *UploadProfilePictureIn,
 ) (
 	*struct{},
 	error,
 ) {
-	id, err := pkg.ContextUserId(ctx)
+	id, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Please login again")
 	}
 	data := input.RawBody.Data()
-	content_type := data.File.ContentType
+	contentType := data.File.ContentType
 	raw, err := io.ReadAll(data.File)
 	if err != nil {
 		return nil, huma.Error400BadRequest("No file content")
 	}
-	file, err := picture.SaveImg(content_type, picture.Img_dir, raw)
+	file, err := picture.SaveImage(contentType, picture.ImageDir, raw)
 	if err != nil {
 		return nil, err
 	}
 	user, err := us.Client.User.Get(ctx, id)
 	if err != nil {
-		_ = picture.DeleteImg(file, picture.Img_dir)
+		_ = picture.DeleteImage(file, picture.ImageDir)
 		return nil, huma.Error500InternalServerError("Try again later")
 	}
 	oldfile := user.PpPath
 	if us.Client.User.UpdateOneID(id).SetPpPath(file).Exec(ctx) != nil {
-		_ = picture.DeleteImg(file, picture.Img_dir)
+		_ = picture.DeleteImage(file, picture.ImageDir)
 		return nil, huma.Error500InternalServerError("Try again later")
 	}
-	_ = picture.DeleteImg(oldfile, picture.Img_dir)
+	_ = picture.DeleteImage(oldfile, picture.ImageDir)
 	return nil, nil
 }
 
 type GetPPIn struct {
-	UserId int `path:"id"`
+	UserID int `path:"id"`
 }
 
 type GetPPOut struct {
@@ -70,7 +70,7 @@ func (us *UserService) GetPicture(
 	error,
 ) {
 	out := &GetPPOut{}
-	id := input.UserId
+	id := input.UserID
 	user, err := us.Client.User.Get(ctx, id)
 	if err != nil {
 		if ent.IsNotFound(err) {
@@ -81,13 +81,13 @@ func (us *UserService) GetPicture(
 	if user.PpPath == "" {
 		return nil, huma.Error404NotFound("No profile picture") // TODO: Default profile picture
 	}
-	out.Body, err = picture.GetImg(user.PpPath, picture.Img_dir)
-	cont_type, ok := picture.Mime[path.Ext(user.PpPath)]
+	out.Body, err = picture.GetImage(user.PpPath, picture.ImageDir)
+	contentType, ok := picture.MIMETypes[path.Ext(user.PpPath)]
 	if ok == false {
 		log.Println("How did we get there")
 		return nil, huma.Error500InternalServerError("Very weird error happened")
 	}
-	out.ContentType = cont_type
+	out.ContentType = contentType
 	return out, nil
 }
 
@@ -98,9 +98,9 @@ func (us *UserService) GetMyPicture(
 	*GetPPOut,
 	error,
 ) {
-	id, err := pkg.ContextUserId(ctx)
+	id, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("login")
 	}
-	return us.GetPicture(ctx, &GetPPIn{UserId: id})
+	return us.GetPicture(ctx, &GetPPIn{UserID: id})
 }

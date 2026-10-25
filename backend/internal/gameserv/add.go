@@ -2,7 +2,7 @@ package gameserv
 
 import (
 	"backend/ent"
-	"backend/internal/pkg/myhuma"
+	"backend/internal/pkg/humaext"
 	"context"
 	"log"
 
@@ -28,7 +28,7 @@ type GameIn struct {
 
 type UserResult struct {
 	UserName string `json:"username"`
-	UserId   int    `json:"user_id,omitempty"`
+	UserID   int    `json:"user_id,omitempty"`
 	Found    bool   `json:"found"`
 }
 
@@ -68,7 +68,7 @@ func (gs *GameService) GameResult(
 			if ent.IsNotFound(err) {
 				out.Body.Results = append(out.Body.Results, UserResult{
 					UserName: player.Username,
-					UserId:   -1,
+					UserID:   -1,
 					Found:    false,
 				})
 			} else {
@@ -78,7 +78,7 @@ func (gs *GameService) GameResult(
 		} else {
 			out.Body.Results = append(out.Body.Results, UserResult{
 				UserName: player.Username,
-				UserId:   res.UserID,
+				UserID:   res.UserID,
 				Found:    true,
 			})
 		}
@@ -86,7 +86,7 @@ func (gs *GameService) GameResult(
 	err = tx.Commit()
 	if err != nil {
 		log.Println(err)
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	return out, nil
 }

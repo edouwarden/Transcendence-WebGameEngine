@@ -3,7 +3,7 @@ package friend
 import (
 	"context"
 
-	"backend/internal/mid"
+	"backend/internal/middleware"
 	"backend/internal/pkg"
 
 	"github.com/danielgtaylor/huma/v2"
@@ -11,10 +11,10 @@ import (
 
 type Handler struct {
 	service *FriendService
-	mid     *mid.Middleware
+	mid     *middleware.Middleware
 }
 
-func NewHandler(s *FriendService, m *mid.Middleware) *Handler {
+func NewHandler(s *FriendService, m *middleware.Middleware) *Handler {
 	return &Handler{service: s, mid: m}
 }
 
@@ -35,11 +35,11 @@ type FriendRequestInput struct {
 }
 
 func (h *Handler) SendFriendRequest(ctx context.Context, input *FriendRequestInput) (*struct{}, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	err = h.service.SendFriendRequest(ctx, userId, input.Body.FriendID)
+	err = h.service.SendFriendRequest(ctx, userID, input.Body.FriendID)
 	if err != nil {
 		return nil, huma.Error400BadRequest("Failed to send friend request", err)
 	}
@@ -47,11 +47,11 @@ func (h *Handler) SendFriendRequest(ctx context.Context, input *FriendRequestInp
 }
 
 func (h *Handler) AcceptFriendRequest(ctx context.Context, input *FriendRequestInput) (*struct{}, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	err = h.service.AcceptFriendRequest(ctx, userId, input.Body.FriendID)
+	err = h.service.AcceptFriendRequest(ctx, userID, input.Body.FriendID)
 	if err != nil {
 		return nil, huma.Error400BadRequest("Failed to accept friend request", err)
 	}
@@ -63,11 +63,11 @@ func (h *Handler) RejectFriendRequest(ctx context.Context, input *struct {
 		FriendID int `json:"friend_id"`
 	}
 }) (*struct{}, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	err = h.service.RejectFriendRequest(ctx, userId, input.Body.FriendID)
+	err = h.service.RejectFriendRequest(ctx, userID, input.Body.FriendID)
 	if err != nil {
 		return nil, huma.Error400BadRequest("Failed to reject friend request", err)
 	}
@@ -79,11 +79,11 @@ func (h *Handler) DeleteFriend(ctx context.Context, input *struct {
 		FriendID int `json:"friend_id"`
 	}
 }) (*struct{}, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	err = h.service.DeleteFriend(ctx, userId, input.Body.FriendID)
+	err = h.service.DeleteFriend(ctx, userID, input.Body.FriendID)
 	if err != nil {
 		return nil, huma.Error400BadRequest("Failed to delete friend", err)
 	}
@@ -91,11 +91,11 @@ func (h *Handler) DeleteFriend(ctx context.Context, input *struct {
 }
 
 func (h *Handler) GetPendingRequests(ctx context.Context, input *struct{}) (*FriendListOutput, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	pending, err := h.service.GetPendingRequests(ctx, userId)
+	pending, err := h.service.GetPendingRequests(ctx, userID)
 	if err != nil {
 		return nil, huma.Error500InternalServerError("Failed to get pending requests", err)
 	}
@@ -113,11 +113,11 @@ func (h *Handler) GetPendingRequests(ctx context.Context, input *struct{}) (*Fri
 }
 
 func (h *Handler) GetSentRequests(ctx context.Context, input *struct{}) (*FriendListOutput, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	sent, err := h.service.GetSentRequests(ctx, userId)
+	sent, err := h.service.GetSentRequests(ctx, userID)
 	if err != nil {
 		return nil, huma.Error500InternalServerError("Failed to get sent requests", err)
 	}
@@ -135,11 +135,11 @@ func (h *Handler) GetSentRequests(ctx context.Context, input *struct{}) (*Friend
 }
 
 func (h *Handler) GetFriendsList(ctx context.Context, input *struct{}) (*FriendListOutput, error) {
-	userId, err := pkg.ContextUserId(ctx)
+	userID, err := pkg.ContextUserID(ctx)
 	if err != nil {
 		return nil, huma.Error401Unauthorized("Unauthorized", err)
 	}
-	friends, err := h.service.GetFriendsList(ctx, userId)
+	friends, err := h.service.GetFriendsList(ctx, userID)
 	if err != nil {
 		return nil, huma.Error500InternalServerError("Failed to get friends list", err)
 	}

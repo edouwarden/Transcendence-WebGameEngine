@@ -3,7 +3,7 @@ package gameserv
 import (
 	"backend/ent"
 	"backend/internal/config"
-	"backend/internal/mid"
+	"backend/internal/middleware"
 	"backend/internal/pkg/routes"
 	"net/http"
 
@@ -25,11 +25,11 @@ func ProvideGameService(i do.Injector) (*GameService, error) {
 
 func ProvideAndRegister(i do.Injector) *GameService {
 	gs, _ := ProvideGameService(i)
-	gs.Register(do.MustInvoke[huma.API](i), do.MustInvoke[*mid.Middleware](i))
+	gs.Register(do.MustInvoke[huma.API](i), do.MustInvoke[*middleware.Middleware](i))
 	return gs
 }
 
-func (gs *GameService) Register(api huma.API, m *mid.Middleware) {
+func (gs *GameService) Register(api huma.API, m *middleware.Middleware) {
 	huma.Register(api, huma.Operation{
 		OperationID: "GAME-ADD",
 		Method:      http.MethodPost,

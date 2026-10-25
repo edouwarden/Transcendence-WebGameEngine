@@ -35,7 +35,7 @@ func logAddUserInput(input *AddUserIn) {
 
 func (us *UserService) AddUser(ctx context.Context, input *AddUserIn) (*AddUserOut, error) {
 	salt := pkg.NewSalt()
-	hash := pkg.HashPwd(salt, input.Body.Password)
+	hash := pkg.HashPassword(salt, input.Body.Password)
 	verified := true
 	if input.Body.Verified != nil {
 		verified = *input.Body.Verified
@@ -73,7 +73,7 @@ func (us *UserService) AddUser(ctx context.Context, input *AddUserIn) (*AddUserO
 		return nil, huma.Error500InternalServerError("Internal Error")
 	}
 
-	err = us.verifEmail(ctx, new_user)
+	err = us.sendEmailVerification(ctx, new_user)
 	if err != nil {
 		log.Print(err)
 		return nil, huma.Error500InternalServerError("Internal Error")

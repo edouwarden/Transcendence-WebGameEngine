@@ -3,7 +3,7 @@ package chat
 import (
 	"backend/ent"
 	"backend/internal/auth"
-	"backend/internal/mid"
+	"backend/internal/middleware"
 	"context"
 	"log"
 
@@ -16,7 +16,7 @@ type Handler struct {
 	Client *ent.Client
 	Hub    *Hub
 	Auth   *auth.AuthService
-	M      *mid.Middleware
+	M      *middleware.Middleware
 }
 
 type CreateConversationInput struct {
@@ -106,7 +106,7 @@ func ProvideAndRegister(i do.Injector) *Handler {
 	mux := do.MustInvoke[*chi.Mux](i)
 	authSvc := do.MustInvoke[*auth.AuthService](i)
 	api := do.MustInvoke[huma.API](i)
-	m := do.MustInvoke[*mid.Middleware](i)
+	m := do.MustInvoke[*middleware.Middleware](i)
 
 	hub := NewHub(client)
 

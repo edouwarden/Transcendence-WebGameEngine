@@ -3,10 +3,9 @@ package pkg
 import (
 	"context"
 	"errors"
-
 )
 
-func ContextUserId(ctx context.Context) (int, error) {
+func ContextUserID(ctx context.Context) (int, error) {
 	id, ok := ctx.Value("sub").(int)
 	if ok == false {
 		return 0, errors.New("sub not found in context")
@@ -14,9 +13,9 @@ func ContextUserId(ctx context.Context) (int, error) {
 	return id, nil
 }
 
-func CheckIdMatchContextSub(ctx context.Context, id int) (error) {
-	sub, err := ContextUserId(ctx)
-	if err != nil {		
+func CheckUserIDMatchesContext(ctx context.Context, id int) error {
+	sub, err := ContextUserID(ctx)
+	if err != nil {
 		return err
 	}
 	if sub != id {

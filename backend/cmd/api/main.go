@@ -6,7 +6,7 @@ import (
 	"backend/internal/config"
 	"backend/internal/friend"
 	"backend/internal/gameserv"
-	"backend/internal/mid"
+	"backend/internal/middleware"
 	"backend/internal/pkg"
 	"backend/internal/server"
 	"backend/internal/user"
@@ -25,7 +25,7 @@ import (
 
 func addServices(i do.Injector) {
 	do.ProvideValue(i, auth.ProvideAndRegister(i))
-	do.Provide(i, mid.ProvideMiddleware)
+	do.Provide(i, middleware.ProvideMiddleware)
 	do.ProvideValue(i, user.ProvideAndRegister(i))
 	do.ProvideValue(i, friend.ProvideAndRegister(i))
 	do.ProvideValue(i, chat.ProvideAndRegister(i))

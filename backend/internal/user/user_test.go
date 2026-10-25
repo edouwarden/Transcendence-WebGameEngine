@@ -30,7 +30,7 @@ var tests = []test{
 
 func TestSendMail(t *testing.T) {
 	for _, tc := range tests {
-		err := sendVerificationEmail(tc.input.to, tc.input.link, tc.input.from, tc.input.password)
+		err := sendVerificationMail(tc.input.to, tc.input.link, tc.input.from, tc.input.password)
 		if err != tc.want {
 			t.Logf("\nto: %s\nlink: %s\nfrom: %s\npassword: %s\n",
 				tc.input.to, tc.input.link, tc.input.from, tc.input.password)

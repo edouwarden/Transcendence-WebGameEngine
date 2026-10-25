@@ -17,7 +17,7 @@ func NewSalt() string {
 	return salt
 }
 
-func HashPwd(salt string, password string) string {
+func HashPassword(salt string, password string) string {
 	hash := sha256.New()
 	hash.Write([]byte(salt + password))
 	return fmt.Sprintf("%X", hash.Sum(nil))

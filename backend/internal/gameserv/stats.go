@@ -1,7 +1,7 @@
 package gameserv
 
 import (
-	"backend/internal/pkg/myhuma"
+	"backend/internal/pkg/humaext"
 	"context"
 )
 
@@ -18,7 +18,7 @@ type PlayerStat struct {
 
 type GetStatOut struct {
 	Body struct {
-		UserId   int        `json:"user_id"`
+		UserID   int        `json:"user_id"`
 		UserName string     `json:"username"`
 		Stats    PlayerStat `json:"stats"`
 	}
@@ -32,15 +32,15 @@ func (gs GameService) GetPlayerStats(
 	error,
 ) {
 	out := &GetStatOut{}
-	out.Body.UserId = input.UserId
-	user, err := gs.Client.User.Get(ctx, input.UserId)
+	out.Body.UserID = input.UserID
+	user, err := gs.Client.User.Get(ctx, input.UserID)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	out.Body.UserName = user.Username
 	results, err := user.QueryResults().All(ctx)
 	if err != nil {
-		return nil, myhuma.EntErrToHumaErr(err)
+		return nil, humaext.EntErrorToHumaError(err)
 	}
 	ranksum := 0
 	pstat := &out.Body.Stats

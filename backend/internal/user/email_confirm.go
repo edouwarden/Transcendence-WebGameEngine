@@ -54,14 +54,14 @@ func (us *UserService) ConfirmEmail(
 	if err != nil {
 		log.Print(err)
 	}
-	return HtmlConfirmPage(user_q.Username), nil
+	return HTMLConfirmPage(user_q.Username), nil
 }
 
 func SeeConfirmPage(ctx context.Context, input *struct{}) (*CallBackOut, error) {
-	return HtmlConfirmPage("THIS IS A TEST"), nil
+	return HTMLConfirmPage("THIS IS A TEST"), nil
 }
 
-func HtmlConfirmPage(username string) *CallBackOut {
+func HTMLConfirmPage(username string) *CallBackOut {
 	output := &CallBackOut{}
 	output.ContentType = "text/html"
 	output.Body = []byte(`<!DOCTYPE html>

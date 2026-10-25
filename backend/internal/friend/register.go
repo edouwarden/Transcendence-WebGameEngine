@@ -1,13 +1,13 @@
 package friend
 
 import (
-	"backend/internal/mid"
+	"backend/internal/middleware"
 	"backend/internal/pkg/routes"
 
 	"github.com/danielgtaylor/huma/v2"
 )
 
-func (h *Handler) Register(api huma.API, m *mid.Middleware) {
+func (h *Handler) Register(api huma.API, m *middleware.Middleware) {
 	huma.Register(api, huma.Operation{
 		OperationID: "friend-request",
 		Method:      "POST",
@@ -59,7 +59,7 @@ func (h *Handler) Register(api huma.API, m *mid.Middleware) {
 	}, h.DeleteFriend)
 }
 
-func (s *FriendService) Register(api huma.API, m *mid.Middleware) {
+func (s *FriendService) Register(api huma.API, m *middleware.Middleware) {
 	handler := NewHandler(s, m)
 	handler.Register(api, m)
 }

@@ -17,14 +17,14 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 )
 
-type FortyTwoLoginIn struct{}
+type Login42In struct{}
 
-type FortyTwoLoginOut struct {
+type Login42Out struct {
 	Status   int    `header:"-"`
 	Location string `header:"Location"`
 }
 
-func (auth *AuthService) FortyTwoLogin(ctx context.Context, input *FortyTwoLoginIn) (*FortyTwoLoginOut, error) {
+func (auth *AuthService) Login42(ctx context.Context, input *Login42In) (*Login42Out, error) {
 	clientID := os.Getenv("FORTYTWO_CLIENT_ID")
 	redirectURI := os.Getenv("FORTYTWO_REDIRECT_URI")
 
@@ -33,23 +33,23 @@ func (auth *AuthService) FortyTwoLogin(ctx context.Context, input *FortyTwoLogin
 		"&redirect_uri=" + url.QueryEscape(redirectURI) +
 		"&response_type=code"
 
-	return &FortyTwoLoginOut{
+	return &Login42Out{
 		Status:   307,
 		Location: redirectURL,
 	}, nil
 }
 
-type FortyTwoCallbackIn struct {
+type Callback42In struct {
 	Code string `query:"code" required:"true" doc:"Authorization code returned by 42"`
 }
 
-type FortyTwoCallbackOut struct {
+type Callback42Out struct {
 	SetCookie http.Cookie `header:"Set-Cookie"`
 	Location  string      `header:"Location"`
 	Status    int         `header:"-"`
 }
 
-type FortyTwoUserProfile struct {
+type UserProfile42 struct {
 	Id    int    `json:"id"`
 	Login string `json:"login"`
 	Email string `json:"email"`
@@ -90,7 +90,7 @@ func exchange42Token(code string) (string, error) {
 	return tokenResp.AccessToken, nil
 }
 
-func fetch42UserProfile(accessToken string) (*FortyTwoUserProfile, error) {
+func fetch42UserProfile(accessToken string) (*UserProfile42, error) {
 	reqUser, _ := http.NewRequest("GET", "https://api.intra.42.fr/v2/me", nil)
 	reqUser.Header.Add("Authorization", "Bearer "+accessToken)
 
@@ -105,19 +105,19 @@ func fetch42UserProfile(accessToken string) (*FortyTwoUserProfile, error) {
 		return nil, huma.Error500InternalServerError("Failed to fetch user data")
 	}
 
-	var profile FortyTwoUserProfile
+	var profile UserProfile42
 	if err := json.NewDecoder(respUser.Body).Decode(&profile); err != nil {
 		return nil, err
 	}
 	return &profile, nil
 }
 
-func (auth *AuthService) getOrCreate42User(ctx context.Context, profile *FortyTwoUserProfile) (*ent.User, error) {
+func (auth *AuthService) getOrCreate42User(ctx context.Context, profile *UserProfile42) (*ent.User, error) {
 	u, err := auth.Client.User.Query().Where(user.EmailEQ(profile.Email)).Only(ctx)
 	if err != nil {
 		if ent.IsNotFound(err) {
 			salt := pkg.NewSalt()
-			hash := pkg.HashPwd(salt, pkg.NewSalt())
+			hash := pkg.HashPassword(salt, pkg.NewSalt())
 
 			u, err = auth.Client.User.
 				Create().
@@ -172,7 +172,7 @@ func (auth *AuthService) getOrCreate42User(ctx context.Context, profile *FortyTw
 	return u, nil
 }
 
-func (auth *AuthService) FortyTwoCallback(ctx context.Context, input *FortyTwoCallbackIn) (*FortyTwoCallbackOut, error) {
+func (auth *AuthService) Callback42(ctx context.Context, input *Callback42In) (*Callback42Out, error) {
 	token, err := exchange42Token(input.Code)
 	if err != nil {
 		log.Printf("Token exchange error: %v\n", err)
@@ -200,7 +200,7 @@ func (auth *AuthService) FortyTwoCallback(ctx context.Context, input *FortyTwoCa
 	}
 
 	domain, secure := auth.getCookieSettings()
-	return &FortyTwoCallbackOut{
+	return &Callback42Out{
 		Status:   307,
 		Location: auth.FrontendURL,
 		SetCookie: http.Cookie{

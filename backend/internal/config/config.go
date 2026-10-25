@@ -10,11 +10,11 @@ import (
 )
 
 type ConfigDB struct {
-	Host string `mapstructure:"DB_HOST"`
-	User string `mapstructure:"DB_USER"`
-	Pwd  string `mapstructure:"DB_PWD"`
-	Name string `mapstructure:"DB_NAME"`
-	Port string `mapstructure:"DB_PORT"`
+	Host     string `mapstructure:"DB_HOST"`
+	User     string `mapstructure:"DB_USER"`
+	Password string `mapstructure:"DB_PWD"`
+	Name     string `mapstructure:"DB_NAME"`
+	Port     string `mapstructure:"DB_PORT"`
 }
 
 type ConfigNet struct {
@@ -28,12 +28,12 @@ type ConfigMail struct {
 }
 
 type Config struct {
-	DB          ConfigDB
-	Gmail       ConfigMail
-	Net         ConfigNet
-	Credentials string `mapstructure:"CREDENTIAL"`
-	Origins     string `mapstructure:"ORIGINS"`
-	KeyPath     string `mapstructure:"KEYPATH"`
+	DB           ConfigDB
+	Gmail        ConfigMail
+	Net          ConfigNet
+	Credentials  string `mapstructure:"CREDENTIAL"`
+	Origins      string `mapstructure:"ORIGINS"`
+	KeyPath      string `mapstructure:"KEYPATH"`
 	CookieDomain string `mapstructure:"COOKIE_DOMAIN"`
 	FrontendURL  string `mapstructure:"FRONTEND_URL"`
 }
@@ -41,14 +41,14 @@ type Config struct {
 func ProvideConfig(i do.Injector) (Config, error) {
 	var cfg Config
 	v := reflect.ValueOf(&cfg).Elem()
-	if err := getEnvMapstructure(v); err != nil {
+	if err := loadConfigFromEnv(v); err != nil {
 		return Config{}, err
 	}
 	debug(v, 0)
 	return cfg, nil
 }
 
-func getEnvMapstructure(v reflect.Value) error {
+func loadConfigFromEnv(v reflect.Value) error {
 	t := v.Type()
 
 	for i := 0; i < t.NumField(); i++ {
@@ -56,7 +56,7 @@ func getEnvMapstructure(v reflect.Value) error {
 		fieldType := t.Field(i)
 
 		if field.Kind() == reflect.Struct {
-			if err := getEnvMapstructure(field); err != nil {
+			if err := loadConfigFromEnv(field); err != nil {
 				return err
 			}
 			continue

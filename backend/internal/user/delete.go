@@ -11,17 +11,17 @@ import (
 	"github.com/danielgtaylor/huma/v2"
 )
 
-type DelUserIn struct {
+type DeleteUserIn struct {
 	UserID   int    `query:"user_id"`
 	Email    string `query:"email"`
 	Username string `query:"username"`
 }
 
-type DelUserOut struct {
+type DeleteUserOut struct {
 	Message string `json:"message"`
 }
 
-func (us *UserService) DelUser(ctx context.Context, input *DelUserIn) (*DelUserOut, error) {
+func (us *UserService) DeleteUser(ctx context.Context, input *DeleteUserIn) (*DeleteUserOut, error) {
 	var err error
 	log.Printf("DELETE user_id: %d | email: %s | username: %s\n", input.UserID, input.Email, input.Username)
 	if input.UserID != 0 {
@@ -43,5 +43,5 @@ func (us *UserService) DelUser(ctx context.Context, input *DelUserIn) (*DelUserO
 		}
 		return nil, huma.Error500InternalServerError("operation failed")
 	}
-	return &DelUserOut{Message: "user deleted successfully"}, nil
+	return &DeleteUserOut{Message: "user deleted successfully"}, nil
 }

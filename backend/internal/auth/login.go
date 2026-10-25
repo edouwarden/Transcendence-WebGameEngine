@@ -32,7 +32,7 @@ func (m *VerifyPwdIn) Resolve(ctx huma.Context) []error {
 	return nil
 }
 
-func (auth *AuthService) VerifyPwd(
+func (auth *AuthService) VerifyPassword(
 	ctx context.Context,
 	input *VerifyPwdIn,
 ) (
@@ -58,7 +58,7 @@ func (auth *AuthService) VerifyPwd(
 		return nil, huma.Error500InternalServerError("internal error")
 	}
 
-	if pkg.HashPwd(u.Salt, input.Body.Password) != u.Hash {
+	if pkg.HashPassword(u.Salt, input.Body.Password) != u.Hash {
 		return nil, huma.Error401Unauthorized("invalid credentials")
 	}
 	jwt, err := auth.NewToken(u)

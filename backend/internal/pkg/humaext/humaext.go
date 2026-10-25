@@ -1,4 +1,4 @@
-package myhuma
+package humaext
 
 import (
 	"backend/ent"
@@ -34,7 +34,7 @@ type MyRequestInput struct {
 	MaybeText OptionalParam[string] `query:"text"`
 }
 
-func EntErrToHumaErr(err error) error {
+func EntErrorToHumaError(err error) error {
 	if ent.IsNotFound(err) {
 		return huma.Error404NotFound("Not Found")
 	} else if ent.IsConstraintError(err) {
