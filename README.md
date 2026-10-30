@@ -1,5 +1,7 @@
 <div align="center">
+  
 [![Parkour Arena in motion](docs/clips/trailer-short.gif)](#trailer)
+  
 # transendance
 
 *One course in the sky, one life each, and zero installs.*
