@@ -32,6 +32,7 @@ services:
       - NEXT_PUBLIC_BASE_URL=${API_PROTOCOL}://${API_HOST}
       - NODE_ENV=development
       - FRONT_HOST=${FRONT_HOST}
+      - DEV_ORIGINS=${DEV_ORIGINS:-}
     depends_on:
       game-server:
         condition: service_healthy
@@ -56,7 +57,7 @@ services:
     depends_on:
       api:
               condition: service_healthy
-    entrypoint: sh -c "bun install --silent && bun --watch src/index.ts"
+    entrypoint: sh -c "bun install --silent && bun src/index.ts"
     healthcheck:
       test: ["CMD", "bash", "-c", "echo > /dev/tcp/localhost/3000"]
       interval: 5s

@@ -1,0 +1,241 @@
+id: demo_canopy
+description: Forest platforms
+sky: {preset: day}
+fog: {kind: exponential, color: 7176026, density: 0.016}
+lights:
+- {type: ambient, color: 9216110, intensity: 0.55}
+- type: directional
+  color: 16773314
+  intensity: 1.1
+  position: {x: 16, y: 26, z: 8}
+  castShadow: true
+- {type: hemisphere, skyColor: 8361576, groundColor: 2892824, intensity: 0.45}
+clouds: true
+objects:
+- id: tile_floor_0
+  component: /game/components/demo_floor_canopy.yaml
+  type: map
+  position: {x: 0, y: 0, z: 0}
+- id: tile_floor_1
+  component: /game/components/demo_floor_canopy.yaml
+  type: map
+  position: {x: 0, y: 0, z: -25}
+- id: tile_floor_2
+  component: /game/components/demo_floor_canopy.yaml
+  type: map
+  position: {x: 0, y: 0, z: -50}
+- id: trunk_0
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -3.8, y: 0.0, z: 6}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_1
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 3.8, y: 0.0, z: 2}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_2
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -6.5, y: 0.0, z: -2}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_3
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 6.5, y: 0.0, z: -6}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_4
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -3.9, y: 0.0, z: -10}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_5
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 9.0, y: 0.0, z: -14}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_6
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -9.0, y: 0.0, z: -18}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_7
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 3.9, y: 0.0, z: -22}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_8
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -6.4, y: 0.0, z: -26}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_9
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 6.4, y: 0.0, z: -30}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_10
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -3.8, y: 0.0, z: -34}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_11
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 9.2, y: 0.0, z: -38}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_12
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -9.2, y: 0.0, z: -42}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_13
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 3.8, y: 0.0, z: -46}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_14
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: -6.6, y: 0.0, z: -50}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: trunk_15
+  component: /game/components/demo_pillar_green.yaml
+  type: map
+  position: {x: 6.6, y: 0.0, z: -54}
+  scale: {x: 0.7, y: 0.75, z: 0.7}
+- id: leaf_0
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: -5.2, y: 6.2, z: 6}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_1
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: 5.2, y: 6.6000000000000005, z: 0}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_2
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: -7.8, y: 7.0, z: -6}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_3
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: 7.8, y: 6.2, z: -12}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_4
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: -4.6, y: 6.6000000000000005, z: -18}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_5
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: 8.6, y: 7.0, z: -24}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_6
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: -8.6, y: 6.2, z: -30}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_7
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: 4.6, y: 6.6000000000000005, z: -36}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_8
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: -6.2, y: 7.0, z: -42}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_9
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: 6.2, y: 6.2, z: -48}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: leaf_10
+  component: /game/components/demo_block_green.yaml
+  type: map
+  position: {x: -4.2, y: 6.6000000000000005, z: -54}
+  scale: {x: 1.8, y: 0.4, z: 1.8}
+- id: branch_0
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: -5.0, y: 4.5, z: 4}
+  scale: {x: 0.6, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: 0.3, z: 0}
+- id: branch_1
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: 5.0, y: 4.5, z: -8}
+  scale: {x: 0.6, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: -0.3, z: 0}
+- id: branch_2
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: -5.0, y: 4.5, z: -20}
+  scale: {x: 0.6, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: 0.3, z: 0}
+- id: branch_3
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: 5.0, y: 4.5, z: -32}
+  scale: {x: 0.6, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: -0.3, z: 0}
+- id: branch_4
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: -5.0, y: 4.5, z: -44}
+  scale: {x: 0.6, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: 0.3, z: 0}
+- id: branch_5
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: 5.0, y: 4.5, z: -52}
+  scale: {x: 0.6, y: 0.7, z: 0.7}
+  rotation: {x: 0, y: -0.3, z: 0}
+- id: deck_0
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.2, y: 0.5, z: -6}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_1
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.2, y: 0.9, z: -6}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_2
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.2, y: 0.5, z: -20}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_3
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.2, y: 0.9, z: -20}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_4
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.2, y: 0.5, z: -34}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_5
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.2, y: 0.9, z: -34}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_6
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.2, y: 0.5, z: -48}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: deck_7
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.2, y: 0.9, z: -48}
+  scale: {x: 1.1, y: 0.6, z: 1.1}
+- id: crown
+  component: /game/components/utils_win_crown.yaml
+  type: map
+  position: {x: 0, y: 0.6, z: -56}

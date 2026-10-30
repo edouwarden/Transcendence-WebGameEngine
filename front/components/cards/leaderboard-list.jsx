@@ -1,114 +1,100 @@
 "use client";
 
-import { useEffect, useState, useMemo } from "react";
-import { Badge } from "@material-tailwind/react";
+import { useEffect, useMemo, useState } from "react";
 import { api } from "@/lib/api";
 
 export default function LeaderBoardList() {
-  const [players, setPlayers] = useState([]);
-  const [img, setImg] = useState([]);
-  const [UserName, setUserName] = useState("");
-  const [playerImgs, setPlayerImgs] = useState({});
-  const [ playersStats, setPlayerStats] = useState({})
-  
-  async function fetchData() {
-    try {
-      const data = await api.get("/api/users");
-      setPlayers([...data]);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+	const [players, setPlayers] = useState([]);
+	const [playerStats, setPlayerStats] = useState({});
+	const [loading, setLoading] = useState(true);
 
-useEffect(() => {
-  async function loadImages() {
-    const imgs = {};
-    for (const player of players) {
-      const url = await fetchImage(player.id);
-      imgs[player.id] = url;
-    }
-    setPlayerImgs(imgs);
-  }
-  if (players.length > 0) {
-    loadImages();
-  }
-}, [players]);
+	useEffect(() => {
+		let alive = true;
 
-async function fetchImage(id) {
-  try {
-    const blob = await api.getBlob(`/api/users/${id}/picture`);
-    if (!blob) return;
-    return URL.createObjectURL(blob);
-  } catch (error) {
-    console.error(error);
-    setImg(null);
-  }
-}
+		async function load() {
+			try {
+				const data = await api.get("/api/users");
+				if (!alive || !Array.isArray(data)) return;
+				setPlayers(data);
 
-useEffect(() => {
-  async function fetchUserData(id) {
-    try {
-      const statsData = await api.get<{ stats: { wins: number } }>(`/api/users/${id}/stats`);
-      if (!statsData) return;
-      return(statsData.stats);
-    } catch (error) {
-      console.error(error);
-    }
-  }
+				const stats = {};
+				await Promise.all(
+					data.map(async (player) => {
+						try {
+							const statsData = await api.get(`/api/users/${player.id}/stats`);
+							stats[player.id] = statsData?.stats?.wins ?? 0;
+						} catch {
+							stats[player.id] = 0;
+						}
+					})
+				);
+				if (!alive) return;
+				setPlayerStats(stats);
+			} catch (error) {
+				console.error(error);
+			} finally {
+				if (alive) setLoading(false);
+			}
+		}
 
-  async function fetchStats() {
-  const wins = {};
-  for (const player of players) {
-      const data = await fetchUserData(player.id);
-      wins[player.id] = data.wins;
-  }
-  setPlayerStats(wins);
-}
+		load();
+		return () => {
+			alive = false;
+		};
+	}, []);
 
-  if (players.length > 0) {
-    fetchStats();
-  }
-}, [players]);
+	const sortedPlayers = useMemo(
+		() => [...players].sort((a, b) => (playerStats[b.id] || 0) - (playerStats[a.id] || 0)),
+		[players, playerStats]
+	);
 
+	if (loading) {
+		return (
+			<div className="app-empty">
+				<strong>Loading rankings…</strong>
+				<span>Fetching players and match results.</span>
+			</div>
+		);
+	}
 
-useEffect(() => {
-  fetchData();
-}, []);
+	if (sortedPlayers.length === 0) {
+		return (
+			<div className="app-empty">
+				<strong>No ranked players yet</strong>
+				<span>Play a round to appear on the board.</span>
+			</div>
+		);
+	}
 
-const sortedPlayers = useMemo(
-    () =>
-      [...players]
-        .filter((player) => player.username !== UserName)
-        .sort((a, b) => (playersStats[b.id] || 0) - (playersStats[a.id] || 0)),
-    [players, playersStats, UserName],
-  );
-
-  return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-[#0b1328]">
-      <nav
-        className="flex flex-col gap-4 w-full h-full overflow-y-auto scrollbar-hide p-2 box-border pb-12 max-h-[calc(100%-8px)]"
-      >
-        {sortedPlayers
-        .map((player, idx) => (
-          <div
-            key={idx}
-            className="flex w-full items-center rounded-lg p-4 bg-[#0b1328] text-white shadow-md border border-slate-700 transition-all hover:bg-[#162447] focus:bg-[#162447] active:bg-[#162447]"
-          >
-            <div className="mr-4 flex items-center gap-2">
-              <span className="font-bold w-6 text-center">{idx + 1}</span>
-                <img
-                  alt={player.username}
-                  src={playerImgs[player.id]}
-                  className="relative inline-block h-12 w-12 rounded-full object-cover object-center"
-                />
-            </div>
-            <div>
-              <h6 className="font-medium text-white">{player.username}</h6>
-              <span className="font-bold w-6 text-center">Wins: {playersStats[player.id]}</span>
-            </div>
-          </div>
-        ))}
-      </nav>
-    </div>
-  );
+	return (
+		<ol className="app-list">
+			{sortedPlayers.map((player, index) => {
+				const initials = (player.username || "?").slice(0, 2).toUpperCase();
+				return (
+					<li className="app-list-row" key={player.id}>
+						<span className="app-rank">{index + 1}</span>
+						<span
+							className="app-avatar"
+							style={
+								player.skin_color
+									? {
+											background: `${player.skin_color}1f`,
+											borderColor: `${player.skin_color}55`,
+											color: player.skin_color,
+										}
+									: undefined
+							}
+						>
+							{initials}
+						</span>
+						<span className="app-list-copy">
+							<strong>{player.username}</strong>
+							<span>{playerStats[player.id] || 0} wins this season</span>
+						</span>
+						<span className="app-wins">{playerStats[player.id] || 0} W</span>
+					</li>
+				);
+			})}
+		</ol>
+	);
 }

@@ -1,64 +1,24 @@
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useRouter } from "next/navigation";
-import { DotLottieReact } from "@lottiefiles/dotlottie-react";
-import { Background } from "./background";
 import { Navbar } from "./navbar.jsx";
 import OrientationGuard from "./orientation-guard.jsx";
-import { Button } from "../animations/button.jsx";
 import Chat from "../chat/chat";
 import Online from "@/components/cards/online-players";
-import SimpleFooter from "@/components/footers/footer";
-import "./page.css";
 import Privacy from "./privacy.jsx";
 import LeaderBoard from "@/components/cards/leaderboard.jsx";
 import FriendsPanel from "@/components/friends/friends-panel.jsx";
-import lottie from "lottie-web";
-import Bear from "@/public/cute-bear.json";
-import { CharacterVisualizerWorld } from "@/ThreeWrapper/world/worlds/CharacterVisualizerWorld";
-import { EngineCanvas } from "../../ThreeWrapper/engine/EngineCanvas";
-import "./character_controls.css";
+import { CharacterVisualizerWorld } from "@/ThreeWrapper/2.world/worlds/CharacterVisualizerWorld";
+import { EngineCanvas } from "../../ThreeWrapper/1.engine/EngineCanvas";
+import { Button } from "../animations/button.jsx";
 import { api } from "@/lib/api";
-const ANIMATIONS = [
-	"AN_Loading_Falling_A",
-	"AN_Idle_A",
-	"AN_Walk_Right_A",
-	"AN_Walk_Left_A",
-	"AN_Walk_A",
-	"AN_CostumeChangeLooking_A",
-	"AN_Idle_Joggingonspot",
-	"AN_Idle_TouchingToes",
-	"AN_Emote_Chicken_A",
-	"AN_Emote_Wave_A",
-	"AN_Emote_Neener_A",
-	"AN_Emote_ThumbsUp_A",
-	"AN_Emote_WaveOverHead_A",
-	"AN_Emote_PirateDance_A",
-	"AN_Emote_slowclap_A",
-	"AN_Emote_RobotDance_A",
-	"CH_Character_AN_Emote_Mexwave",
-	"CH_Character_AN_emote_HappyClap",
-	"AN_Beefcake_A",
-	"AN_Emote_Zsnap_A",
-	"AN_Emote_Pattycake_A",
-	"AN_Emote_Armthrow_A",
-	"AN_emote_boxing_01_A",
-	"AN_emote_ChestBump_01_A",
-	"AN_emote_Salute_01_A",
-	"AN_emote_horsey_A",
-	"AN_emote_Jester_A",
-	"AN_emote_Curtsy_A",
-	"AN_emote_Bow_A",
-	"AN_emote_comeon_01_A",
-	"AN_emote_HONK_01_A",
-	"ArmWave_Start",
-	"ArmWave_Loop",
-	"ArmWave_End"
-];
-const BODY_COLORS = ["#c000c0", "#ff4444", "#44ff44", "#4444ff", "#ffff00", "#ff8800", "#00ffff", "#ff00ff"];
-const FACE_COLORS = ["#ffffff", "#ffcccc", "#ccffcc", "#ccccff", "#ffffcc", "#ffccff", "#ccffff", "#ffddaa"];
-const EYE_COLORS = ["#00ff00", "#ff0000", "#0000ff", "#ffff00", "#ff8800", "#00ffff", "#ff00ff", "#8800ff"];
+import "./character_controls.css";
+import "./home.css";
+
+const BODY_COLORS = ["#03fc6f", "#5b8cff", "#ff8a3d", "#f4d35e", "#ff5d8f", "#9b8cff", "#3ddbd9", "#e8e8e8"];
+const FACE_COLORS = ["#eeeeee", "#fff1e6", "#e8f0ff", "#ffe8f0", "#eaffea", "#f4eaff", "#e6fbff", "#d9dee8"];
+
 export default function HomePage() {
 	const router = useRouter();
 	const [OptionsOpen, setOptionsOpen] = useState(false);
@@ -68,69 +28,22 @@ export default function HomePage() {
 	const [YourFriendsOpen, setYourFriendsOpen] = useState(false);
 	const [colorPanelOpen, setColorPanelOpen] = useState(false);
 	const [worldApi, setWorldApi] = useState(null);
-	const [currentAnim, setCurrentAnim] = useState("AN_Idle_A");
-	const [currentBodyColor, setCurrentBodyColor] = useState("#c000c0");
-	const [currentFaceColor, setCurrentFaceColor] = useState("#ffffff");
-	const [currentEyeColor, setCurrentEyeColor] = useState("#00ff00");
+	const [username, setUsername] = useState("");
+	const [currentBodyColor, setCurrentBodyColor] = useState("#03fc6f");
+	const [currentFaceColor, setCurrentFaceColor] = useState("#eeeeee");
 	const [isChangingColor, setIsChangingColor] = useState(false);
 	const [colorsReady, setColorsReady] = useState(false);
-	const [canvasHeight, setCanvasHeight] = useState(500);
-	const bearRef = useRef(null);
 	const characterArgsRef = useRef({
-		bodyColor: "#c000c0",
-		faceColor: "#ffffff",
-		eyeColor: "#00ff00",
-		cameraPos: { x: 0, y: 1.1, z: 1.5 },
-		cameraTarget: { x: 0, y: 0.95, z: 0 },
+		bodyColor: "#03fc6f",
+		faceColor: "#eeeeee",
+		eyeColor: "#03fc6f",
+		cameraPos: { x: 0, y: 1.12, z: 2.5 },
+		cameraTarget: { x: 0, y: 0.93, z: 0 },
+		cameraFov: 50,
 		animation: "AN_Idle_A",
-		background: false
+		background: false,
 	});
 
-	useEffect(() => {
-		const anim = lottie.loadAnimation({
-			container: bearRef.current,
-			loop: true,
-			autoplay: true,
-			animationData: Bear
-		});
-		return () => {
-			anim.destroy();
-		};
-	}, []);
-	useEffect(() => {
-		const userId = getUserIDFromCookie();
-		if (!userId) {
-			setColorsReady(true);
-			return;
-		}
-		api.get("/api/users/" + userId)
-			.then((data) => {
-				const user = Array.isArray(data) ? data[0] : data;
-				console.log("Loaded saved colors:", { skin_color: user.skin_color, face_color: user.face_color });
-				if (user.skin_color) {
-					characterArgsRef.current.bodyColor = user.skin_color;
-					setCurrentBodyColor(user.skin_color);
-				}
-				if (user.face_color) {
-					characterArgsRef.current.faceColor = user.face_color;
-					setCurrentFaceColor(user.face_color);
-				}
-			})
-			.catch(console.error)
-			.finally(() => setColorsReady(true));
-		const updateCanvasHeight = () => {
-			if (window.innerWidth < 768) {
-				setCanvasHeight(300);
-			} else if (window.innerWidth < 1024) {
-				setCanvasHeight(400);
-			} else {
-				setCanvasHeight(400);
-			}
-		};
-		updateCanvasHeight();
-		window.addEventListener("resize", updateCanvasHeight);
-		return () => window.removeEventListener("resize", updateCanvasHeight);
-	}, []);
 	function getUserIDFromCookie() {
 		const auth_token = document.cookie
 			.split("; ")
@@ -144,10 +57,30 @@ export default function HomePage() {
 		}
 	}
 
-	const handleAnimationChange = (anim) => {
-		setCurrentAnim(anim);
-		worldApi?.playAnimation(anim);
-	};
+	useEffect(() => {
+		const userId = getUserIDFromCookie();
+		if (!userId) {
+			setColorsReady(true);
+			return;
+		}
+		api.get("/api/users/" + userId)
+			.then((data) => {
+				const user = Array.isArray(data) ? data[0] : data;
+				if (!user) return;
+				setUsername(user.username || "");
+				if (user.skin_color) {
+					characterArgsRef.current.bodyColor = user.skin_color;
+					setCurrentBodyColor(user.skin_color);
+				}
+				if (user.face_color) {
+					characterArgsRef.current.faceColor = user.face_color;
+					setCurrentFaceColor(user.face_color);
+				}
+			})
+			.catch(console.error)
+			.finally(() => setColorsReady(true));
+	}, []);
+
 	const handleBodyColorChange = async (color) => {
 		setCurrentBodyColor(color);
 		if (!worldApi) return;
@@ -155,15 +88,13 @@ export default function HomePage() {
 		try {
 			await worldApi.setBodyColor(color);
 			const userId = getUserIDFromCookie();
-			if (userId) {
-				console.log("PATCH /api/users/" + userId, { skin_color: color });
-				await api.patch("/api/users/" + userId, { skin_color: color });
-			}
+			if (userId) await api.patch("/api/users/" + userId, { skin_color: color });
 		} catch (e) {
 			console.error("Failed to save body color:", e);
 		}
 		setIsChangingColor(false);
 	};
+
 	const handleFaceColorChange = async (color) => {
 		setCurrentFaceColor(color);
 		if (!worldApi) return;
@@ -171,106 +102,117 @@ export default function HomePage() {
 		try {
 			await worldApi.setFaceColor(color);
 			const userId = getUserIDFromCookie();
-			if (userId) {
-				console.log("PATCH /api/users/" + userId, { face_color: color });
-				await api.patch("/api/users/" + userId, { face_color: color });
-			}
+			if (userId) await api.patch("/api/users/" + userId, { face_color: color });
 		} catch (e) {
 			console.error("Failed to save face color:", e);
 		}
 		setIsChangingColor(false);
 	};
-	const handleEyeColorChange = async (color) => {
-		setCurrentEyeColor(color);
-		if (!worldApi) return;
-		setIsChangingColor(true);
-		await worldApi.setEyeColor(color);
-		setIsChangingColor(false);
-	};
-	const handleWorldReady = (world) => {
-		setWorldApi(world);
-	};
+
+	function play() {
+		setIsTransitioning(true);
+		router.push("/online");
+	}
+
 	return (
 		<OrientationGuard>
-			<main className="relative min-h-screen">
-				<motion.div animate={{ opacity: isTransitioning ? 0 : 1 }} transition={{ duration: 0.3 }}>
-					<Navbar OptionsOpen={OptionsOpen} setOptionsOpen={setOptionsOpen} />
+			<main className="home-screen">
+				<div className="home-glow" />
+				<Navbar OptionsOpen={OptionsOpen} setOptionsOpen={setOptionsOpen} />
 
-					{colorsReady ? (
-						<>
-							<AnimatePresence>
-								{colorPanelOpen && (
-									<motion.div className={`character-controls ${isChangingColor ? "loading" : ""}`} initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 20 }} transition={{ duration: 0.2 }}>
-										<button className="control-close" onClick={() => setColorPanelOpen(false)}>
-											✕
-										</button>
-										<div className="control-section">
-											<span className="control-label">Body</span>
-											<div className="color-buttons">
-												{BODY_COLORS.map((color) => (
-													<button key={color} className={`color-btn ${currentBodyColor === color ? "active" : ""}`} style={{ backgroundColor: color }} onClick={() => handleBodyColorChange(color)} />
-												))}
-											</div>
-										</div>
-										<div className="control-section">
-											<span className="control-label">Face</span>
-											<div className="color-buttons">
-												{FACE_COLORS.map((color) => (
-													<button key={color} className={`color-btn ${currentFaceColor === color ? "active" : ""}`} style={{ backgroundColor: color }} onClick={() => handleFaceColorChange(color)} />
-												))}
-											</div>
-										</div>
-									</motion.div>
-								)}
-							</AnimatePresence>
-							<div className="absolute inset-0 flex items-center justify-center gap-12">
-								<div className="flex flex-row items-center gap-12">
-									<div className="baloo_button fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center gap-6">
-										
-											<EngineCanvas config={{ mode: "standalone" }} world={() => new CharacterVisualizerWorld(characterArgsRef.current)} onReady={handleWorldReady} style={{ width: "full", height: `${canvasHeight}px` }} />
-										
-										<motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: OptionsOpen ? 0 : 1, y: OptionsOpen ? 20 : 0 }} transition={{ duration: 0.4, ease: "easeOut" }}>
-											<div className="grid grid-flow-col auto-cols-max gap-4">
-												<Button statement="Your Friends" onClick={() => setYourFriendsOpen(true)} />
-												<Button
-													statement="Let's play"
-													onClick={() => {
-														setIsTransitioning(true);
-														window.location.href = "/online";
-													}}
-												/>
-												<Button statement="LeaderBoard" onClick={() => setLeaderBoardOpen(true)} />
-											</div>
-										</motion.div>
-										<button className="customize-toggle" onClick={() => setColorPanelOpen((prev) => !prev)}>
-											{colorPanelOpen ? "Close" : "Customize"}
-										</button>
-									</div>
-									<div className="chat xl:fixed xl:right-2 xl:top-1/2 xl:-translate-y-1/2">
-										<Online OptionsOpen={OptionsOpen} />
-									</div>
+				<motion.div
+					className="home-stack"
+					animate={{ opacity: isTransitioning ? 0 : 1 }}
+					transition={{ duration: 0.25 }}
+				>
+					<div className="home-canvas">
+						{colorsReady ? (
+							<EngineCanvas
+								config={{ mode: "standalone" }}
+								world={() => new CharacterVisualizerWorld(characterArgsRef.current)}
+								onReady={setWorldApi}
+								style={{ width: "100%", height: "100%" }}
+							/>
+						) : (
+							<span className="home-loading">Loading your runner…</span>
+						)}
+					</div>
+
+					{username && <p className="home-name">{username}</p>}
+
+					<div className="home-menu">
+						<Button statement="Your friends" onClick={() => setYourFriendsOpen(true)} />
+						<Button statement="Let's play" onClick={play} />
+						<Button statement="Leaderboard" onClick={() => setLeaderBoardOpen(true)} />
+					</div>
+
+					<button className="home-customize" onClick={() => setColorPanelOpen((open) => !open)}>
+						{colorPanelOpen ? "Close customization" : "Customize your runner"}
+					</button>
+				</motion.div>
+
+				<aside className="home-chat">
+					<Chat OptionsOpen={OptionsOpen} />
+				</aside>
+
+				<aside className="home-players">
+					<Online />
+				</aside>
+
+				<AnimatePresence>
+					{colorPanelOpen && (
+						<motion.div
+							className={`character-controls ${isChangingColor ? "loading" : ""}`}
+							initial={{ opacity: 0, y: 10 }}
+							animate={{ opacity: 1, y: 0 }}
+							exit={{ opacity: 0, y: 10 }}
+							transition={{ duration: 0.18 }}
+						>
+							<div className="control-section">
+								<span className="control-label">Body</span>
+								<div className="color-buttons">
+									{BODY_COLORS.map((color) => (
+										<button
+											key={color}
+											aria-label={`Body ${color}`}
+											className={`color-btn ${currentBodyColor === color ? "active" : ""}`}
+											style={{ backgroundColor: color }}
+											onClick={() => handleBodyColorChange(color)}
+										/>
+									))}
 								</div>
 							</div>
-						</>
-					) : (
-						<div className="absolute inset-0 flex items-center justify-center">
-							<span className="text-white/50 text-sm">Loading...</span>
-						</div>
+							<div className="control-section">
+								<span className="control-label">Face</span>
+								<div className="color-buttons">
+									{FACE_COLORS.map((color) => (
+										<button
+											key={color}
+											aria-label={`Face ${color}`}
+											className={`color-btn ${currentFaceColor === color ? "active" : ""}`}
+											style={{ backgroundColor: color }}
+											onClick={() => handleFaceColorChange(color)}
+										/>
+									))}
+								</div>
+							</div>
+						</motion.div>
 					)}
-					<div className="chat">
-						<Chat OptionsOpen={OptionsOpen} />
-					</div>
-					<div className="absolute inset-x-4 bottom-5 h-17 ...">
-						<SimpleFooter setPrivacyOpen={setPrivacyOpen} />
-					</div>
-					{PrivacyOpen && (
-						<div className="modal-overlay backdrop-blur-sm">
+				</AnimatePresence>
+
+				<button className="home-privacy" onClick={() => setPrivacyOpen(true)}>
+					Privacy &amp; terms
+				</button>
+
+				{PrivacyOpen && (
+					<div className="modal-overlay backdrop-blur-sm" onClick={() => setPrivacyOpen(false)}>
+						<div onClick={(event) => event.stopPropagation()}>
 							<Privacy setPrivacyOpen={setPrivacyOpen} />
 						</div>
-					)}
-					{LeaderBoardOpen && <LeaderBoard setLeaderBoardOpen={setLeaderBoardOpen} />}
-					{YourFriendsOpen && <FriendsPanel setYourFriendsOpen={setYourFriendsOpen} />}
-				</motion.div>
+					</div>
+				)}
+				{LeaderBoardOpen && <LeaderBoard setLeaderBoardOpen={setLeaderBoardOpen} />}
+				{YourFriendsOpen && <FriendsPanel setYourFriendsOpen={setYourFriendsOpen} />}
 			</main>
 		</OrientationGuard>
 	);

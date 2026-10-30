@@ -1,56 +1,28 @@
 "use client";
 
-import { useState, Fragment } from "react";
-import {
-  CalendarDaysIcon,
-  GiftIcon,
-  MessageCircleIcon,
-  MoreHorizontalIcon,
-  PhoneIcon,
-  PlusIcon,
-  SquareChevronRightIcon,
-  VideoIcon,
-  XIcon,
-} from "lucide-react";
-import { Chat as ChatContainer } from "@/components/chat/chat";
-import {
-  ChatHeader,
-  ChatHeaderAddon,
-  ChatHeaderAvatar,
-  ChatHeaderButton,
-  ChatHeaderMain,
-} from "@/components/chat/chat-header";
-import {
-  ChatToolbar,
-  ChatToolbarAddon,
-  ChatToolbarButton,
-} from "@/components/chat/chat-toolbar";
-import { ChatMessages } from "@/components/chat/chat-messages";
-import { PrimaryMessage } from "@/components/messages/primary-message";
-import { AdditionalMessage } from "@/components/messages/additional-message";
-import { DateItem } from "@/components/messages/date-item";
+import { ShieldCheck, X } from "lucide-react";
 import MenuPrivacy from "@/components/cards/menu-privacy";
 
-export default function Privacy({setPrivacyOpen}) {
-  
-
-  return (
-  <>
-	{(
-	<div
-	  className="w-70 h-100 lg:w-90 lg:h-100 xl:w-90 xl:h-110 z-50 shadow-xl rounded-3xl border-yellow border-20 table-fixed border-double overflow-hidden"
-	  style={{ fontFamily: "var(--font-party-title), var(--font-geist-sans), sans-serif" }}
-	>
-	  <ChatContainer className="h-full">
-	  <ChatHeader className="border-b bg-yellow">
-		<ChatHeaderMain >
-		<span className="font-medium">Privacy Policy and Terms of Service</span>
-		</ChatHeaderMain>
-	  </ChatHeader>
-		<MenuPrivacy setPrivacyOpen={setPrivacyOpen} />
-		  </ChatContainer>
+export default function Privacy({ setPrivacyOpen }) {
+	return (
+		<div className="modal-overlay" onClick={() => setPrivacyOpen(false)}>
+			<div className="app-modal app-modal--sm" onClick={(event) => event.stopPropagation()}>
+				<header className="app-modal-head">
+					<div className="app-modal-title">
+						<ShieldCheck size={16} />
+						<h2>
+							Legal
+							<span className="app-modal-sub">Privacy and terms</span>
+						</h2>
+					</div>
+					<button className="app-modal-close" onClick={() => setPrivacyOpen(false)} aria-label="Close legal">
+						<X size={15} />
+					</button>
+				</header>
+				<div className="app-modal-body app-modal-body--flush">
+					<MenuPrivacy setPrivacyOpen={setPrivacyOpen} />
+				</div>
+			</div>
 		</div>
-	  )}
-	</>
-  );
+	);
 }

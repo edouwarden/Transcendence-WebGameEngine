@@ -43,10 +43,21 @@ server/dist/
 postgres_data/
 
 # ========================
-# Shared
+# Local generated files
 # ========================
+nginx/certs/
+backend/dev_private.pem
+.nfs*
 secret
 .TODO
+
+# ========================
+# Third-party assets (not distributed)
+# ========================
+front/public/game/models/
+front/public/game/textures/
+front/public/game/skybox/
+front/public/game/material/
 
 # ========================
 # Build Tools

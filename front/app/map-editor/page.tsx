@@ -1,6 +1,6 @@
 'use client'
-import { EngineCanvas } from '@/ThreeWrapper/engine/EngineCanvas'
-import { EditorWorld } from '@/ThreeWrapper/world/worlds/EditorWorld'
+import { EngineCanvas } from '@/ThreeWrapper/1.engine/EngineCanvas'
+import { EditorWorld } from '@/ThreeWrapper/2.world/worlds/EditorWorld'
 
 export default function EditorPage() {
   return (

@@ -1,0 +1,177 @@
+.result-screen {
+	position: relative;
+	min-height: 100dvh;
+	display: grid;
+	place-items: center;
+	padding: 32px 20px;
+	overflow: hidden;
+	background:
+		radial-gradient(720px 480px at 50% -10%, rgba(124, 245, 106, 0.13), transparent 62%),
+		radial-gradient(640px 500px at 84% 110%, rgba(88, 200, 250, 0.08), transparent 60%),
+		linear-gradient(140deg, #050912 0%, #080e1b 52%, #0a1020 100%);
+	color: #e7edf7;
+	font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+.result-screen::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.028) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.028) 1px, transparent 1px);
+	background-size: 64px 64px;
+	mask-image: radial-gradient(circle at 50% 45%, black, transparent 74%);
+	pointer-events: none;
+}
+
+.result-card {
+	position: relative;
+	z-index: 1;
+	width: min(480px, 100%);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	gap: 12px;
+	padding: 40px 34px 32px;
+	border-radius: 20px;
+	border: 1px solid rgba(255, 255, 255, 0.09);
+	background: linear-gradient(180deg, rgba(17, 26, 45, 0.9), rgba(10, 17, 31, 0.94));
+	box-shadow: 0 36px 90px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.05);
+	animation: result-in 0.4s ease both;
+}
+
+@keyframes result-in {
+	from { opacity: 0; transform: translateY(10px) scale(0.985); }
+	to { opacity: 1; transform: none; }
+}
+
+.result-mark {
+	width: 72px;
+	height: 72px;
+	display: grid;
+	place-items: center;
+	margin-bottom: 4px;
+	border-radius: 20px;
+	border: 1px solid rgba(124, 245, 106, 0.24);
+	background: radial-gradient(circle at 50% 30%, rgba(124, 245, 106, 0.18), rgba(124, 245, 106, 0.05));
+	color: #7cf56a;
+	box-shadow: 0 16px 40px rgba(124, 245, 106, 0.12);
+}
+
+.result-card.is-loss .result-mark {
+	border-color: rgba(255, 138, 61, 0.24);
+	background: radial-gradient(circle at 50% 30%, rgba(255, 138, 61, 0.16), rgba(255, 138, 61, 0.04));
+	color: #ff8a3d;
+	box-shadow: 0 16px 40px rgba(255, 138, 61, 0.1);
+}
+
+.result-kicker {
+	color: #64718a;
+	font-size: 10px;
+	font-weight: 600;
+	letter-spacing: 0.18em;
+	text-transform: uppercase;
+}
+
+.result-card h1 {
+	margin: 0;
+	color: #f3f7fd;
+	font-size: clamp(30px, 4vw, 40px);
+	font-weight: 640;
+	letter-spacing: -0.04em;
+	line-height: 1.05;
+}
+
+.result-card.is-loss h1 {
+	color: #fbf3ed;
+}
+
+.result-card p {
+	margin: 0;
+	max-width: 330px;
+	color: #8492a9;
+	font-size: 13px;
+	line-height: 1.6;
+}
+
+.result-meta {
+	display: flex;
+	align-items: center;
+	gap: 8px;
+	margin: 8px 0 4px;
+	padding: 6px 12px;
+	border-radius: 999px;
+	border: 1px solid rgba(255, 255, 255, 0.08);
+	background: rgba(255, 255, 255, 0.025);
+	color: #738198;
+	font-family: var(--font-geist-mono), monospace;
+	font-size: 9.5px;
+	letter-spacing: 0.06em;
+	text-transform: uppercase;
+}
+
+.result-meta i {
+	width: 5px;
+	height: 5px;
+	border-radius: 50%;
+	background: #7cf56a;
+}
+
+.result-card.is-loss .result-meta i {
+	background: #ff8a3d;
+}
+
+.result-actions {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	width: 100%;
+	margin-top: 14px;
+}
+
+.result-primary,
+.result-secondary {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 8px;
+	height: 44px;
+	border-radius: 11px;
+	font: inherit;
+	font-size: 13px;
+	font-weight: 600;
+	text-decoration: none;
+	cursor: pointer;
+	transition: transform 0.12s ease, background 0.12s ease, border-color 0.12s ease;
+}
+
+.result-primary {
+	border: 0;
+	background: linear-gradient(180deg, #8bfb79, #7cf56a);
+	color: #05110a;
+	box-shadow: 0 12px 28px rgba(124, 245, 106, 0.18), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+
+.result-primary:hover {
+	transform: translateY(-1px);
+	background: linear-gradient(180deg, #9bff8b, #86f977);
+}
+
+.result-secondary {
+	border: 1px solid rgba(255, 255, 255, 0.11);
+	background: transparent;
+	color: #9fadc3;
+}
+
+.result-secondary:hover {
+	border-color: rgba(255, 255, 255, 0.24);
+	color: #e7edf7;
+}
+
+.result-primary:disabled {
+	opacity: 0.65;
+	cursor: default;
+	transform: none;
+}

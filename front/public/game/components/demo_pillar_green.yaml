@@ -1,0 +1,10 @@
+id: demo_pillar_green
+meshes:
+  - primitive: box
+    size: { x: 1.0, y: 9.0, z: 1.0 }
+    color: 0x74855f
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

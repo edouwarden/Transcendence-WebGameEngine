@@ -1,0 +1,217 @@
+.home-screen {
+	position: relative;
+	height: 100dvh;
+	min-height: 100dvh;
+	overflow: hidden;
+	display: flex;
+	flex-direction: column;
+	color: #f2f5fb;
+	font-family: var(--font-geist-sans), system-ui, sans-serif;
+	background:
+		radial-gradient(900px 620px at 50% 6%, rgba(250, 204, 21, 0.16), transparent 62%),
+		radial-gradient(900px 700px at 50% 115%, rgba(88, 200, 250, 0.1), transparent 60%),
+		linear-gradient(180deg, #050b1b 0%, #071022 55%, #050a17 100%);
+}
+
+.home-screen::before {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+	background-size: 56px 56px;
+	mask-image: radial-gradient(circle at 50% 45%, black, transparent 72%);
+	pointer-events: none;
+}
+
+.home-glow {
+	position: absolute;
+	left: 50%;
+	bottom: 6%;
+	width: 620px;
+	height: 380px;
+	transform: translateX(-50%);
+	background: radial-gradient(closest-side, rgba(250, 204, 21, 0.16), transparent);
+	filter: blur(30px);
+	pointer-events: none;
+}
+
+/* ------------------------------------------------------------ character */
+
+.home-stack {
+	position: relative;
+	z-index: 1;
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: 16px;
+	padding: 86px 24px 78px;
+	min-height: 0;
+}
+
+.home-canvas {
+	position: relative;
+	width: clamp(300px, 32vw, 420px);
+	height: clamp(300px, 44vh, 420px);
+}
+
+.home-canvas::before {
+	content: "";
+	position: absolute;
+	inset: 12% 4%;
+	background: radial-gradient(closest-side, rgba(250, 204, 21, 0.18), transparent 70%);
+	filter: blur(24px);
+	pointer-events: none;
+}
+
+.home-canvas::after {
+	content: "";
+	position: absolute;
+	left: 50%;
+	bottom: 5%;
+	width: 52%;
+	height: 26px;
+	transform: translateX(-50%);
+	background: radial-gradient(closest-side, rgba(0, 0, 0, 0.5), transparent 72%);
+	filter: blur(6px);
+	pointer-events: none;
+}
+
+.home-canvas canvas {
+	position: relative;
+}
+
+.home-loading {
+	position: absolute;
+	inset: 0;
+	display: grid;
+	place-items: center;
+	color: #7d8ba3;
+	font-size: 13px;
+}
+
+.home-name {
+	margin: 0;
+	font-family: var(--font-party-title), var(--font-geist-sans), sans-serif;
+	font-size: 22px;
+	font-weight: 700;
+	letter-spacing: 0.01em;
+	color: #ffffff;
+}
+
+/* ---------------------------------------------------------------- menu */
+
+.home-menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 14px;
+	margin-top: 4px;
+}
+
+.home-menu .button {
+	--button-font-size: 1rem;
+	--button-pad-y: 0.8rem;
+	--button-pad-x: 1.5rem;
+}
+
+.home-customize {
+	margin-top: 6px;
+	padding: 4px 6px;
+	border: 0;
+	background: transparent;
+	color: rgba(241, 245, 251, 0.55);
+	font-family: inherit;
+	font-size: 12.5px;
+	cursor: pointer;
+	text-decoration: underline;
+	text-decoration-style: dotted;
+	text-underline-offset: 4px;
+	transition: color 0.15s ease;
+}
+
+.home-customize:hover {
+	color: #facc15;
+}
+
+/* ------------------------------------------------------ floating panels */
+
+.home-chat {
+	position: fixed;
+	left: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+	width: 320px;
+	height: min(360px, calc(100dvh - 180px));
+}
+
+.home-players {
+	position: fixed;
+	right: 20px;
+	top: 50%;
+	transform: translateY(-50%);
+	z-index: 2;
+	width: 252px;
+	max-height: min(360px, calc(100dvh - 180px));
+	display: flex;
+}
+
+.home-players .players-panel {
+	width: 100%;
+}
+
+.home-privacy {
+	position: fixed;
+	right: 22px;
+	bottom: 16px;
+	z-index: 2;
+	border: 0;
+	background: transparent;
+	color: rgba(241, 245, 251, 0.32);
+	font-family: inherit;
+	font-size: 11px;
+	cursor: pointer;
+}
+
+.home-privacy:hover {
+	color: rgba(241, 245, 251, 0.7);
+}
+
+/* --------------------------------------------------------------- modals */
+
+.modal-overlay {
+	position: fixed;
+	inset: 0;
+	z-index: 999;
+	display: grid;
+	place-items: center;
+	background: rgba(3, 7, 16, 0.62);
+}
+
+@media (max-width: 1180px) {
+	.home-chat {
+		display: none;
+	}
+}
+
+@media (max-width: 900px) {
+	.home-players {
+		display: none;
+	}
+
+	.home-stack {
+		padding-bottom: 90px;
+	}
+}
+
+@media (max-width: 520px) {
+	.home-menu .button {
+		--button-font-size: 0.85rem;
+		--button-pad-x: 1.1rem;
+	}
+}

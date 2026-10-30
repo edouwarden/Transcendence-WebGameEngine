@@ -19,7 +19,6 @@ export default function FriendsRequestsList(props) {
   const [Added, setAdded] = useState([])
   const [UserName,setUserName] = useState("")
   const [FriendsClick,setFriendsClick] = useState(false)
-  const [playerImgs, setPlayerImgs] = useState({});
 
   function handleAdd(idx) {
     setAdded((prev) => {
@@ -35,30 +34,6 @@ export default function FriendsRequestsList(props) {
     setRequests(data)
   } catch (error) {
     // console.error(error);
-  }
-}
-
-useEffect(() => {
-  async function loadImages() {
-    const imgs = {};
-    for (const Request of Requests) {
-      const url = await fetchImage(Request.id);
-      imgs[Request.id] = url;
-    }
-    setPlayerImgs(imgs);
-  }
-  if (Requests.length > 0) {
-    loadImages();
-  }
-}, [Requests]);
-
-async function fetchImage(id) {
-  try {
-    const blob = await api.getBlob(`/api/users/${id}/picture`);
-    if (!blob) return;
-    return URL.createObjectURL(blob);
-  } catch (error) {
-    setImg(null);
   }
 }
 
@@ -104,40 +79,46 @@ useEffect(() => {
 }, [FriendsClick]);
 
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-[#0b1328]">
-      <nav
-        className="flex flex-col gap-4 w-full h-full overflow-y-auto scrollbar-hide p-2 box-border pb-12 max-h-[calc(100%-8px)]"
-      >
-        {Array.isArray(Requests) && Requests.map((player, idx) => (
-          <div
-            key={player.id}
-            className="flex w-full items-center rounded-lg p-4 bg-[#0b1328] text-white shadow-md border border-slate-700 transition-all hover:bg-[#162447] focus:bg-[#162447] active:bg-[#162447]"
-          >
-            <div className="mr-4 flex items-center gap-2">
-              <img
-                alt={player.username}
-                src={playerImgs[player.id]}
-                className="relative inline-block h-12 w-12 rounded-full! object-cover object-center"
-              />
-            </div>
-            <div className="flex-1">
-              <h6 className="font-medium text-white">{player.username}</h6>
-            </div>
-            <div className="ml-3 flex shrink-0 items-center gap-4">
-                <Button
-                  statement={"Accept"}
-                  size="compact"
-                  onClick={() => fetchAccept(player.id)}
-                />
-                 <Button
-                  statement={"Decline"}
-                  size="compact"
-                  onClick={() => fetchDecline(player.id)}
-                />
-            </div>
-          </div>
-        ))}
-      </nav>
-    </div>
+    <ul className="app-list">
+      {Array.isArray(Requests) && Requests.map((player) => {
+        const initials = (player.username || "?").slice(0, 2).toUpperCase();
+        return (
+          <li className="app-list-row" key={player.id}>
+            <span
+              className="app-avatar"
+              style={
+                player.skin_color
+                  ? {
+                      background: `${player.skin_color}1f`,
+                      borderColor: `${player.skin_color}55`,
+                      color: player.skin_color,
+                    }
+                  : undefined
+              }
+            >
+              {initials}
+            </span>
+            <span className="app-list-copy">
+              <strong>{player.username}</strong>
+              <span>Wants to be your friend</span>
+            </span>
+            <span className="app-request-actions">
+              <button className="app-row-action is-primary" onClick={() => fetchAccept(player.id)}>
+                Accept
+              </button>
+              <button className="app-row-action" onClick={() => fetchDecline(player.id)}>
+                Decline
+              </button>
+            </span>
+          </li>
+        );
+      })}
+      {(!Array.isArray(Requests) || Requests.length === 0) && (
+        <li className="app-empty">
+          <strong>No pending requests</strong>
+          <span>New friend requests will show up here.</span>
+        </li>
+      )}
+    </ul>
   );
 }

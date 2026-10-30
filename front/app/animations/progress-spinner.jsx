@@ -54,132 +54,84 @@ const StyledWrapper = styled.div`
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 5px;
-    padding: 20px;
-    font-family: system-ui, sans-serif;
+    gap: 10px;
+    width: 100%;
+    font-family: var(--font-geist-sans), system-ui, sans-serif;
   }
 
   .loader-track {
     position: relative;
-    width: 180px;
-    height: 32px;
-    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-    border-radius: 16px;
+    width: 100%;
+    max-width: 280px;
+    height: 6px;
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: 999px;
     overflow: hidden;
-    box-shadow:
-      inset 0 2px 4px rgba(0, 0, 0, 0.6),
-      0 1px 3px rgba(255, 255, 255, 0.1);
   }
 
   .liquid-fill {
     position: absolute;
-    top: 2px;
-    left: 2px;
-    height: calc(100% - 4px);
-    background: linear-gradient(90deg, #4f46e5, #7c3aed, #ec4899, #f59e0b);
-    border-radius: 14px;
-    box-shadow:
-      0 0 12px rgba(124, 58, 237, 0.4),
-      inset 0 1px 2px rgba(255, 255, 255, 0.2);
+    top: 0;
+    left: 0;
+    height: 100%;
+    border-radius: 999px;
+    background: linear-gradient(90deg, #43c9a5, #7cf56a);
+    box-shadow: 0 0 14px rgba(124, 245, 106, 0.35);
     transition: width 0.15s ease-out;
-    animation: colorShift 3s linear infinite;
   }
 
   .liquid-fill.indeterminate {
-    width: 30% !important;
-    animation: indeterminate 1.5s ease-in-out infinite, colorShift 3s linear infinite;
+    width: 34% !important;
+    animation: indeterminate 1.4s ease-in-out infinite;
   }
 
   @keyframes indeterminate {
     0% {
-      left: 2px;
-      width: 10%;
+      left: -34%;
+      width: 34%;
     }
     50% {
-      left: calc(100% - 30% - 2px);
-      width: 50%;
+      left: 30%;
+      width: 48%;
     }
     100% {
-      left: calc(100% - 10% - 2px);
-      width: 10%;
+      left: 100%;
+      width: 34%;
     }
   }
 
   .loading-text {
-    color: white;
-    font-size: 18px;
-    font-weight: 600;
-    letter-spacing: 1px;
-    animation: textGlow 1s ease-in-out infinite;
+    color: #9fadc3;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.04em;
   }
 
   .dot {
-    margin-left: 3px;
-    animation: blink 1.5s infinite;
+    margin-left: 2px;
+    animation: blink 1.4s infinite;
   }
+
   .dot:nth-of-type(1) {
     animation-delay: 0s;
   }
+
   .dot:nth-of-type(2) {
-    animation-delay: 0.3s;
+    animation-delay: 0.2s;
   }
+
   .dot:nth-of-type(3) {
-    animation-delay: 0.6s;
-  }
-
-  @keyframes fillProgress {
-    0% {
-      width: 4px;
-    }
-    25% {
-      width: 25%;
-    }
-    50% {
-      width: 50%;
-    }
-    75% {
-      width: 75%;
-    }
-    100% {
-      width: calc(100% - 4px);
-    }
-  }
-
-  @keyframes colorShift {
-    0% {
-      filter: hue-rotate(0deg) brightness(1);
-    }
-    33% {
-      filter: hue-rotate(120deg) brightness(1.1);
-    }
-    66% {
-      filter: hue-rotate(240deg) brightness(0.9);
-    }
-    100% {
-      filter: hue-rotate(360deg) brightness(1);
-    }
-  }
-
-  @keyframes textGlow {
-    0%,
-    100% {
-      opacity: 0.7;
-      text-shadow: 0 0 8px rgba(139, 92, 246, 0.3);
-    }
-    50% {
-      opacity: 1;
-      text-shadow: 0 0 16px rgba(139, 92, 246, 0.6);
-    }
+    animation-delay: 0.4s;
   }
 
   @keyframes blink {
     0%,
-    50% {
+    45% {
       opacity: 1;
     }
-    51%,
+    50%,
     100% {
-      opacity: 0;
+      opacity: 0.25;
     }
   }
 `;

@@ -1,52 +1,25 @@
 "use client";
 
-import { useState, Fragment } from "react";
-import {
-  CalendarDaysIcon,
-  GiftIcon,
-  MessageCircleIcon,
-  MoreHorizontalIcon,
-  PhoneIcon,
-  PlusIcon,
-  SquareChevronRightIcon,
-  VideoIcon,
-  XIcon,
-} from "lucide-react";
-import { Chat as ChatContainer } from "@/components/chat/chat";
-import {
-  ChatHeader,
-  ChatHeaderAddon,
-  ChatHeaderAvatar,
-  ChatHeaderButton,
-  ChatHeaderMain,
-} from "@/components/chat/chat-header";
-import {
-  ChatToolbar,
-  ChatToolbarAddon,
-  ChatToolbarButton,
-} from "@/components/chat/chat-toolbar";
-import { ChatMessages } from "@/components/chat/chat-messages";
-import { PrimaryMessage } from "@/components/messages/primary-message";
-import { AdditionalMessage } from "@/components/messages/additional-message";
-import { DateItem } from "@/components/messages/date-item";
+import { Settings2, X } from "lucide-react";
 import MenuOptions from "@/components/cards/menu-options";
 
-export default function Options(props) {
-  
-
-  return (
-    <div
-      className="w-70 h-110 lg:w-90 lg:h-100 xl:w-90 xl:h-130 z-50 shadow-xl rounded-3xl border-yellow border-20 table-fixed border-double overflow-hidden"
-      style={{ fontFamily: "var(--font-party-title), var(--font-geist-sans), sans-serif" }}
-    >
-      <ChatContainer className="h-full">
-        <ChatHeader className="border-b bg-yellow">
-          <ChatHeaderMain>
-            <span className="font-medium">Options</span>
-          </ChatHeaderMain>
-        </ChatHeader>
-        <MenuOptions  setOptionsOpen={props.setOptionsOpen} />
-      </ChatContainer>
-    </div>
-  );
+export default function Options({ setOptionsOpen }) {
+	return (
+		<div className="modal-overlay" onClick={() => setOptionsOpen(false)}>
+			<div className="app-modal app-modal--sm" onClick={(event) => event.stopPropagation()}>
+				<header className="app-modal-head">
+					<div className="app-modal-title">
+						<Settings2 size={16} />
+						<h2>Options</h2>
+					</div>
+					<button className="app-modal-close" onClick={() => setOptionsOpen(false)} aria-label="Close options">
+						<X size={15} />
+					</button>
+				</header>
+				<div className="app-modal-body app-modal-body--flush">
+					<MenuOptions setOptionsOpen={setOptionsOpen} />
+				</div>
+			</div>
+		</div>
+	);
 }

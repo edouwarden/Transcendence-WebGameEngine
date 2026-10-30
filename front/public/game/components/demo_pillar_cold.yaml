@@ -1,0 +1,10 @@
+id: demo_pillar_cold
+meshes:
+  - primitive: box
+    size: { x: 1.2, y: 9.0, z: 1.2 }
+    color: 0x5b7285
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

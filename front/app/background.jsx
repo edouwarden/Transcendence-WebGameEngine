@@ -37,8 +37,7 @@ return (
           >
             <span className="text-transparent bg-clip-text bg-gradient-to-r to-emerald-600 from-sky-400">
               Parkour Arena
-            </span>{" "}
-            <span className="text-white">(For Sure)</span>
+            </span>
 
             <p className="mt-3 text-2xl font-semibold text-white lg:text-3xl">
               Here comes the Fun

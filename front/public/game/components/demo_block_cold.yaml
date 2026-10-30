@@ -1,0 +1,10 @@
+id: demo_block_cold
+meshes:
+  - primitive: box
+    size: { x: 4.0, y: 0.6, z: 4.0 }
+    color: 0xb7c9d8
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

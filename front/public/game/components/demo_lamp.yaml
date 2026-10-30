@@ -1,0 +1,10 @@
+id: demo_lamp
+meshes:
+  - primitive: box
+    size: { x: 0.8, y: 0.8, z: 0.8 }
+    color: 0xffd34a
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

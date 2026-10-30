@@ -1,67 +1,99 @@
 "use client";
 
-import { Button } from "@/app/animations/button.jsx";
-import { useState } from "react";
+import { X } from "lucide-react";
 
 export function Terms({ setTermsOpen }) {
-  const [Profile, setProfile] = useState()
- 
-  return (
-    <div
-      data-dialog-backdrop="web-3-dialog"
-      data-dialog-backdrop-close="true"
-      className="modal-overlay"
-      onClick={() => setTermsOpen(false)}
-    >
-      <div
-        className="relative m-4 h-130 max-w-5xl overflow-hidden rounded-3xl border-20 border-double border-yellow bg-[#0b1328] shadow-xl"
-        style={{ fontFamily: "var(--font-party-title), var(--font-geist-sans), sans-serif" }}
-        data-dialog="web-3-dialog"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="text-white p-6 overflow-y-auto scrollbar-hide max-h-96">
-          <h2 className="text-2xl font-bold mb-4">Terms of Service</h2>
-          <section className="mb-4">
-            <h3 className="font-semibold">1. Service Overview</h3>
-            <p>This online video game is published by Parkour Arena. It allows users to play, interact, and participate in virtual competitions.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">2. Access to the Service</h3>
-            <p>Access to the game requires creating an account. Users must be at least 13 years old. They agree to provide accurate information and keep their credentials confidential.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">3. Code of Conduct</h3>
-            <p>Cheating, harassing other players, hate speech, or undermining the integrity of the game are strictly prohibited. Any inappropriate behavior may result in sanctions.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">4. Intellectual Property</h3>
-            <p>The game and all its content are protected by copyright. Any reproduction or modification without authorization is prohibited.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">5. Personal Data Protection</h3>
-            <p>Data collected is used for the proper functioning of the game. In accordance with regulations, you have the right to access, rectify, and delete your data.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">6. Liability</h3>
-            <p>The publisher cannot be held responsible for bugs, data loss, or temporary unavailability of the service.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">7. Sanctions</h3>
-            <p>In case of non-compliance with the rules, the publisher reserves the right to suspend or delete the user's account.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">8. Changes to the Terms</h3>
-            <p>The publisher may modify these terms at any time. Users will be informed of any changes.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">9. Contact</h3>
-            <p>For any questions or complaints, please contact us at: contact@parkour-arena.example.</p>
-          </section>
-        </div>
-        <div className="mt-6 flex gap-3 justify-end pr-1">
-          <Button statement="Go back" onClick={() => setTermsOpen(false)} />
-        </div>
-      </div>
-    </div>
-  );
+	return (
+		<div className="modal-overlay" onClick={() => setTermsOpen(false)}>
+			<div className="app-modal app-modal--lg" onClick={(event) => event.stopPropagation()}>
+				<header className="app-modal-head">
+					<div className="app-modal-title">
+						<h2>
+							Terms of service
+							<span className="app-modal-sub">Last updated October 2026</span>
+						</h2>
+					</div>
+					<button className="app-modal-close" onClick={() => setTermsOpen(false)} aria-label="Close terms">
+						<X size={15} />
+					</button>
+				</header>
+
+				<div className="app-modal-body">
+					<div className="app-doc">
+						<section>
+							<h3>1. Service overview</h3>
+							<p>
+								Parkour Arena is a browser-based multiplayer game published by
+								the Parkour Arena team. It lets players compete in real time on
+								shared courses.
+							</p>
+						</section>
+						<section>
+							<h3>2. Access to the service</h3>
+							<p>
+								Playing requires an account. You must be at least 13 years old,
+								provide accurate information and keep your credentials
+								confidential.
+							</p>
+						</section>
+						<section>
+							<h3>3. Code of conduct</h3>
+							<p>
+								Cheating, harassment, hate speech and any attempt to undermine
+								the integrity of the game are prohibited. Accounts that break
+								these rules may be sanctioned.
+							</p>
+						</section>
+						<section>
+							<h3>4. Intellectual property</h3>
+							<p>
+								The game and all of its content are protected by copyright.
+								Reproduction or modification without authorisation is
+								prohibited.
+							</p>
+						</section>
+						<section>
+							<h3>5. Personal data</h3>
+							<p>
+								Data is collected to operate the game. You have the right to
+								access, correct and delete your data under the conditions
+								described in the privacy policy.
+							</p>
+						</section>
+						<section>
+							<h3>6. Liability</h3>
+							<p>
+								The publisher is not liable for bugs, data loss or temporary
+								unavailability of the service.
+							</p>
+						</section>
+						<section>
+							<h3>7. Sanctions</h3>
+							<p>
+								Accounts that do not comply with these terms may be suspended or
+								deleted.
+							</p>
+						</section>
+						<section>
+							<h3>8. Changes to the terms</h3>
+							<p>
+								These terms may change at any time. Players are informed of
+								significant updates in-game or by email.
+							</p>
+						</section>
+						<section>
+							<h3>9. Contact</h3>
+							<p>Questions or complaints: contact@parkour-arena.example</p>
+						</section>
+					</div>
+				</div>
+
+				<footer className="app-modal-foot">
+					<button className="app-btn" onClick={() => setTermsOpen(false)}>
+						Go back
+					</button>
+				</footer>
+			</div>
+		</div>
+	);
 }

@@ -13,7 +13,6 @@ export default function FriendList(props) {
   const [SentRequests,setSentRequests] = useState([])
   const [deleted, setDeleted] = useState(false)
   const [Requested, setRequested] = useState(false)
-  const [playerImgs, setPlayerImgs] = useState({});
 
   
     async function fetchUsers() {
@@ -78,60 +77,6 @@ export default function FriendList(props) {
   }
 }
 
-  async function fetchImage(id) {
-  try {
-    const blob = await api.getBlob(`/api/users/${id}/picture`);
-    if (!blob) return;
-    return URL.createObjectURL(blob);
-  } catch (error) {
-    setImg(null);
-  }
-}
-
-  async function fetchData(id) {
-  try {
-    const data = await api.get('/api/users/' + id);
-    setUserName(data[0].username);
-  } catch (error) {
-
-  }
-}
-
-function getCookie(name) {
-  return document.cookie
-    .split('; ')
-    .find(row => row.startsWith(name + '='))
-    ?.split('=')[1];
-}
-
-useEffect(() => {
-  async function loadImages() {
-    const imgs = {};
-    for (const player of players) {
-      const url = await fetchImage(player.id);
-      imgs[player.id] = url;
-    }
-    setPlayerImgs(imgs);
-  }
-  if (players.length > 0) {
-    loadImages();
-  }
-}, [players]);
-
-useEffect(() => {
-  const token = getCookie('auth_token');
-  if (!token) return;
-
-  const payload = token.split('.')[1];
-  const decoded = JSON.parse(atob(payload));
-  fetchData(decoded.sub);
-}, []);
-
-
-useEffect(() => {
-  // setAdded([]);
-}, [deleted]);
-
 useEffect(() => {
   if (props.FriendsDisplay) {
     const refreshFriendsView = () => {
@@ -158,53 +103,65 @@ useEffect(() => {
   return () => clearInterval(addablePlayersIntervalId);
 }, [props.FriendsDisplay, deleted]);
   return (
-    <div className="w-full h-full flex flex-col items-center justify-center bg-[#0b1328]">
-      <nav
-        className="flex flex-col gap-4 w-full h-full overflow-y-auto scrollbar-hide p-2 box-border pb-12 max-h-[calc(100%-8px)]"
-      >
-        {(Array.isArray(players) ? players : [])
-          .filter((player) =>
-            props.FriendsDisplay
-              ? player.username !== UserName
-              : player.username !== UserName && !friends.some((friend) => friend.id === player.id) 
-              && !Requests.some((request) => request.id === player.id)
-          )
-          .map((player, idx) => {
-            const isPending = SentRequests.some((req) => req.id === player.id) || Added[player.id];
-            return (
-          <div
-            key={player.id}
-            className="flex w-full items-center rounded-lg p-4 bg-[#0b1328] text-white shadow-md border border-slate-700 transition-all hover:bg-[#162447] focus:bg-[#162447] active:bg-[#162447]"
-          >
-            <div className="mr-4 flex items-center gap-2">
-              <img
-                alt={player.username}
-                src={playerImgs[player.id]}
-                className="relative inline-block h-12 w-12 rounded-full! object-cover object-center"
-              />
-            </div>
-            <div className="flex-1">
-              <h6 className="font-medium text-white">{player.username}</h6>
-            </div>
-            <div className="ml-auto">
+    <ul className="app-list">
+      {(Array.isArray(players) ? players : [])
+        .filter((player) =>
+          props.FriendsDisplay
+            ? player.username !== UserName
+            : player.username !== UserName && !friends.some((friend) => friend.id === player.id) 
+            && !Requests.some((request) => request.id === player.id)
+        )
+        .map((player) => {
+          const isPending = SentRequests.some((req) => req.id === player.id) || Added[player.id];
+          const initials = (player.username || "?").slice(0, 2).toUpperCase();
+          return (
+            <li className="app-list-row" key={player.id}>
+              <span
+                className="app-avatar"
+                style={
+                  player.skin_color
+                    ? {
+                        background: `${player.skin_color}1f`,
+                        borderColor: `${player.skin_color}55`,
+                        color: player.skin_color,
+                      }
+                    : undefined
+                }
+              >
+                {initials}
+              </span>
+              <span className="app-list-copy">
+                <strong>{player.username}</strong>
+                <span>{isPending ? "Request sent" : props.FriendsDisplay ? "Friend" : "Available to add"}</span>
+              </span>
               {!props.FriendsDisplay && (
-                <Button
-                  statement={isPending ? "Pending" : "Add"}
-                  isAdded={isPending}
+                <button
+                  className={`app-row-action ${isPending ? "" : "is-primary"}`}
+                  disabled={isPending}
                   onClick={() => {
                     if (!isPending) {
                       setAdded((prev) => ({ ...prev, [player.id]: true }));
                       fetchSendRequest(player.id);
                     }
                   }}
-                />
+                >
+                  {isPending ? "Pending" : "Add"}
+                </button>
               )}
-              {props.FriendsDisplay && <Button statement="Delete" onClick={() => {fetchDelete(player.id)}} />}
-            </div>
-          </div>
-        );
-      })}
-      </nav>
-    </div>
+              {props.FriendsDisplay && (
+                <button className="app-row-action" onClick={() => fetchDelete(player.id)}>
+                  Remove
+                </button>
+              )}
+            </li>
+          );
+        })}
+      {(!Array.isArray(players) || players.length === 0) && (
+        <li className="app-empty">
+          <strong>No players yet</strong>
+          <span>Invite someone to the lobby to start a friends list.</span>
+        </li>
+      )}
+    </ul>
   );
 }

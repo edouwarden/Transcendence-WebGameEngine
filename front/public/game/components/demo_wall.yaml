@@ -1,0 +1,10 @@
+id: demo_wall
+meshes:
+  - primitive: box
+    size: { x: 0.7, y: 7.0, z: 9.8 }
+    color: 0x202836
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

@@ -1,6 +1,6 @@
 'use client'
-import { EngineCanvas } from '@/ThreeWrapper/engine/EngineCanvas'
-import { CharacterCustomizerWorld } from '@/ThreeWrapper/world/worlds/CharacterCustomizerWorld'
+import { EngineCanvas } from '@/ThreeWrapper/1.engine/EngineCanvas'
+import { CharacterCustomizerWorld } from '@/ThreeWrapper/2.world/worlds/CharacterCustomizerWorld'
 
 export default function CharacterCustomizerPage() {
   return (

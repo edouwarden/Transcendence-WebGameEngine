@@ -1,0 +1,256 @@
+id: demo_foundry
+description: Industrial arena
+sky: {preset: day}
+fog: {kind: exponential, color: 4862757, density: 0.013}
+lights:
+- {type: ambient, color: 9067066, intensity: 0.55}
+- type: directional
+  color: 16757354
+  intensity: 1.25
+  position: {x: 14, y: 28, z: 10}
+  castShadow: true
+- {type: hemisphere, skyColor: 7227954, groundColor: 2365199, intensity: 0.52}
+- type: point
+  color: 16757354
+  intensity: 1.1
+  position: {x: 0, y: 6.0, z: 0}
+  distance: 22
+- type: point
+  color: 16757354
+  intensity: 1.1
+  position: {x: 0, y: 6.0, z: -25}
+  distance: 22
+- type: point
+  color: 16757354
+  intensity: 1.1
+  position: {x: 0, y: 6.0, z: -50}
+  distance: 22
+clouds: true
+objects:
+- id: tile_floor_0
+  component: /game/components/demo_floor_foundry.yaml
+  type: map
+  position: {x: 0, y: 0, z: 0}
+- id: tile_floor_1
+  component: /game/components/demo_floor_foundry.yaml
+  type: map
+  position: {x: 0, y: 0, z: -25}
+- id: tile_floor_2
+  component: /game/components/demo_floor_foundry.yaml
+  type: map
+  position: {x: 0, y: 0, z: -50}
+- id: wall_l_0
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: 6}
+- id: wall_r_0
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: 6}
+- id: beam_0
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: 6}
+- id: lamp_0
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: 6}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: wall_l_1
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: -3}
+- id: wall_r_1
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: -3}
+- id: beam_1
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: -3}
+- id: lamp_1
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: -3}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: wall_l_2
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: -12}
+- id: wall_r_2
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: -12}
+- id: beam_2
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: -12}
+- id: lamp_2
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: -12}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: wall_l_3
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: -21}
+- id: wall_r_3
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: -21}
+- id: beam_3
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: -21}
+- id: lamp_3
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: -21}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: wall_l_4
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: -30}
+- id: wall_r_4
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: -30}
+- id: beam_4
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: -30}
+- id: lamp_4
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: -30}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: wall_l_5
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: -39}
+- id: wall_r_5
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: -39}
+- id: beam_5
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: -39}
+- id: lamp_5
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: -39}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: wall_l_6
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: -10.2, y: 3.5, z: -48}
+- id: wall_r_6
+  component: /game/components/demo_wall_warm.yaml
+  type: map
+  position: {x: 10.2, y: 3.5, z: -48}
+- id: beam_6
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 0, y: 6.9, z: -48}
+- id: lamp_6
+  component: /game/components/demo_lamp.yaml
+  type: map
+  position: {x: 0, y: 6.3, z: -48}
+  scale: {x: 0.6, y: 0.6, z: 0.6}
+- id: pillar_l_0
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: -6.6, y: 0, z: 2}
+- id: pillar_r_0
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: 6.6, y: 0, z: 2}
+- id: pillar_l_1
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: -6.6, y: 0, z: -16}
+- id: pillar_r_1
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: 6.6, y: 0, z: -16}
+- id: pillar_l_2
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: -6.6, y: 0, z: -34}
+- id: pillar_r_2
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: 6.6, y: 0, z: -34}
+- id: pillar_l_3
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: -6.6, y: 0, z: -52}
+- id: pillar_r_3
+  component: /game/components/demo_pillar_warm.yaml
+  type: map
+  position: {x: 6.6, y: 0, z: -52}
+- id: pipe_0
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: -9.3, y: 1.2, z: 0}
+  scale: {x: 0.4, y: 0.6, z: 1.0}
+- id: pipe_1
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 9.3, y: 1.2, z: -10}
+  scale: {x: 0.4, y: 0.6, z: 1.0}
+- id: pipe_2
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: -9.3, y: 1.2, z: -18}
+  scale: {x: 0.4, y: 0.6, z: 1.0}
+- id: pipe_3
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 9.3, y: 1.2, z: -28}
+  scale: {x: 0.4, y: 0.6, z: 1.0}
+- id: pipe_4
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: -9.3, y: 1.2, z: -36}
+  scale: {x: 0.4, y: 0.6, z: 1.0}
+- id: pipe_5
+  component: /game/components/demo_beam_warm.yaml
+  type: map
+  position: {x: 9.3, y: 1.2, z: -46}
+  scale: {x: 0.4, y: 0.6, z: 1.0}
+- id: catwalk_0
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.8, y: 0.15, z: -8}
+  scale: {x: 1.2, y: 0.6, z: 1.2}
+- id: catwalk_1
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.8, y: 0.15, z: -8}
+  scale: {x: 1.2, y: 0.6, z: 1.2}
+- id: catwalk_2
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.8, y: 0.15, z: -26}
+  scale: {x: 1.2, y: 0.6, z: 1.2}
+- id: catwalk_3
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.8, y: 0.15, z: -26}
+  scale: {x: 1.2, y: 0.6, z: 1.2}
+- id: catwalk_4
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -4.8, y: 0.15, z: -44}
+  scale: {x: 1.2, y: 0.6, z: 1.2}
+- id: catwalk_5
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 4.8, y: 0.15, z: -44}
+  scale: {x: 1.2, y: 0.6, z: 1.2}
+- id: crown
+  component: /game/components/utils_win_crown.yaml
+  type: map
+  position: {x: 0, y: 0.6, z: -56}

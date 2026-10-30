@@ -1,0 +1,184 @@
+id: demo_rooftop
+description: Open rooftop sprint
+sky: {preset: day}
+fog: {kind: exponential, color: 14148334, density: 0.0025}
+lights:
+- {type: ambient, color: 12831960, intensity: 0.68}
+- type: directional
+  color: 16773848
+  intensity: 1.9
+  position: {x: 18, y: 30, z: 8}
+  castShadow: true
+- {type: hemisphere, skyColor: 14148334, groundColor: 5923440, intensity: 0.5}
+clouds: true
+objects:
+- id: tile_floor_0
+  component: /game/components/demo_floor_rooftop.yaml
+  type: map
+  position: {x: 0, y: 0, z: 0}
+- id: tile_floor_1
+  component: /game/components/demo_floor_rooftop.yaml
+  type: map
+  position: {x: 0, y: 0, z: -25}
+- id: tile_floor_2
+  component: /game/components/demo_floor_rooftop.yaml
+  type: map
+  position: {x: 0, y: 0, z: -50}
+- id: parapet_l_0
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -11.9, y: 0.5, z: 6}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_r_0
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 11.9, y: 0.5, z: 6}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_l_1
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -11.9, y: 0.5, z: -6}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_r_1
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 11.9, y: 0.5, z: -6}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_l_2
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -11.9, y: 0.5, z: -18}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_r_2
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 11.9, y: 0.5, z: -18}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_l_3
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -11.9, y: 0.5, z: -30}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_r_3
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 11.9, y: 0.5, z: -30}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_l_4
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -11.9, y: 0.5, z: -42}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_r_4
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 11.9, y: 0.5, z: -42}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_l_5
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -11.9, y: 0.5, z: -54}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: parapet_r_5
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 11.9, y: 0.5, z: -54}
+  scale: {x: 0.25, y: 2.0, z: 4.6}
+- id: ac_0
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -8.2, y: 0.35, z: 4}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_1
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 8.2, y: 0.7, z: -2}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_2
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -8.2, y: 0.35, z: -10}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_3
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 8.2, y: 0.7, z: -16}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_4
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -8.2, y: 0.35, z: -24}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_5
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 8.2, y: 0.7, z: -30}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_6
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -8.2, y: 0.35, z: -38}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_7
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 8.2, y: 0.7, z: -44}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_8
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: -8.2, y: 0.35, z: -52}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: ac_9
+  component: /game/components/demo_block.yaml
+  type: map
+  position: {x: 8.2, y: 0.35, z: 8}
+  scale: {x: 0.8, y: 1.4, z: 0.8}
+- id: mast_0
+  component: /game/components/demo_pillar.yaml
+  type: map
+  position: {x: -9.6, y: 0.0, z: -16}
+  scale: {x: 0.1, y: 2.2, z: 0.1}
+- id: mast_1
+  component: /game/components/demo_pillar.yaml
+  type: map
+  position: {x: 9.6, y: 0.0, z: -16}
+  scale: {x: 0.1, y: 2.2, z: 0.1}
+- id: mast_2
+  component: /game/components/demo_pillar.yaml
+  type: map
+  position: {x: -9.6, y: 0.0, z: -40}
+  scale: {x: 0.1, y: 2.2, z: 0.1}
+- id: mast_3
+  component: /game/components/demo_pillar.yaml
+  type: map
+  position: {x: 9.6, y: 0.0, z: -40}
+  scale: {x: 0.1, y: 2.2, z: 0.1}
+- id: duct_0
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: -10.4, y: 0.5, z: -4}
+  scale: {x: 0.3, y: 0.8, z: 1.2}
+  rotation: {x: 0, y: 0.0, z: 0}
+- id: duct_1
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: 10.4, y: 0.5, z: -22}
+  scale: {x: 0.3, y: 0.8, z: 1.2}
+  rotation: {x: 0, y: 0.4, z: 0}
+- id: duct_2
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: -10.4, y: 0.5, z: -34}
+  scale: {x: 0.3, y: 0.8, z: 1.2}
+  rotation: {x: 0, y: -0.4, z: 0}
+- id: duct_3
+  component: /game/components/demo_beam.yaml
+  type: map
+  position: {x: 10.4, y: 0.5, z: -48}
+  scale: {x: 0.3, y: 0.8, z: 1.2}
+  rotation: {x: 0, y: 0.0, z: 0}
+- id: crown
+  component: /game/components/utils_win_crown.yaml
+  type: map
+  position: {x: 0, y: 0.6, z: -56}

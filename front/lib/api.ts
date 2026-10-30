@@ -1,4 +1,17 @@
-const API_BASE = process.env.NEXT_PUBLIC_BASE_URL || "https://localhost:4443";
+const CONFIGURED_BASE = process.env.NEXT_PUBLIC_BASE_URL;
+
+function resolveApiBase(): string {
+	// nginx serves the app and /api from the same origin. On a LAN or tunnel the
+	// build-time localhost URL points at the visitor's own machine, so prefer the
+	// origin that actually served the page.
+	if (typeof window !== "undefined") {
+		const isLocal = !CONFIGURED_BASE || /^https?:\/\/(localhost|127\.0\.0\.1)(:|\/|$)/.test(CONFIGURED_BASE);
+		if (isLocal) return window.location.origin;
+	}
+	return CONFIGURED_BASE || "https://localhost:4443";
+}
+
+const API_BASE = resolveApiBase();
 
 function formatApiError(parsed: Record<string, unknown>, fallback: string): string {
 	if (Array.isArray(parsed.errors) && parsed.errors.length) {

@@ -1,0 +1,15 @@
+# $schema: ./component.schema.json
+# ---
+id: my_component
+meshes:
+  - primitive: box
+    size:
+      x: 2.5
+      'y': 2.5
+      z: 2.5
+    color: 16106776
+physics:
+  bodyType: dynamic
+  gravityScale: 0.4
+  mass: 1
+  restitution: 0.45

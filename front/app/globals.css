@@ -261,3 +261,25 @@
     transform: translateY(-280px);
   }
 }
+
+.app-canvas-bg {
+	position: fixed;
+	inset: 0;
+	z-index: 0;
+	background:
+		radial-gradient(1000px 620px at 6% -12%, rgba(88, 200, 250, 0.1), transparent 62%),
+		radial-gradient(900px 680px at 102% 106%, rgba(124, 245, 106, 0.07), transparent 58%),
+		linear-gradient(140deg, #050912 0%, #080e1b 48%, #0a1020 100%);
+	pointer-events: none;
+}
+
+.app-canvas-bg::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background-image:
+		linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+		linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+	background-size: 64px 64px;
+	mask-image: radial-gradient(circle at 45% 40%, black, transparent 78%);
+}

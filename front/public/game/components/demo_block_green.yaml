@@ -1,0 +1,10 @@
+id: demo_block_green
+meshes:
+  - primitive: box
+    size: { x: 3.4, y: 0.6, z: 3.4 }
+    color: 0x9aab82
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

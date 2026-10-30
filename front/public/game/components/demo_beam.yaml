@@ -1,0 +1,10 @@
+id: demo_beam
+meshes:
+  - primitive: box
+    size: { x: 10.6, y: 0.5, z: 0.5 }
+    color: 0x3c465c
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

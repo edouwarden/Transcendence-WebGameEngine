@@ -1,0 +1,10 @@
+id: demo_beam_warm
+meshes:
+  - primitive: box
+    size: { x: 11.6, y: 0.55, z: 0.55 }
+    color: 0x9a7a5a
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

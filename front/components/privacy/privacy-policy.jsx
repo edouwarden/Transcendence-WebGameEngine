@@ -1,91 +1,111 @@
 "use client";
-import { Button } from "@/app/animations/button.jsx";
-import {useState } from "react";
+
+import { X } from "lucide-react";
 
 export function PrivacyPolicy({ setPrivacyPolicyOpen }) {
-  const [decoded, setDecoded] = useState("")
+	return (
+		<div className="modal-overlay" onClick={() => setPrivacyPolicyOpen(false)}>
+			<div className="app-modal app-modal--lg" onClick={(event) => event.stopPropagation()}>
+				<header className="app-modal-head">
+					<div className="app-modal-title">
+						<h2>
+							Privacy policy
+							<span className="app-modal-sub">Last updated October 2026</span>
+						</h2>
+					</div>
+					<button className="app-modal-close" onClick={() => setPrivacyPolicyOpen(false)} aria-label="Close privacy policy">
+						<X size={15} />
+					</button>
+				</header>
 
-  
-  return (
-    <div
-      data-dialog-backdrop="web-3-dialog"
-      data-dialog-backdrop-close="true"
-      className="modal-overlay"
-      onClick={() => setPrivacyPolicyOpen(false)}
-    >
-      <div
-        className="relative m-4 h-130 max-w-5xl overflow-hidden rounded-3xl border-20 border-double border-yellow bg-[#0b1328] shadow-xl"
-        style={{ fontFamily: "var(--font-party-title), var(--font-geist-sans), sans-serif" }}
-        data-dialog="web-3-dialog"
-        onClick={(event) => event.stopPropagation()}
-      >
-        <div className="text-white p-6 overflow-y-auto scrollbar-hide max-h-96">
-          <h2 className="text-2xl font-bold mb-4">Privacy Policy</h2>
-          <section className="mb-4">
-            <h3 className="font-semibold">1. Introduction</h3>
-            <p>We, Parkour Arena, are committed to protecting your personal data. This Privacy Policy explains what data we collect when you use Parkour Arena, how we use it, and what rights you have regarding your information.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">2. Data we collect</h3>
-            <ul className="list-disc">Depending on the features you use, we may collect the following data:
-              <li className="ml-10">Account data: username, email address, encrypted password</li>
-              <li className="ml-10">Game data: progress, scores, statistics, unlocked achievements, playtime</li>
-              <li className="ml-10">Technical data: device type, operating system, game version, session identifier, IP address</li>
-              <li className="ml-10">Communication data: in-game chat messages, bug reports, support requests</li>
-            </ul>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">3. How we use your data</h3>
-            <ul className="list-disc">Your data is used to:
-              <li className="ml-10">Enable leaderboards and multiplayer features</li>
-              <li className="ml-10">Prevent cheating, abuse, and fraudulent activity</li>
-              <li className="ml-10">Perform anonymized statistical analysis to improve gameplay and performance</li>
-            </ul>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">4. Data sharing</h3>
-            <ul className="list-disc">We do not sell your personal data. It may be shared with:
-              <li className="ml-10">Our technical service providers (hosting, analytics, anti-cheat systems)</li>
-              <li className="ml-10">Law enforcement or regulatory authorities when required by applicable law</li>
-            </ul>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">5. Cookies and similar technologies</h3>
-            <p>The website and launcher associated with the game may use cookies to maintain your session, remember your preferences, and measure audience traffic.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">6. Data retention</h3>
-            <p>Account data is retained for as long as your account is active, then deleted within [30/90] days of your deletion request. Anonymized game statistics may be retained indefinitely for analytical purposes.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">7. Your rights (GDPR)</h3>
-            <ul className="list-disc">If you reside in the European Economic Area, you have the following rights:
-              <li className="ml-10">Right to access, correct, and delete your personal data</li>
-              <li className="ml-10">Right to object to processing and to data portability</li>
-              <li className="ml-10">Right to withdraw consent at any time</li>
-              <li className="ml-10">Right to lodge a complaint with your local data protection authority (e.g. CNIL in France, ICO in the UK)</li>
-              <p>To exercise any of these rights, contact us at: contact@parkour-arena.example</p>
-            </ul>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">8. Data security</h3>
-            <p>We implement appropriate technical and organizational measures (encryption, access controls, regular audits) to protect your data against unauthorized access, loss, or disclosure. However, no system is entirely immune to risk, and we cannot guarantee absolute security.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">9. Changes to this policy</h3>
-            <p>We may update this Privacy Policy from time to time. In the event of significant changes, you will be notified by email or through an in-game notice. The date of the latest update is always shown at the top of this page.</p>
-          </section>
-          <section className="mb-4">
-            <h3 className="font-semibold">10.  Contact</h3>
-            <p>You may contact us at contact@parkour-arena.example</p>
-          </section>
-        </div>
-        <div className="mt-6 flex gap-3 justify-end pr-1">
-            <Button statement="Go back" onClick={() => setPrivacyPolicyOpen(false)} />
-        </div>
-      </div>
-    </div>
-  );
+				<div className="app-modal-body">
+					<div className="app-doc">
+						<section>
+							<h3>1. Introduction</h3>
+							<p>
+								Parkour Arena is committed to protecting your personal data.
+								This policy explains what we collect, how we use it, and what
+								rights you have over your information.
+							</p>
+						</section>
+						<section>
+							<h3>2. Data we collect</h3>
+							<ul>
+								<li>Account data: username, email address, encrypted password.</li>
+								<li>Game data: progress, scores, statistics and playtime.</li>
+								<li>Technical data: device type, operating system, session identifier and IP address.</li>
+								<li>Communication data: in-game chat messages and support requests.</li>
+							</ul>
+						</section>
+						<section>
+							<h3>3. How we use your data</h3>
+							<ul>
+								<li>Enable leaderboards and multiplayer features.</li>
+								<li>Prevent cheating, abuse and fraudulent activity.</li>
+								<li>Run anonymised statistical analysis to improve gameplay and performance.</li>
+							</ul>
+						</section>
+						<section>
+							<h3>4. Data sharing</h3>
+							<p>
+								We do not sell your personal data. It may be shared with
+								technical service providers such as hosting and anti-cheat
+								systems, or with authorities when required by law.
+							</p>
+						</section>
+						<section>
+							<h3>5. Cookies and similar technologies</h3>
+							<p>
+								The site may use cookies to keep your session active, remember
+								preferences and measure audience traffic.
+							</p>
+						</section>
+						<section>
+							<h3>6. Data retention</h3>
+							<p>
+								Account data is kept while your account is active, then deleted
+								within 30 days of a deletion request. Anonymised game
+								statistics may be retained for analytical purposes.
+							</p>
+						</section>
+						<section>
+							<h3>7. Your rights (GDPR)</h3>
+							<ul>
+								<li>Access, correct or delete your personal data.</li>
+								<li>Object to processing and request data portability.</li>
+								<li>Withdraw consent at any time.</li>
+								<li>Lodge a complaint with your local data protection authority.</li>
+							</ul>
+						</section>
+						<section>
+							<h3>8. Data security</h3>
+							<p>
+								We apply encryption, access controls and regular audits to
+								protect your data. No system is entirely immune to risk, so
+								absolute security cannot be guaranteed.
+							</p>
+						</section>
+						<section>
+							<h3>9. Changes to this policy</h3>
+							<p>
+								We may update this policy from time to time. Significant changes
+								are announced by email or in-game, and the latest revision date
+								is always shown above.
+							</p>
+						</section>
+						<section>
+							<h3>10. Contact</h3>
+							<p>Questions about this policy: contact@parkour-arena.example</p>
+						</section>
+					</div>
+				</div>
 
-
+				<footer className="app-modal-foot">
+					<button className="app-btn" onClick={() => setPrivacyPolicyOpen(false)}>
+						Go back
+					</button>
+				</footer>
+			</div>
+		</div>
+	);
 }

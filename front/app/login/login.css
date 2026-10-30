@@ -1,0 +1,311 @@
+:root {
+	--ink: #050b1b;
+	--panel: #081026;
+	--panel-soft: #0a142c;
+	--line: rgba(255, 255, 255, 0.09);
+	--line-strong: rgba(255, 255, 255, 0.16);
+	--text: #f1f5fb;
+	--muted: #93a1b8;
+	--yellow: #facc15;
+	--yellow-soft: rgba(250, 204, 21, 0.12);
+}
+
+.login-screen {
+	position: relative;
+	min-height: 100dvh;
+	display: grid;
+	place-items: center;
+	padding: 48px 20px;
+	overflow: hidden;
+	background: var(--ink);
+	color: var(--text);
+	font-family: var(--font-geist-sans), system-ui, sans-serif;
+}
+
+/* A frame from the actual course, dimmed so the card stays readable. */
+.login-backdrop {
+	position: absolute;
+	inset: 0;
+	background:
+		linear-gradient(180deg, rgba(5, 11, 27, 0.9) 0%, rgba(5, 11, 27, 0.82) 45%, rgba(5, 11, 27, 0.97) 100%),
+		url("/login-bg.jpg") center 30% / cover no-repeat;
+	transform: scale(1.03);
+	pointer-events: none;
+}
+
+.login-backdrop::after {
+	content: "";
+	position: absolute;
+	inset: 0;
+	background: radial-gradient(70% 55% at 50% 30%, transparent 30%, rgba(5, 11, 27, 0.85) 100%);
+}
+
+.login-column {
+	position: relative;
+	z-index: 1;
+	width: 100%;
+	max-width: 460px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 10px;
+}
+
+.login-title {
+	margin: 0;
+	font-size: clamp(34px, 5vw, 46px);
+	line-height: 1.02;
+	text-align: center;
+	color: #ffffff;
+	font-weight: 900;
+	text-shadow: 0 4px 24px rgba(0, 0, 0, 0.5);
+}
+
+.login-tagline {
+	margin: 0 0 18px;
+	font-size: 17px;
+	font-weight: 600;
+	color: rgba(241, 245, 251, 0.78);
+	letter-spacing: 0.01em;
+}
+
+/* ------------------------------------------------------------------ card */
+
+.auth-card {
+	width: 100%;
+	padding: 26px 26px 22px;
+	border-radius: 22px;
+	border: 3px solid var(--yellow);
+	background: linear-gradient(180deg, rgba(11, 20, 40, 0.97), rgba(7, 14, 30, 0.99));
+	box-shadow:
+		0 0 0 6px rgba(250, 204, 21, 0.1),
+		0 30px 70px rgba(0, 0, 0, 0.6);
+}
+
+.auth-tabs {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 6px;
+	padding: 5px;
+	margin-bottom: 20px;
+	border-radius: 14px;
+	background: rgba(5, 11, 27, 0.75);
+	border: 1px solid var(--line);
+}
+
+.tab {
+	height: 38px;
+	border: 0;
+	border-radius: 10px;
+	background: transparent;
+	color: var(--muted);
+	font-family: inherit;
+	font-size: 13.5px;
+	font-weight: 650;
+	cursor: pointer;
+	transition: background 0.15s ease, color 0.15s ease;
+}
+
+.tab:hover {
+	color: var(--text);
+}
+
+.tab.is-active {
+	background: var(--yellow);
+	color: #1a1405;
+	box-shadow: 0 4px 0 rgba(0, 0, 0, 0.25);
+}
+
+.auth-form {
+	display: flex;
+	flex-direction: column;
+	gap: 14px;
+}
+
+.field {
+	display: flex;
+	flex-direction: column;
+	gap: 6px;
+}
+
+.field > span {
+	color: #c7d2e4;
+	font-size: 12.5px;
+	font-weight: 600;
+}
+
+.field input {
+	height: 46px;
+	padding: 0 14px;
+	border-radius: 11px;
+	border: 1px solid var(--line-strong);
+	background: rgba(4, 9, 22, 0.8);
+	color: var(--text);
+	font-family: inherit;
+	font-size: 14px;
+	transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.field input::placeholder {
+	color: #61708a;
+}
+
+.field input:focus {
+	outline: none;
+	border-color: var(--yellow);
+	box-shadow: 0 0 0 3px rgba(250, 204, 21, 0.16);
+}
+
+.form-error {
+	padding: 10px 12px;
+	border-radius: 9px;
+	border: 1px solid rgba(255, 110, 110, 0.3);
+	background: rgba(255, 86, 86, 0.1);
+	color: #ffb4b4;
+	font-size: 12.5px;
+	line-height: 1.4;
+}
+
+/* The chunky yellow pill from the original main menu. */
+.login-action {
+	width: 100%;
+	margin-top: 6px;
+}
+
+.login-action .button {
+	width: 100%;
+	--button-font-size: 1.05rem;
+	--button-pad-y: 0.85rem;
+	--button-pad-x: 1.25rem;
+}
+
+.login-action .button > div {
+	width: 100%;
+}
+
+.divider {
+	display: flex;
+	align-items: center;
+	gap: 12px;
+	margin: 18px 0 14px;
+	color: #6b7a92;
+	font-size: 11px;
+	letter-spacing: 0.08em;
+	text-transform: lowercase;
+}
+
+.divider::before,
+.divider::after {
+	content: "";
+	flex: 1;
+	height: 1px;
+	background: var(--line);
+}
+
+.btn-42 {
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+	gap: 9px;
+	width: 100%;
+	height: 44px;
+	border-radius: 11px;
+	border: 1px solid rgba(250, 204, 21, 0.45);
+	background: var(--yellow-soft);
+	color: var(--yellow);
+	font-family: inherit;
+	font-size: 13.5px;
+	font-weight: 650;
+	cursor: pointer;
+	transition: background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn-42:hover {
+	background: rgba(250, 204, 21, 0.2);
+	border-color: var(--yellow);
+}
+
+.logo-42 {
+	display: grid;
+	place-items: center;
+	width: 22px;
+	height: 22px;
+	border-radius: 5px;
+	background: var(--yellow);
+	color: #12100a;
+}
+
+.logo-42 svg {
+	width: 14px;
+	height: 14px;
+}
+
+.demo-note {
+	margin: 14px 0 0;
+	text-align: center;
+	color: #6b7a92;
+	font-size: 11px;
+	line-height: 1.4;
+}
+
+/* ---------------------------------------------------------------- verify */
+
+.verify-card {
+	position: relative;
+	z-index: 2;
+	width: min(420px, calc(100vw - 40px));
+	padding: 32px 28px;
+	border-radius: 22px;
+	border: 3px solid var(--yellow);
+	background: var(--panel);
+	box-shadow: 0 0 0 6px rgba(250, 204, 21, 0.1), 0 30px 70px rgba(0, 0, 0, 0.6);
+	text-align: center;
+}
+
+.verify-card h1 {
+	margin: 0 0 10px;
+	font-size: 26px;
+	letter-spacing: -0.02em;
+}
+
+.verify-card p {
+	margin: 0 0 22px;
+	color: var(--muted);
+	font-size: 13.5px;
+	line-height: 1.6;
+}
+
+.verify-card strong {
+	color: var(--yellow);
+	font-weight: 600;
+}
+
+.verify-card .login-action {
+	margin-bottom: 4px;
+}
+
+.btn-quiet {
+	height: 38px;
+	margin-top: 12px;
+	border: 0;
+	background: transparent;
+	color: var(--muted);
+	font: inherit;
+	font-size: 12.5px;
+	cursor: pointer;
+}
+
+.btn-quiet:hover {
+	color: var(--text);
+}
+
+@media (max-width: 480px) {
+	.login-screen {
+		padding: 32px 16px;
+	}
+
+	.auth-card {
+		padding: 20px 18px 18px;
+		border-radius: 18px;
+	}
+}

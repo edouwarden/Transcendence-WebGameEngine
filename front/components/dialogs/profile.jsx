@@ -1,155 +1,179 @@
 "use client";
 
-import { Button } from "@/app/animations/button.jsx";
-import { useEffect, useState } from "react";
-import { useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
+import { Camera, Trash2, UserRound, X } from "lucide-react";
 import { api } from "@/lib/api";
 
 export function Profile({ SetProfileOpen }) {
-	const [Profile, setProfile] = useState({ age: "", email: "", password: ".........", username: "" });
-	const [initialProfile, setinitialProfile] = useState({ age: "", email: "", password: ".........", username: "" });
-	const [userError, setUserError] = useState("");
-	const [emailError, setEmailError] = useState("");
+	const [profile, setProfile] = useState({ email: "", password: ".........", username: "" });
+	const [initialProfile, setInitialProfile] = useState({ email: "", password: ".........", username: "" });
+	const [error, setError] = useState("");
+	const [saving, setSaving] = useState(false);
+	const [avatar, setAvatar] = useState(null);
 	const [decoded, setDecoded] = useState("");
 	const inputRef = useRef(null);
 	const router = useRouter();
 
-	async function fetchData(id) {
-		try {
-			console.log("fetch data", id);
-			const data = await api.get("/api/users/" + id);
-			setProfile({ age: data[0].age, email: data[0].email, password: ".........", username: data[0].username });
-			setinitialProfile({ age: data[0].age, email: data[0].email, password: ".........", username: data[0].username });
-		} catch (error) {
-			console.error(error);
-		}
-	}
-	async function uploadPicture(e) {
-		const file = e.target.files[0];
-		if (file) {
-			const form = new FormData();
-			form.append("file", file);
-			try {
-				await api.put("/api/update/profile-picture", form);
-				console.log("avatar changed!");
-			} catch (error) {
-				console.error(error);
-			}
-		}
-	}
-
-	function getCookie(name) {
-		return document.cookie
-			.split("; ")
-			.find((row) => row.startsWith(name + "="))
-			?.split("=")[1];
-	}
-
 	useEffect(() => {
-		const token = getCookie("auth_token");
+		const token = document.cookie
+			.split("; ")
+			.find((row) => row.startsWith("auth_token="))
+			?.split("=")[1];
 		if (!token) return;
-		const payload = token.split(".")[1];
-		const decoded = JSON.parse(atob(payload));
-		setDecoded(decoded.sub);
-		fetchData(decoded.sub);
+		try {
+			const payload = JSON.parse(atob(token.split(".")[1]));
+			setDecoded(payload.sub);
+			api.get("/api/users/" + payload.sub)
+				.then((data) => {
+					const user = Array.isArray(data) ? data[0] : data;
+					if (!user) return;
+					const next = {
+						email: user.email || "",
+						password: ".........",
+						username: user.username || "",
+					};
+					setProfile(next);
+					setInitialProfile(next);
+				})
+				.catch(console.error);
+		} catch {
+			setError("Could not read your session.");
+		}
 	}, []);
 
+	async function uploadPicture(event) {
+		const file = event.target.files?.[0];
+		if (!file) return;
+		setAvatar(URL.createObjectURL(file));
+		const form = new FormData();
+		form.append("file", file);
+		try {
+			await api.put("/api/update/profile-picture", form);
+		} catch (uploadError) {
+			console.error(uploadError);
+			setError("Could not upload that image.");
+		}
+	}
+
 	async function handleSave() {
-		let payload;
-		if (Profile.password === initialProfile.password) {
-			const { password: _password, ...profileWithoutPassword } = Profile;
-			payload = profileWithoutPassword;
-		} else payload = Profile;
+		setSaving(true);
+		setError("");
+		const payload =
+			profile.password === initialProfile.password
+				? { username: profile.username, email: profile.email }
+				: { ...profile };
 		try {
 			await api.patch("/api/users/" + decoded, payload);
 			SetProfileOpen(false);
-		} catch (error) {
-			console.log(error);
-			if (initialProfile.username !== Profile.username) setUserError("Invalid credentials");
-			if (initialProfile.email !== Profile.email) setEmailError("Invalid credentials");
+		} catch (saveError) {
+			console.log(saveError);
+			setError("Those details could not be saved. Try another username or email.");
+		} finally {
+			setSaving(false);
 		}
 	}
 
 	async function handleDelete() {
+		if (!window.confirm("Delete your account permanently? This cannot be undone.")) return;
 		try {
 			await api.delete("/api/users/delete?user_id=" + decoded);
 			SetProfileOpen(false);
 			router.push("/login");
-		} catch (error) {
-			console.error(error);
+		} catch (deleteError) {
+			console.error(deleteError);
+			setError("Could not delete the account.");
 		}
 	}
+
+	const initials = (profile.username || "P").slice(0, 2).toUpperCase();
+
 	return (
-		<div data-dialog-backdrop="web-3-dialog" data-dialog-backdrop-close="true" className="modal-overlay" onClick={() => SetProfileOpen(false)}>
-			<div
-				className="relative w-[min(92vw,800px)] h-[min(88vh,600px)] overflow-hidden rounded-3xl border-20 border-double border-yellow bg-[#0b1328] shadow-xl"
-				style={{ fontFamily: "var(--font-party-title), var(--font-geist-sans), sans-serif" }}
-				data-dialog="web-3-dialog"
-				onClick={(event) => event.stopPropagation()}>
-				<div className="flex items-center justify-between border-b bg-yellow px-4 py-3">
-					<h5 className="text-lg font-medium text-[#292524]">Edit Profile</h5>
-				</div>
-				<div className="flex h-[calc(100%-58px)] flex-col justify-between bg-[#05113a] px-4 py-5">
-					<div className="space-y-4">
-						<div className="mb-8">
-							<p className="text-sm font-light text-slate-300">Make changes to your profile here. Click save when you're done.</p>
+		<div className="modal-overlay" onClick={() => SetProfileOpen(false)}>
+			<div className="app-modal" onClick={(event) => event.stopPropagation()}>
+				<header className="app-modal-head">
+					<div className="app-modal-title">
+						<UserRound size={16} />
+						<h2>
+							Your profile
+							<span className="app-modal-sub">Account details and avatar</span>
+						</h2>
+					</div>
+					<button className="app-modal-close" onClick={() => SetProfileOpen(false)} aria-label="Close profile">
+						<X size={15} />
+					</button>
+				</header>
+
+				<div className="app-modal-body">
+					<div className="profile-identity">
+						{avatar ? (
+							<img src={avatar} alt="" className="profile-avatar" />
+						) : (
+							<span className="profile-avatar">{initials}</span>
+						)}
+						<div>
+							<strong>{profile.username || "Player"}</strong>
+							<span>Skin colour is managed from the lobby stage.</span>
+							<button className="app-btn" onClick={() => inputRef.current?.click()}>
+								<Camera size={14} /> Change avatar
+							</button>
+							<input ref={inputRef} type="file" accept="image/*" hidden onChange={uploadPicture} />
 						</div>
-						<fieldset className="flex items-center gap-4">
-							<label className="w-24 text-right text-[15px] text-slate-200" htmlFor="username">
-								Username
-							</label>
-							<input
-								className="w-full bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-500 hover:border-blue-300 shadow-sm focus:shadow"
-								value={userError ? "" : Profile.username}
-								placeholder={userError ? userError : ""}
-								onChange={(e) => {
-									setUserError("");
-									setProfile({ ...Profile, username: e.target.value });
-								}}
-							/>
-						</fieldset>
-						<fieldset className="flex items-center gap-4">
-							<label className="w-24 text-right text-[15px] text-slate-200" htmlFor="email">
-								Email
-							</label>
-							<input
-								className="w-full bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-500 hover:border-blue-300 shadow-sm focus:shadow"
-								value={emailError ? "" : Profile.email}
-								placeholder={emailError ? emailError : ""}
-								onChange={(e) => {
-									setEmailError("");
-									setProfile({ ...Profile, email: e.target.value });
-								}}
-							/>
-						</fieldset>
-						<fieldset className="flex items-center gap-4">
-							<label className="w-24 text-right text-[15px] text-slate-200" htmlFor="email">
-								Password
-							</label>
-							<input
-								type="password"
-								onChange={(e) => {
-									setProfile({ ...Profile, password: e.target.value });
-								}}
-								value={Profile.password}
-								className="w-full bg-transparent placeholder:text-slate-400 text-white text-sm border border-slate-200 rounded-md px-3 py-2 transition duration-300 ease focus:outline-none focus:border-blue-500 hover:border-blue-300 shadow-sm focus:shadow"
-							/>
-						</fieldset>
 					</div>
 
-					<div className="mt-6 flex flex-wrap gap-3 justify-end pr-1">
-						<Button statement="Go back" onClick={() => SetProfileOpen(false)} />
-						<Button statement="Upload un avatar" onClick={() => inputRef.current.click()} />
-						<input ref={inputRef} type="file" accept="image/*" style={{ display: "none" }} onChange={(event) => uploadPicture(event)} />
-						<Button
-							statement="Save Changes"
-							onClick={() => {
-								handleSave();
-							}}
-						/>
+					{error && <p className="app-error">{error}</p>}
+
+					<div className="app-form">
+						<div className="app-field">
+							<label htmlFor="profile-username">Username</label>
+							<input
+								id="profile-username"
+								className="app-input"
+								value={profile.username}
+								onChange={(event) => setProfile({ ...profile, username: event.target.value })}
+							/>
+						</div>
+						<div className="app-field">
+							<label htmlFor="profile-email">Email</label>
+							<input
+								id="profile-email"
+								type="email"
+								className="app-input"
+								value={profile.email}
+								onChange={(event) => setProfile({ ...profile, email: event.target.value })}
+							/>
+						</div>
+						<div className="app-field">
+							<label htmlFor="profile-password">Password</label>
+							<input
+								id="profile-password"
+								type="password"
+								className="app-input"
+								value={profile.password}
+								onChange={(event) => setProfile({ ...profile, password: event.target.value })}
+							/>
+						</div>
+					</div>
+
+					<div className="profile-danger">
+						<div>
+							<strong>Delete account</strong>
+							<span>Removes your player, stats and chat history.</span>
+						</div>
+						<button className="app-btn app-btn--danger" onClick={handleDelete}>
+							<Trash2 size={14} /> Delete
+						</button>
 					</div>
 				</div>
+
+				<footer className="app-modal-foot">
+					<button className="app-btn" onClick={() => SetProfileOpen(false)}>
+						Cancel
+					</button>
+					<button className="app-btn app-btn--primary" onClick={handleSave} disabled={saving}>
+						{saving ? "Saving…" : "Save changes"}
+					</button>
+				</footer>
 			</div>
 		</div>
 	);

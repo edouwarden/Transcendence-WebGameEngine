@@ -2,8 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { Baloo_2, Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import "./home/background.css";
+import "./home/modal.css";
 import "./online/online-background.css";
-import "./rules/comicspeechbubbles.css";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +25,8 @@ const baloo2 = Baloo_2({
 });
 
 export const metadata: Metadata = {
-  title: "Fun Guy",
-  description: "nice game",
+  title: "Parkour Arena",
+  description: "A browser-native 3D battle royale. One course, one life, last one standing.",
   manifest: "/manifest.json",
   appleWebApp: {
     capable: true,
@@ -37,29 +37,32 @@ export const metadata: Metadata = {
     telephone: false,
   },
   icons: {
-    icon: "/champion.png",
-    apple: "/champion.png",
+    icon: [
+      { url: "/icons/parkour-192.png", sizes: "192x192", type: "image/png" },
+      { url: "/icons/parkour-512.png", sizes: "512x512", type: "image/png" },
+    ],
+    apple: "/icons/apple-touch-icon.png",
   },
   applicationName: "Parkour Arena",
   keywords: ["game", "multiplayer", "interactive"],
   metadataBase: new URL(process.env.NEXT_PUBLIC_BASE_URL || "http://localhost:3000"),
   openGraph: {
     type: "website",
-    title: "Fun Guy",
-    description: "nice game",
+    title: "Parkour Arena",
+    description: "A browser-native 3D battle royale. One course, one life, last one standing.",
     images: [
       {
-        url: "/champion.png",
-        width: 192,
-        height: 192,
-        alt: "Fun Guy App Icon",
+        url: "/icons/parkour-512.png",
+        width: 512,
+        height: 512,
+        alt: "Parkour Arena icon",
       },
     ],
   },
 };
 
 export const viewport: Viewport = {
-  themeColor: "#000000",
+  themeColor: "#050912",
 };
 
 export default function RootLayout({
@@ -87,15 +90,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${baloo2.variable} antialiased`}
         style={{ background: "#060816", margin: 0, padding: 0 }}
       >
-        <div
-          className="background"
-          style={{ position: "fixed", inset: 0, zIndex: 0 }}
-        >
-          <div className="blob blob-1" />
-          <div className="blob blob-2" />
-          <div className="blob blob-3" />
-          <div className="blob blob-4" />
-        </div>
+        <div className="app-canvas-bg" aria-hidden="true" />
         <div style={{ position: "relative", zIndex: 1 }}>
           {children}
         </div>

@@ -1,0 +1,10 @@
+id: demo_wall_warm
+meshes:
+  - primitive: box
+    size: { x: 0.8, y: 7.5, z: 9.8 }
+    color: 0x7d6a58
+physics:
+  bodyType: static
+hitboxes:
+  - shape: box
+    size: full

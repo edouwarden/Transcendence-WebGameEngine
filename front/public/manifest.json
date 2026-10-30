@@ -1,25 +1,31 @@
 {
-    "name": "Fun Guy",
-    "short_name": "Fun Guy",
-    "description": "Fun Game",
-    "start_url": "/",
-    "display": "standalone",
-    "orientation": "landscape",
-    "background_color": "#ffffff",
-    "theme_color": "#000000",
-    "scope": "/",
-    "icons": [
-        {
-            "src": "champion.png",
-            "sizes": "192x192",
-            "type": "image/png",
-            "purpose": "any"
-        },
-        {
-            "src": "champion.png",
-            "sizes": "512x512",
-            "type": "image/png",
-            "purpose": "any"
-        }
-    ]
+  "name": "Parkour Arena",
+  "short_name": "Parkour Arena",
+  "description": "A browser-native 3D battle royale. One course, one life, last one standing.",
+  "start_url": "/login",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#050912",
+  "theme_color": "#050912",
+  "scope": "/",
+  "icons": [
+    {
+      "src": "/icons/parkour-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/parkour-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/parkour-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
 }

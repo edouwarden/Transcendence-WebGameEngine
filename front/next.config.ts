@@ -1,6 +1,11 @@
 import type { NextConfig } from "next";
 import withPWA from "next-pwa";
 
+const devOrigins = (process.env.DEV_ORIGINS ?? "")
+  .split(",")
+  .map((origin) => origin.trim())
+  .filter(Boolean);
+
 const nextConfig: NextConfig = {
   async redirects() {
     return [
@@ -9,16 +14,23 @@ const nextConfig: NextConfig = {
         destination: "/winning",
         permanent: true,
       },
+      {
+        source: "/",
+        destination: "/login",
+        permanent: false,
+      },
     ];
   },
   compiler: {
     styledComponents: true,
   },
+  devIndicators: false,
   turbopack: {},
   allowedDevOrigins: [
     process.env.FRONT_HOST,
     "localhost",
     "127.0.0.1",
+    ...devOrigins,
   ].filter(Boolean) as string[],
 };
 

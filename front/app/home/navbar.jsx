@@ -1,150 +1,127 @@
-"use client"
-import { useState, useEffect, useRef } from 'react';
-import Image from 'next/image';
-import './navbar.css';
-import './background.css';
-import { DotLottieReact } from '@lottiefiles/dotlottie-react';
-import KpiCardContainer, { KpiCard } from "@/components/cards/kpi-cards";
-import { useRouter } from 'next/navigation';
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useRouter } from "next/navigation";
+import { ChevronDown, LogOut, Settings2 } from "lucide-react";
 import Options from "@/components/cards/options";
-import { Avatar, Typography } from "@material-tailwind/react";
-import Sloth from "@/public/sloth-meditate.json";
-import lottie from "lottie-web";
 import { api } from "@/lib/api";
+import "./navbar.css";
 
-export const Navbar = ({OptionsOpen, setOptionsOpen}) => {
-const [dropdownOpen, setDropdownOpen] = useState(false);
-const [error, setError] = useState("");
-const [username, setUserName] = useState('');
-const [Img, setImg] = useState(null)
-const [leaving, setLeaving] = useState(false);
-const router = useRouter();
-const slothRef = useRef(null);
+export const Navbar = ({ OptionsOpen, setOptionsOpen, active = "lobby" }) => {
+	const [dropdownOpen, setDropdownOpen] = useState(false);
+	const [username, setUserName] = useState("");
+	const [img, setImg] = useState(null);
+	const [leaving, setLeaving] = useState(false);
+	const router = useRouter();
+	const menuRef = useRef(null);
 
+	useEffect(() => {
+		const token = document.cookie
+			.split("; ")
+			.find((row) => row.startsWith("auth_token="))
+			?.split("=")[1];
+		if (token) {
+			try {
+				const decoded = JSON.parse(atob(token.split(".")[1]));
+				api.get("/api/users/" + decoded.sub)
+					.then((data) => setUserName(data[0]?.username || "Player"))
+					.catch(console.error);
+			} catch {
+				setUserName("Player");
+			}
+		}
+		api.getBlob("/api/users/me/profile-picture")
+			.then((blob) => blob && setImg(URL.createObjectURL(blob)))
+			.catch(() => setImg(null));
+	}, []);
 
-async function fetchImage() {
-  try {
-    const blob = await api.getBlob('/api/users/me/profile-picture');
-    if (!blob) { setImg(null); return; }
-    setImg(URL.createObjectURL(blob));
-  } catch (error) {
-    console.error(error);
-    setImg(null);
-  }
-}
+	useEffect(() => {
+		function onClick(event) {
+			if (menuRef.current && !menuRef.current.contains(event.target)) {
+				setDropdownOpen(false);
+			}
+		}
+		document.addEventListener("mousedown", onClick);
+		return () => document.removeEventListener("mousedown", onClick);
+	}, []);
 
-async function fetchData(id) {
-  try {
-    const data = await api.get('/api/users/' + id);
-    setUserName(data[0].username);
-  } catch (error) {
-    console.error(error);
-  }
-}
+	function signOut() {
+		setLeaving(true);
+		document.cookie = "auth_token=; Max-Age=0; path=/";
+		router.push("/login");
+	}
 
-function getCookie(name) {
-  return document.cookie
-    .split('; ')
-    .find(row => row.startsWith(name + '='))
-    ?.split('=')[1];
-}
+	const initials = (username || "P").slice(0, 2).toUpperCase();
 
-useEffect(() => {
-  const token = getCookie('auth_token');
-  if (!token) return;
+	return (
+		<>
+			<header className="app-nav">
+				<a className="nav-brand" href="/home" aria-label="Parkour Arena home">
+					<span className="nav-brand-mark" aria-hidden="true">
+						<svg viewBox="0 0 24 24" fill="none">
+							<path d="M4 19 12 5l8 14" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round" />
+							<path d="M8 19h8" stroke="currentColor" strokeWidth="2.4" strokeLinecap="round" />
+						</svg>
+					</span>
+					<span className="nav-brand-copy">
+						<strong>Parkour Arena</strong>
+						<span>transendance</span>
+					</span>
+				</a>
 
-  const payload = token.split('.')[1];
-  const decoded = JSON.parse(atob(payload));
-  fetchData(decoded.sub);
-  fetchImage()
-}, [OptionsOpen]);
+				<nav className="nav-links" aria-label="Primary">
+					<a href="/home" className={active === "lobby" ? "is-active" : ""}>Lobby</a>
+					<a href="/rules" className={active === "rules" ? "is-active" : ""}>How to play</a>
+				</nav>
 
-useEffect(function(){
-    lottie.loadAnimation({
-      container: slothRef.current,
-      loop: true,
-      autoplay: true,
-      animationData: Sloth,
-    })},[])
-  return (
-    <>
-    <div className="navbar">
-      <div>
-        <KpiCardContainer />
-      </div>
-      <div className="navbar-actions">
-        <div className="dropdown-trigger" onMouseEnter={() => setDropdownOpen(true)} onMouseLeave={() => setDropdownOpen(false)}>
-          <button type="button" className="navbar-avatar-btn">
-            <div className="navbar-avatar-btn-lottie">
-              <div ref={slothRef}/>
-            </div>
-          </button>
-          {dropdownOpen && (
-            <div className="dropdown-wrapper">
-              <div className="dropdown-menu">
-                <ul
-                  role="menu"
-                  data-popover="profile-menu"
-                  data-popover-placement="bottom"
-                  className="z-10 min-w-45 overflow-auto rounded-4xl border border-slate-200 bg-white p-1.5 shadow-lg focus:outline-none"
-                >
-              <li
-                role="menuitem"
-                className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
-              >
-					<div className="flex items-center gap-4">
-               <Avatar src={Img} alt="avatar" />
-				<div>
-				<Typography variant="h6"> {username}</Typography>
+				<div className="nav-right">
+					<span className="nav-status"><span /> Lobby open</span>
+					<div className="nav-user" ref={menuRef}>
+						<button
+							className="nav-user-btn"
+							onClick={() => setDropdownOpen((open) => !open)}
+							aria-expanded={dropdownOpen}
+						>
+							{img ? (
+								<img src={img} alt="" className="nav-avatar" />
+							) : (
+								<span className="nav-avatar">{initials}</span>
+							)}
+							<span className="nav-user-copy">
+								<strong>{username || "Player"}</strong>
+								<span>Rookie</span>
+							</span>
+							<ChevronDown size={14} className={dropdownOpen ? "is-open" : ""} />
+						</button>
 
+						{dropdownOpen && (
+							<div className="nav-menu" role="menu">
+								<button
+									role="menuitem"
+									onClick={() => {
+										setDropdownOpen(false);
+										setOptionsOpen?.(true);
+									}}
+								>
+									<Settings2 size={15} /> Settings
+								</button>
+								<div className="nav-menu-sep" />
+								<button role="menuitem" className="is-danger" onClick={signOut} disabled={leaving}>
+									<LogOut size={15} /> {leaving ? "Signing out…" : "Sign out"}
+								</button>
+							</div>
+						)}
+					</div>
 				</div>
-      				</div>
-            
-              </li>
-              <li
-                role="menuitem"
-                className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-slate-400">
-                  <path fillRule="evenodd" d="M7.84 1.804A1 1 0 0 1 8.82 1h2.36a1 1 0 0 1 .98.804l.331 1.652a6.993 6.993 0 0 1 1.929 1.115l1.598-.54a1 1 0 0 1 1.186.447l1.18 2.044a1 1 0 0 1-.205 1.251l-1.267 1.113a7.047 7.047 0 0 1 0 2.228l1.267 1.113a1 1 0 0 1 .206 1.25l-1.18 2.045a1 1 0 0 1-1.187.447l-1.598-.54a6.993 6.993 0 0 1-1.929 1.115l-.33 1.652a1 1 0 0 1-.98.804H8.82a1 1 0 0 1-.98-.804l-.331-1.652a6.993 6.993 0 0 1-1.929-1.115l-1.598.54a1 1 0 0 1-1.186-.447l-1.18-2.044a1 1 0 0 1 .205-1.251l1.267-1.114a7.05 7.05 0 0 1 0-2.227L1.821 7.773a1 1 0 0 1-.206-1.25l1.18-2.045a1 1 0 0 1 1.187-.447l1.598.54A6.992 6.992 0 0 1 7.51 3.456l.33-1.652ZM10 13a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z" clipRule="evenodd" />
-                </svg>
-            
-                <button className="text-slate-800 font-medium ml-2" onClick={() => setOptionsOpen(true)}>
-                  Options
-                </button>
-              </li>
-              <hr className="my-2 border-slate-200" role="menuitem" />
-              <li
-                role="menuitem"
-                className="cursor-pointer text-slate-800 flex w-full text-sm items-center rounded-md p-3 transition-all hover:bg-slate-100 focus:bg-slate-100 active:bg-slate-100"
-              >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="w-5 h-5 text-slate-400">
-                  <path fillRule="evenodd" d="M3 4.25A2.25 2.25 0 0 1 5.25 2h5.5A2.25 2.25 0 0 1 13 4.25v2a.75.75 0 0 1-1.5 0v-2a.75.75 0 0 0-.75-.75h-5.5a.75.75 0 0 0-.75.75v11.5c0 .414.336.75.75.75h5.5a.75.75 0 0 0 .75-.75v-2a.75.75 0 0 1 1.5 0v2A2.25 2.25 0 0 1 10.75 18h-5.5A2.25 2.25 0 0 1 3 15.75V4.25Z" clipRule="evenodd" />
-                  <path fillRule="evenodd" d="M19 10a.75.75 0 0 0-.75-.75H8.704l1.048-.943a.75.75 0 1 0-1.004-1.114l-2.5 2.25a.75.75 0 0 0 0 1.114l2.5 2.25a.75.75 0 1 0 1.004-1.114l-1.048-.943h9.546A.75.75 0 0 0 19 10Z" clipRule="evenodd" />
-                </svg>
-            
-                <button className={`text-slate-800 font-medium ml-2 ${leaving ? "opacity-50" : ""}`} disabled={leaving} onClick={() => { setLeaving(true); window.location.href = "/login"; }}>
-                  {leaving ? "Quitter..." : "Quitter"}
-                </button>
-              </li>
-            </ul>
-              </div>
-            </div>
-          )}
-        </div>
-      </div>
-    </div>
+			</header>
 
-    {OptionsOpen && (
-      <div
-        className="modal-overlay backdrop-blur-sm" 
-        onClick={() => setOptionsOpen(false)}
-      >
-        <div onClick={e => e.stopPropagation()}>
-          <Options OptionsOpen={OptionsOpen} setOptionsOpen={setOptionsOpen}/>
-        </div>
-      </div>
-    )}
-    </>
-  );
-}
+			{OptionsOpen && (
+				<div className="modal-overlay backdrop-blur-sm" onClick={() => setOptionsOpen(false)}>
+					<div onClick={(event) => event.stopPropagation()}>
+						<Options OptionsOpen={OptionsOpen} setOptionsOpen={setOptionsOpen} />
+					</div>
+				</div>
+			)}
+		</>
+	);
+};
