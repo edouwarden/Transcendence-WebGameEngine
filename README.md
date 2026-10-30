@@ -1,10 +1,10 @@
 <div align="center">
-
+[![Parkour Arena in motion](docs/clips/trailer-short.gif)](#trailer)
 # transendance
 
 *One course in the sky, one life each, and zero installs.*
 
-[![Parkour Arena in motion](docs/clips/trailer-short.gif)](#trailer)
+
 
 ![Next.js](https://img.shields.io/badge/Next.js-15-000000?logo=nextdotjs&logoColor=white)
 ![Three.js](https://img.shields.io/badge/Three.js-Rapier-000000?logo=threedotjs&logoColor=white)
