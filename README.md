@@ -35,9 +35,7 @@ on it.
 
 ## Trailer
 
-<p align="center"><video src="https://github.com/user-attachments/assets/3cc65587-2844-4b68-86f7-369cf77538cd" controls></video></p>
-
-*46 seconds, recorded at 720p.*
+https://github.com/user-attachments/assets/f1a2e92e-13d9-4c53-ab31-90d7b12418cb
 
 ## The interface
 
