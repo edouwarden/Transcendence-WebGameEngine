@@ -2,7 +2,7 @@
   
 [![Parkour Arena in motion](docs/clips/trailer-short.gif)](#trailer)
   
-# transendance
+# Transcendence-WebGameEngine
 
 *One course in the sky, one life each, and zero installs.*
 
@@ -17,7 +17,7 @@
 
 </div>
 
-Four of us built this for the 42 transendance project. A course floats in the
+Four of us built this for the 42 transcendence project. A course floats in the
 sky, every player gets one life, and the last one still standing wins.
 
 Most of the work went under the game, into **ThreeWrapper**, our engine on top
@@ -169,7 +169,7 @@ maps and the player body render empty.
 ## Layout
 
 ```text
-transendance/
+Transcendence-WebGameEngine/
 ├── front/              Next.js app + the ThreeWrapper engine
 │   ├── app/            login, home, online, rules, map-editor, component-creator
 │   ├── ThreeWrapper/   numbered engine layers
